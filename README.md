@@ -66,5 +66,5 @@ circumvented by first compiling the project into a JAR, and then running it usin
 command:
 
     $ mvn package
-    $ java -classpath target/interpres-0.0.1.jar interpres.App < my-program.fg
+    $ java -classpath target/interpres-0.0.1.jar interpres.App < my-program.interpres
 
