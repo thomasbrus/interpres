@@ -1,7 +1,7 @@
 # Interpres
 Interpres is an **extensible LISP** which helps programmers write programs that **emit assembly
 instructions for any platform**. This is accomplished by implementing every language feature in terms of a list
-of assembly instructions. When a Interpres program is evaluated, its output can be run by the
+of assembly instructions. After an Interpres program is evaluated, its output can be run by the
 interpreter of the target platform (JVM, LLVM, ...).
 
 In order to not leave a programmer empty handed when getting started, a number of prelude
