@@ -39,7 +39,7 @@ integers would have been replaced already at compile-time by their respective as
 Finally, when the program is evaluated, the `print-int` instruction will produce a list of valid
 assembly instructions. In this case, instructions for the
 [Triangle virtual machine (TAM)](http://www.dcs.gla.ac.uk/~daw/books/PLPJ/software.html).
-The specific program can be executed by using the TAM Interpreter.
+This specific program can be executed by using the TAM Interpreter.
 
 ## Advantages
 
