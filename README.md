@@ -1,6 +1,6 @@
 # Interpres
-Interpres is an extensible LISP which helps programmers write programs that emit assembly
-instructions for any platform. This is accomplished by implementing every language feature in terms of a list
+Interpres is an **extensible LISP** which helps programmers write programs that **emit assembly
+instructions for any platform**. This is accomplished by implementing every language feature in terms of a list
 of assembly instructions. When a Interpres program is evaluated, its output can be run by the
 interpreter of the target platform (JVM, LLVM, ...).
 
@@ -51,7 +51,7 @@ The specific program can be executed by using the TAM Interpreter.
     By writing macros the language can be further extended and made even more powerful.
 - Speed
   - Every language feature can be implemented in terms of low level assembly instructions.
-  - Compiled programs take full advantage of the speed of its target platform
+  - Compiled programs take full advantage of the speed of its target platform.
 
 ## Building & Running
 In order to build this project, [Maven](http://maven.apache.org) is required. Using Maven, the
@@ -61,8 +61,8 @@ providing a programming written in Interpres and passing it to the main app:
     $ mvn compile
     $ mvn exec:java -Dexec.mainClass="interpres.App" < my-program.interpres
 
-This command will produce a bunch of output, probably more than you'd hoped for. This is
-circumvented by first compiling the project into a JAR, which can be run using the regular `java`
+This command will produce a bunch of output, probably more than you'd hoped for. This can be
+circumvented by first compiling the project into a JAR, and then running it using the regular `java`
 command:
 
     $ mvn package
