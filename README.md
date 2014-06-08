@@ -17,14 +17,14 @@ going on.
 ```clojure
 ; Standard library functions, for example defined in Prelude.TAM
 (define asm.loadl (lambda [literal] ["LOADL " literal]))
-(define asm.call (lambda [address] [„CALL " address]))
+(define asm.call (lambda [address] ["CALL " address]))
 
-(define print-int (lambda [int] [int (asm.call „putint") (asm.call „puteol")]))
-(define + (lambda [a b] [(asm.loadl a) (asm.loadl b) (asm.call „add")])) ; 
+(define print-int (lambda [int] [int (asm.call "putint") (asm.call "puteol")]))
+(define + (lambda [a b] [(asm.loadl a) (asm.loadl b) (asm.call "add")])) ; 
 
 ; The actual program, which makes use of the Prelude targeted at TAM
 (import Prelude.TAM)
-(print-int (+ 1 2)) ; => [„LOADL 1”, „LOADL 2”, „CALL add”, „CALL putint”, „CALL puteol”]
+(print-int (+ 1 2)) ; => ["LOADL 1", "LOADL 2", "CALL add", "CALL putint", "CALL puteol"]
 ```
 
 First the meta-function `print-int` is defined. In order for this function to output the correct
