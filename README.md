@@ -9,23 +9,23 @@ libraries targeted at different platforms are provided. These libraries implemen
 of imperative programming constructs, such as `var`, `if`, `println`, as well as arithmetic
 operations, and defining and invoking procedures.
 
-# Example
+## Example
 The following example showcases a simple program in which two numbers are added together and
 its resulted is printed to the screen. Even though this is an elementary example, much is
 going on.
 
-    ```clojure
-    ; Standard library functions, for example defined in Prelude.TAM
-    (define asm.loadl (lambda [literal] ["LOADL " literal]))
-    (define asm.call (lambda [address] [„CALL " address]))
+```clojure
+; Standard library functions, for example defined in Prelude.TAM
+(define asm.loadl (lambda [literal] ["LOADL " literal]))
+(define asm.call (lambda [address] [„CALL " address]))
 
-    (define print-int (lambda [int] [int (asm.call „putint") (asm.call „puteol")]))
-    (define + (lambda [a b] [(asm.loadl a) (asm.loadl b) (asm.call „add")])) ; 
+(define print-int (lambda [int] [int (asm.call „putint") (asm.call „puteol")]))
+(define + (lambda [a b] [(asm.loadl a) (asm.loadl b) (asm.call „add")])) ; 
 
-    ; The actual program, which makes use of the Prelude targeted at TAM
-    (import Prelude.TAM)
-    (print-int (+ 1 2)) ; => [„LOADL 1”, „LOADL 2”, „CALL add”, „CALL putint”, „CALL puteol”]
-    ```
+; The actual program, which makes use of the Prelude targeted at TAM
+(import Prelude.TAM)
+(print-int (+ 1 2)) ; => [„LOADL 1”, „LOADL 2”, „CALL add”, „CALL putint”, „CALL puteol”]
+```
 
 First the meta-function `print-int` is defined. In order for this function to output the correct
 set of assembly instructions, it will need to evaluate its first argument (`int`, which in turn
@@ -41,7 +41,7 @@ assembly instructions. In this case, instructions for the
 [Triangle virtual machine (TAM)](http://www.dcs.gla.ac.uk/~daw/books/PLPJ/software.html).
 The specific program can be executed by using the TAM Interpreter.
 
-# Advantages
+## Advantages
 
 - Freedom
   - Programs can be targeted at *any* platform without messing with the Interpres infrastructure.
@@ -53,7 +53,7 @@ The specific program can be executed by using the TAM Interpreter.
   - Every language feature can be implemented in terms of low level assembly instructions.
   - Compiled programs take full advantage of the speed of its target platform
 
-# Building & Running
+## Building & Running
 In order to build this project, [Maven](http://maven.apache.org) is required. Using Maven, the
 project is compiled by issuing the `mvn compile` command. The project can then be run by
 providing a programming written in Interpres and passing it to the main app:
