@@ -31,9 +31,11 @@ tokens {
   package interpres;
 }
 
-program: expressions -> ^(PROGRAM expressions);
+parse: program EOF -> program;
 
-expressions: (expression)* EOF!;
+program: expressions -> ^(LIST expressions);
+
+expressions: (expression)*;
 
 expression: sexp | list | atom;
 
