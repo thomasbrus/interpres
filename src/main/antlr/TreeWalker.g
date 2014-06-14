@@ -9,63 +9,68 @@ options {
 @header {
   package interpres;
   import interpres.ast.*;
-  import interpres.ast.Node;
 }
 
-walk returns [Node node]: program { $node = $program.node; };
+walk returns [AST ast]: program { $ast = $program.ast; };
 
 // Transformer rules
 // =============================================================================
 
-program returns [Node node]
+program returns [AST ast]
   @init {
-    List<Node> expressions = new ArrayList<Node>();
+    List<AST> expressions = new ArrayList<AST>();
   }
   @after {
-    $node = new ListNode(expressions);
+    $ast = new ListExpression(expressions);
   }
   :
-  ^(LIST (expression { expressions.add($expression.node); })*)
+  ^(LIST (expression { expressions.add($expression.ast); })*)
   ;
 
-expression returns [Node node]: sexp | list | atom;
+expression returns [AST ast]
+  : sexp { $ast = $sexp.ast; }
+  | list { $ast = $list.ast; }
+  | atom { $ast = $atom.ast; }
+  ;
 
-sexp returns [Node node]
+sexp returns [AST ast]
   @init {
-    Node functionName;
-    List<Node> arguments = new ArrayList<Node>();
+    AST functionName;
+    List<AST> arguments = new ArrayList<AST>();
   }
   @after {
-    $node = new SexpNode(functionName, arguments);
+    $ast = new SymbolicExpression(functionName, arguments);
   }
   :
   ^(SEXPR
-    sexp_function_name { functionName = $sexp_function_name.node; }
-    (sexp_argument { arguments.add($sexp_argument.node); })*)
+    sexp_function_name { functionName = $sexp_function_name.ast; }
+    (sexp_argument { arguments.add($sexp_argument.ast); })*)
   ;
 
-sexp_function_name returns [Node node]: expression;
+sexp_function_name returns [AST ast]: expression { $ast = $expression.ast; };
 
-sexp_argument returns [Node node]: expression;
+sexp_argument returns [AST ast]: expression { $ast = $expression.ast; };
 
-list returns [Node node]
+list returns [AST ast]
   @init {
-    List<Node> items = new ArrayList<Node>();
+    List<AST> items = new ArrayList<AST>();
   }
   @after {
-    $node = new ListNode(items);
+    $ast = new ListExpression(items);
   }
   :
-  ^(LIST (list_item { items.add($list_item.node); })*)
+  ^(LIST (list_item { items.add($list_item.ast); })*)
   ;
 
-list_item returns [Node node]: expression;
+list_item returns [AST ast]: expression { $ast = $expression.ast; };
 
-atom returns [Node node]:
-  ^(STRING string) { $node = new StringNode($string.text); }
-  ^(REFERENCE reference) { $node = new ReferenceNode($reference.text); }
+atom returns [AST ast]
+  : ^(STRING string=QUOTED_VALUE) {
+    String literal = $string.text;
+    $ast = new StringLiteral(literal.substring(1, literal.length() - 1));
+  }
+  | ^(REFERENCE reference=IDENTIFIER) {
+    $ast = new Reference($reference.text);
+  }
   ;
-
-string: QUOTED_VALUE;
-reference: IDENTIFIER;
 
