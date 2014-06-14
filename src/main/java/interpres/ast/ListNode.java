@@ -4,9 +4,9 @@ import java.util.List;
 import org.antlr.runtime.tree.*;
 
 public class ListNode extends Node {
-  private CommonTree expressions;
+  private List<Node> expressions;
 
-  public ListNode(CommonTree expressions) {
+  public ListNode(List<Node> expressions) {
     this.expressions = expressions;
   }
 

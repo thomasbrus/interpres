@@ -1,10 +1,10 @@
 package interpres.ast;
 
 public class IntegerNode extends Node {
-  private Integer literal;
+  private Integer value;
 
-  public IntegerNode(Integer literal) {
-    this.literal = literal;
+  public IntegerNode(Integer value) {
+    this.value = value;
   }
 
   public Object evaluate() {

@@ -4,10 +4,12 @@ import java.util.List;
 import org.antlr.runtime.tree.*;
 
 public class SexpNode extends Node {
-  private CommonTree expressions;
+  private Node functionName;
+  private List<Node> arguments;
 
-  public SexpNode(CommonTree expressions) {
-    this.expressions = expressions;
+  public SexpNode(Node functionName, List<Node> arguments) {
+    this.functionName = functionName;
+    this.arguments = arguments;
   }
 
   public Object evaluate() {

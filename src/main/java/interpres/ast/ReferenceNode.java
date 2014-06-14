@@ -1,10 +1,10 @@
 package interpres.ast;
 
 public class ReferenceNode extends Node {
-  private String literal;
+  private String name;
 
-  public ReferenceNode(String literal) {
-    this.literal = literal;
+  public ReferenceNode(String name) {
+    this.name = name;
   }
 
   public Object evaluate() {
