@@ -19,7 +19,6 @@ tokens {
   SEXPR;
   LIST;
   STRING;
-  INTEGER;
   REFERENCE;
 }
 
@@ -33,30 +32,43 @@ tokens {
 
 parse: program EOF -> program;
 
+// Parser rules
+// =============================================================================
+
 program: expressions -> ^(LIST expressions);
 
-expressions: (expression)*;
+expressions: expression*;
 
 expression: sexp | list | atom;
 
-sexp: LPAREN expression+ RPAREN -> ^(SEXPR expression+);
+sexp: LPAREN sexp_function_name sexp_argument* RPAREN -> ^(SEXPR sexp_function_name sexp_argument*);
 
-list: LBRACKET expression* RBRACKET -> ^(LIST expression*);
+sexp_function_name: expression;
 
-atom: string | reference | integer;
+sexp_argument: expression;
 
-string: DOUBLE_QUOTE except_double_quotes DOUBLE_QUOTE -> ^(STRING except_double_quotes*);
-integer: NUMBER -> ^(INTEGER NUMBER);
-reference: actual_reference -> ^(REFERENCE actual_reference);
+list: LBRACKET list_item* RBRACKET -> ^(LIST list_item*);
 
-except_double_quotes: ~(DOUBLE_QUOTE)*;
-actual_reference: (IDENTIFIER);
+list_item: expression;
 
-IDENTIFIER: (LETTER | SPECIAL) (LETTER | DIGIT | SPECIAL)*;
-NUMBER: DIGIT+;
+// TODO: Add quoted expressions
+atom: string -> ^(STRING string) | reference -> ^(REFERENCE reference);
+
+string: QUOTED_VALUE;
+reference: IDENTIFIER;
+
+// Lexer rules
+// =============================================================================
+
+QUOTED_VALUE: '"' (~'"')* '"';
+
+IDENTIFIER: (LETTER | DIGIT | SPECIAL)+;
 
 COMMENT: ';' .* '\n' { $channel=HIDDEN; };
-WS:   (' ' | '\t' | '\f' | '\r' | '\n')+ { $channel=HIDDEN; };
+WS:(' ' | '\t' | '\f' | '\r' | '\n')+ { $channel=HIDDEN; };
+
+// Protected lexer rules
+// =============================================================================
 
 fragment DIGIT: ('0'..'9');
 fragment LOWER: ('a'..'z');
