@@ -69,15 +69,3 @@ atom returns [Node node]:
 string: QUOTED_VALUE;
 reference: IDENTIFIER;
 
-/* list returns [Node node] */
-/*   @init { items = new ArrayList<Node>();} */
-
-/*   : ^(LIST expressions=(expression { items.add($expression.node) })*) { $node = new ListNode($expressions.tree); }; */
-/*   @after { $node = new ListNode(items); } */
-
-/* atom: string | reference | integer; */
-
-/* string returns [Node node]: ^(STRING literal=~(DOUBLE_QUOTE)*) { $node = new StringNode($literal.text); }; */
-/* integer returns [Node node]: ^(INTEGER literal=NUMBER) { $node = new IntegerNode(Integer.parseInt($literal.text)); }; */
-/* reference returns [Node node]: ^(REFERENCE literal=IDENTIFIER) { $node = new ReferenceNode($literal.text); }; */
-
