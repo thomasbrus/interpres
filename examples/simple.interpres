@@ -1,0 +1,4 @@
+(add 1 2)
+["hello there, " "world"]
+(do-something [1 2 3] "blaa")
+
