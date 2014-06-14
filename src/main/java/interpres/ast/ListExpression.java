@@ -12,8 +12,7 @@ public class ListExpression extends AST {
   }
 
   public List<Object> evaluate() {
-    Stream<Object> things = this.items.stream().map(i -> i.evaluate());
-    return things.collect(Collectors.toList());
+    return this.items.stream().map(AST::evaluate).collect(Collectors.toList());
   }
 }
 
