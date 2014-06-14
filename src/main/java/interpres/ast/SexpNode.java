@@ -9,5 +9,9 @@ public class SexpNode extends Node {
   public SexpNode(CommonTree expressions) {
     this.expressions = expressions;
   }
+
+  public Object evaluate() {
+    return null;
+  }
 }
 

@@ -6,5 +6,9 @@ public class IntegerNode extends Node {
   public IntegerNode(Integer literal) {
     this.literal = literal;
   }
+
+  public Object evaluate() {
+    return null;
+  }
 }
 

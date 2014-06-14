@@ -6,5 +6,9 @@ public class StringNode extends Node {
   public StringNode(String literal) {
     this.literal = literal;
   }
+
+  public Object evaluate() {
+    return null;
+  }
 }
 

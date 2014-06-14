@@ -6,5 +6,9 @@ public class ReferenceNode extends Node {
   public ReferenceNode(String literal) {
     this.literal = literal;
   }
+
+  public Object evaluate() {
+    return null;
+  }
 }
 
