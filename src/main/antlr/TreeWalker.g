@@ -30,6 +30,8 @@ program returns [AST ast]
 expression returns [AST ast]
   : list { $ast = $list.ast; }
   | literal { $ast = $literal.ast; }
+  | quoted_expression { $ast = $quoted_expression.ast; }
+  | unquoted_expression { $ast = $unquoted_expression.ast; }
   ;
 
 list returns [AST ast]
@@ -55,5 +57,13 @@ literal returns [AST ast]
   | ^(SYMBOL symbol=Symbol) {
     $ast = new Symbol($symbol.text);
   }
+  ;
+
+quoted_expression returns [AST ast]
+  : ^(QUOTED expression) { $ast = new QuotedExpression($expression.ast); }
+  ;
+
+unquoted_expression returns [AST ast]
+  : ^(UNQUOTED expression) { $ast = new UnquotedExpression($expression.ast); }
   ;
 

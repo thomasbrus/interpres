@@ -12,10 +12,15 @@ tokens {
 
   DOUBLE_QUOTE = '"';
 
+  AT = '@';
+  PERCENT = '%';
+
   PROGRAM;
   LIST;
   STRING;
   SYMBOL;
+  QUOTED;
+  UNQUOTED;
 }
 
 @lexer::header {
@@ -32,16 +37,18 @@ parse: program EOF -> program;
 // =============================================================================
 
 
+expression: list | literal | quoted_expression | unquoted_expression;
 
+list: LPAREN expression* RPAREN -> ^(LIST expression*);
 
 literal: string -> ^(STRING string) | symbol -> ^(SYMBOL symbol);
 
 string: String;
 symbol: Symbol;
 
-// TODO: Add quoted expressions
-atom: string -> ^(STRING string) | reference -> ^(REFERENCE reference);
+quoted_expression: AT expression -> ^(QUOTED expression);
 
+unquoted_expression: PERCENT expression -> ^(UNQUOTED expression);
 
 // Lexer rules
 // =============================================================================
