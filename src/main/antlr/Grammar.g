@@ -36,6 +36,7 @@ parse: program EOF -> program;
 // Parser rules
 // =============================================================================
 
+program: expression* -> ^(PROGRAM expression*);
 
 expression: list | literal | quoted_expression | unquoted_expression;
 

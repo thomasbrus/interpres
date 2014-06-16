@@ -21,10 +21,10 @@ program returns [AST ast]
     List<AST> expressions = new ArrayList<AST>();
   }
   @after {
-    $ast = new ListExpression(expressions);
+    $ast = new Program(expressions);
   }
   :
-  ^(LIST (expression { expressions.add($expression.ast); })*)
+  ^(PROGRAM (expression { expressions.add($expression.ast); })*)
   ;
 
 expression returns [AST ast]
