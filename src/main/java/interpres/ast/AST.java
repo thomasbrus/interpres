@@ -1,8 +1,9 @@
 package interpres.ast;
 
 import java.util.List;
+import interpres.DefinitionTable;
 
 public abstract class AST {
-  public abstract List<Object> evaluate();
+  public abstract Object evaluate(DefinitionTable definitionTable);
 }
 

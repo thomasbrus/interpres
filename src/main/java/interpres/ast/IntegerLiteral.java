@@ -3,6 +3,8 @@ package interpres.ast;
 import java.util.Arrays;
 import java.util.List;
 
+import interpres.DefinitionTable;
+
 public class IntegerLiteral extends AST {
   private Integer value;
 
@@ -10,7 +12,7 @@ public class IntegerLiteral extends AST {
     this.value = value;
   }
 
-  public List<Object> evaluate() {
+  public Object evaluate(DefinitionTable definitionTable) {
     return Arrays.asList("LOADL " + this.value);
   }
 
