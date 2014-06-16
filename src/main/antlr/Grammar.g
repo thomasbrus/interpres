@@ -10,13 +10,9 @@ tokens {
   LPAREN = '(';
   RPAREN = ')';
 
-  LBRACKET = '[';
-  RBRACKET = ']';
-
   DOUBLE_QUOTE = '"';
 
   PROGRAM;
-  SEXPR;
   LIST;
   STRING;
   REFERENCE;
@@ -35,21 +31,10 @@ parse: program EOF -> program;
 // Parser rules
 // =============================================================================
 
-program: expressions -> ^(LIST expressions);
 
-expressions: expression*;
 
-expression: sexp | list | atom;
 
-sexp: LPAREN sexp_function_name sexp_argument* RPAREN -> ^(SEXPR sexp_function_name sexp_argument*);
 
-sexp_function_name: expression;
-
-sexp_argument: expression;
-
-list: LBRACKET list_item* RBRACKET -> ^(LIST list_item*);
-
-list_item: expression;
 
 // TODO: Add quoted expressions
 atom: string -> ^(STRING string) | reference -> ^(REFERENCE reference);

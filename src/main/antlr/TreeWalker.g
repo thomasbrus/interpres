@@ -28,41 +28,24 @@ program returns [AST ast]
   ;
 
 expression returns [AST ast]
-  : sexp { $ast = $sexp.ast; }
-  | list { $ast = $list.ast; }
   | atom { $ast = $atom.ast; }
+  : list { $ast = $list.ast; }
   ;
-
-sexp returns [AST ast]
-  @init {
-    AST functionName;
-    List<AST> arguments = new ArrayList<AST>();
-  }
-  @after {
-    $ast = new SymbolicExpression(functionName, arguments);
-  }
-  :
-  ^(SEXPR
-    sexp_function_name { functionName = $sexp_function_name.ast; }
-    (sexp_argument { arguments.add($sexp_argument.ast); })*)
-  ;
-
-sexp_function_name returns [AST ast]: expression { $ast = $expression.ast; };
-
-sexp_argument returns [AST ast]: expression { $ast = $expression.ast; };
 
 list returns [AST ast]
   @init {
     List<AST> items = new ArrayList<AST>();
   }
   @after {
-    $ast = new ListExpression(items);
+    if (items.isEmpty()) {
+      $ast = new QuotedExpression(new ListExpression(items));
+    } else {
+      $ast = new ListExpression(items);
+    }
   }
   :
-  ^(LIST (list_item { items.add($list_item.ast); })*)
+  ^(LIST (expression { items.add($expression.ast); })*)
   ;
-
-list_item returns [AST ast]: expression { $ast = $expression.ast; };
 
 atom returns [AST ast]
   : ^(STRING string=QUOTED_VALUE) {
