@@ -19,4 +19,8 @@ public class StringLiteral extends AST {
 
     return instructions;
   }
+
+  public String toString() {
+    return this.literal.toString();
+  }
 }

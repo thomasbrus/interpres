@@ -13,5 +13,9 @@ public class IntegerLiteral extends AST {
   public List<Object> evaluate() {
     return Arrays.asList("LOADL " + this.value);
   }
+
+  public String toString() {
+    return this.value.toString();
+  }
 }
 
