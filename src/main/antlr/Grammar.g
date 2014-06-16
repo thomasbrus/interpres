@@ -57,15 +57,15 @@ String: '"' (~'"' | '\\' '"')* '"';
 
 Symbol: (Letter | Digit | Special)+;
 
-COMMENT: ';' .* '\n' { $channel=HIDDEN; };
-WS:(' ' | '\t' | '\f' | '\r' | '\n')+ { $channel=HIDDEN; };
+Comment: ';' .* '\n' { $channel=HIDDEN; };
+Ws:(' ' | '\t' | '\f' | '\r' | '\n')+ { $channel=HIDDEN; };
 
 // Protected lexer rules
 // =============================================================================
 
-fragment DIGIT: ('0'..'9');
-fragment LOWER: ('a'..'z');
-fragment UPPER: ('A'..'Z');
-fragment SPECIAL: '+' | '-' | '*' | '/' | '=' | '>' | '<';
-fragment LETTER: LOWER | UPPER;
+fragment Digit: ('0'..'9');
+fragment Lower: ('a'..'z');
+fragment Upper: ('A'..'Z');
+fragment Special: '+' | '-' | '*' | '/' | '=' | '>' | '<' | '$' | '?' | '_' | '.';
+fragment Letter: Lower | Upper;
 
