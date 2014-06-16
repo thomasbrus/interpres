@@ -52,8 +52,8 @@ atom returns [AST ast]
     String literal = $string.text;
     $ast = new StringLiteral(literal.substring(1, literal.length() - 1));
   }
-  | ^(REFERENCE reference=IDENTIFIER) {
-    $ast = new Reference($reference.text);
+  | ^(SYMBOL symbol=Symbol) {
+    $ast = new Symbol($symbol.text);
   }
   ;
 

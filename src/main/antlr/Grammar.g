@@ -15,7 +15,7 @@ tokens {
   PROGRAM;
   LIST;
   STRING;
-  REFERENCE;
+  SYMBOL;
 }
 
 @lexer::header {
@@ -35,19 +35,19 @@ parse: program EOF -> program;
 
 
 
+symbol: Symbol;
 
 // TODO: Add quoted expressions
 atom: string -> ^(STRING string) | reference -> ^(REFERENCE reference);
 
 string: QUOTED_VALUE;
-reference: IDENTIFIER;
 
 // Lexer rules
 // =============================================================================
 
 QUOTED_VALUE: '"' (~'"')* '"';
 
-IDENTIFIER: (LETTER | DIGIT | SPECIAL)+;
+Symbol: (Letter | Digit | Special)+;
 
 COMMENT: ';' .* '\n' { $channel=HIDDEN; };
 WS:(' ' | '\t' | '\f' | '\r' | '\n')+ { $channel=HIDDEN; };
