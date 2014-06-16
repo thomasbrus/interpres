@@ -34,18 +34,19 @@ parse: program EOF -> program;
 
 
 
+literal: string -> ^(STRING string) | symbol -> ^(SYMBOL symbol);
 
+string: String;
 symbol: Symbol;
 
 // TODO: Add quoted expressions
 atom: string -> ^(STRING string) | reference -> ^(REFERENCE reference);
 
-string: QUOTED_VALUE;
 
 // Lexer rules
 // =============================================================================
 
-QUOTED_VALUE: '"' (~'"')* '"';
+String: '"' (~'"' | '\\' '"')* '"';
 
 Symbol: (Letter | Digit | Special)+;
 

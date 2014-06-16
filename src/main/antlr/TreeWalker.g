@@ -28,8 +28,8 @@ program returns [AST ast]
   ;
 
 expression returns [AST ast]
-  | atom { $ast = $atom.ast; }
   : list { $ast = $list.ast; }
+  | literal { $ast = $literal.ast; }
   ;
 
 list returns [AST ast]
@@ -47,8 +47,8 @@ list returns [AST ast]
   ^(LIST (expression { items.add($expression.ast); })*)
   ;
 
-atom returns [AST ast]
-  : ^(STRING string=QUOTED_VALUE) {
+literal returns [AST ast]
+  : ^(STRING string=String) {
     String literal = $string.text;
     $ast = new StringLiteral(literal.substring(1, literal.length() - 1));
   }
