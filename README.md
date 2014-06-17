@@ -20,7 +20,7 @@ going on.
 (define asm.call (lambda [address] ["CALL " address]))
 
 (define print-int (lambda [int] [int (asm.call "putint") (asm.call "puteol")]))
-(define + (lambda [a b] [(asm.loadl a) (asm.loadl b) (asm.call "add")])) ; 
+(define + (lambda [a b] [(asm.loadl a) (asm.loadl b) (asm.call "add")])) ;
 
 ; The actual program, which makes use of the Prelude targeted at TAM
 (import Prelude.TAM)
@@ -64,7 +64,7 @@ To make sure that Maven uses the correct JDK version, alter the `JAVA_HOME` envi
 or place this in your `~/.mavenrc`:
 
     export JAVA_HOME=/Library/Java/JavaVirtualMachines/<jdk-version-1.8>/Contents/Home
-    
+
 Use `mvn --version` to verify that everything is setup correctly.
 
 ### Compilation
