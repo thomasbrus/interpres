@@ -11,17 +11,17 @@ public class DefinitionTable {
   // TODO: Allow non-lambda definitions
   // TODO: Dynamically resolve names that matches [0-9]+ to IntegerLiterals
 
-  private HashMap<String, BiFunction<DefinitionTable, List<AST>, Object>> definitions;
+  private HashMap<String, Object> definitions;
 
   public DefinitionTable() {
-    this.definitions = new HashMap<String, BiFunction<DefinitionTable, List<AST>, Object>>();
+    this.definitions = new HashMap<String, Object>();
   }
 
-  public void define(String name, BiFunction<DefinitionTable, List<AST>, Object> definition) {
+  public void define(String name, Object definition) {
     this.definitions.put(name, definition);
   }
 
-  public BiFunction<DefinitionTable, List<AST>, Object> lookup(String name) {
+  public Object lookup(String name) {
     return this.definitions.get(name);
   }
 

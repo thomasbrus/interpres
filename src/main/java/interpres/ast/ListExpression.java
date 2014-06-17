@@ -13,11 +13,14 @@ public class ListExpression extends AST {
     this.items = items;
   }
 
+  @SuppressWarnings("unchecked")
   public Object evaluate(DefinitionTable definitionTable) {
     AST functionAST = this.getFunction();
 
+    Object definition = (((Symbol) functionAST).evaluate(definitionTable));
+
     // Assume that the first item is a Symbol and that its definition is a BiFunction
-    BiFunction<DefinitionTable, List<AST>, Object> lambda = ((Symbol) functionAST).evaluate(definitionTable);
+    BiFunction<DefinitionTable, List<AST>, Object> lambda = (BiFunction<DefinitionTable, List<AST>, Object>) definition;
 
     return lambda.apply(definitionTable, this.getArguments());
   }

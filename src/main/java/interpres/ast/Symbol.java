@@ -13,8 +13,12 @@ public class Symbol extends AST {
     this.name = name;
   }
 
-  public BiFunction<DefinitionTable, List<AST>, Object> evaluate(DefinitionTable definitionTable) {
+  public Object evaluate(DefinitionTable definitionTable) {
     return definitionTable.lookup(this.name);
+  }
+
+  public String getName() {
+    return this.name;
   }
 
   public String toString() {
