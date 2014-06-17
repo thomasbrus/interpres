@@ -54,9 +54,22 @@ This specific program can be executed by using the TAM Interpreter.
   - Compiled programs take full advantage of the speed of its target platform.
 
 ## Building & Running
-In order to build this project, [Maven](http://maven.apache.org) is required. Using Maven, the
-project is compiled by issuing the `mvn compile` command. The project can then be run by
-providing a programming written in Interpres and passing it to the main app:
+### Prerequisites
+This project requires the following software to be installed:
+
+  - [Maven](http://maven.apache.org)
+  - JDK 1.8
+
+To make sure that Maven uses the correct JDK version, alter the `JAVA_HOME` environment variable,
+or place this in your `~/.mavenrc`:
+
+    export JAVA_HOME=/Library/Java/JavaVirtualMachines/<jdk-version-1.8>/Contents/Home
+    
+Use `mvn --version` to verify that everything is setup correctly.
+
+### Compilation
+Using Maven, the project is compiled by issuing the `mvn compile` command. The project can
+then be run by providing a programming written in Interpres and passing it to the main app:
 
     $ mvn compile
     $ mvn exec:java -Dexec.mainClass="interpres.App" < my-program.interpres
