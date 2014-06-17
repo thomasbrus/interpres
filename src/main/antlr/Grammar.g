@@ -13,7 +13,7 @@ tokens {
   DOUBLE_QUOTE = '"';
 
   AT = '@';
-  PERCENT = '%';
+  TILDE = '\~';
 
   PROGRAM;
   LIST;
@@ -49,7 +49,7 @@ symbol: Symbol;
 
 quoted_expression: AT expression -> ^(QUOTED expression);
 
-unquoted_expression: PERCENT expression -> ^(UNQUOTED expression);
+unquoted_expression: TILDE expression -> ^(UNQUOTED expression);
 
 // Lexer rules
 // =============================================================================

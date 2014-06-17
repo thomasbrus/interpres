@@ -12,10 +12,10 @@ public class QuotedExpression extends AST {
     this.expression = expression;
   }
 
-  public Object evaluate(DefinitionTable definitionTable) {
-    return new ListExpression(
+  public AST evaluate(DefinitionTable definitionTable) {
+    return (AST) (new ListExpression(
       Arrays.asList(new Symbol("quote"), this.expression)
-    ).evaluate(definitionTable);
+    ).evaluate(definitionTable));
   }
 
   public String toString() {

@@ -7,6 +7,7 @@ import java.io.*;
 import java.util.List;
 
 import interpres.ast.AST;
+import interpres.ast.QuotedExpression;
 
 public class App {
   public static void main(String[] args) throws IOException, RecognitionException {
@@ -29,7 +30,13 @@ public class App {
     // Setup the definition table
     DefinitionTable definitionTable = new DefinitionTable();
 
-    definitionTable.define("quote", (DefinitionTable dt, List<AST> arguments) -> arguments.get(0));
+    definitionTable.define("quote", (DefinitionTable dt, List<AST> arguments) ->
+      arguments.get(0)
+    );
+
+    definitionTable.define("unquote", (DefinitionTable dt, List<AST> arguments) ->
+      ((QuotedExpression) arguments.get(0)).evaluate(dt).evaluate(dt)
+    );
 
     // Evaluate the AST
     System.out.println("Evaluated result:");
