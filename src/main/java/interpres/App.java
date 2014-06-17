@@ -5,9 +5,11 @@ import org.antlr.runtime.tree.*;
 
 import java.io.*;
 import java.util.List;
+import java.util.function.BiFunction;
 
 import interpres.ast.AST;
 import interpres.ast.QuotedExpression;
+import interpres.ast.Symbol;
 
 public class App {
   public static void main(String[] args) throws IOException, RecognitionException {
@@ -30,11 +32,17 @@ public class App {
     // Setup the definition table
     DefinitionTable definitionTable = new DefinitionTable();
 
-    definitionTable.define("quote", (DefinitionTable dt, List<AST> arguments) ->
+    definitionTable.define("define", (BiFunction<DefinitionTable, List<AST>, Object>) (DefinitionTable dt, List<AST> arguments) -> {
+      Symbol symbol = (Symbol) arguments.get(0).evaluate(dt);
+      definitionTable.define(symbol.getName(), arguments.get(1).evaluate(dt));
+      return null;
+    });
+
+    definitionTable.define("quote", (BiFunction<DefinitionTable, List<AST>, Object>) (DefinitionTable dt, List<AST> arguments) ->
       arguments.get(0)
     );
 
-    definitionTable.define("unquote", (DefinitionTable dt, List<AST> arguments) ->
+    definitionTable.define("unquote", (BiFunction<DefinitionTable, List<AST>, Object>) (DefinitionTable dt, List<AST> arguments) ->
       ((QuotedExpression) arguments.get(0)).evaluate(dt).evaluate(dt)
     );
 
