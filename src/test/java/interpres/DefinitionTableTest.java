@@ -34,5 +34,38 @@ public class DefinitionTableTest {
 
     assertEquals(4, this.definitionTable.lookup("x"));
   }
+
+  @Test public void bindAddsADefinition() {
+    this.definitionTable.bind("y", 3);
+    assertEquals(3, this.definitionTable.lookup("y"));
+  }
+
+  @Test public void bindOverridesPreviousDefinitions() {
+    this.definitionTable.define("y", 3);
+
+    this.definitionTable.enterScope();
+    this.definitionTable.bind("y", 4);
+
+    assertEquals(4, this.definitionTable.lookup("y"));
+
+    this.definitionTable.enterScope();
+    this.definitionTable.bind("y", 5);
+
+    assertEquals(5, this.definitionTable.lookup("y"));
+
+    this.definitionTable.leaveScope();
+    this.definitionTable.leaveScope();
+  }
+
+  @Test public void bindAcknowledgesScoping() {
+    this.definitionTable.enterScope();
+    this.definitionTable.bind("y", 3);
+
+    assertEquals(3, this.definitionTable.lookup("y"));
+
+    this.definitionTable.leaveScope();
+
+    assertEquals(null, this.definitionTable.lookup("y"));
+  }
 }
 
