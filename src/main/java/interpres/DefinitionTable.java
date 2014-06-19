@@ -25,11 +25,13 @@ public class DefinitionTable {
         if(currentDefinition.getPrevious() != null && currentDefinition.getPrevious().getLevel() == 0){
           Definition newDefinition = new Definition(name, definition, 0, currentDefinition.getPrevious());
           currentDefinition.setPrevious(newDefinition);
+          this.latest = newDefinition;
           return;
         } else
         if(currentDefinition.getPrevious() == null){
           Definition newDefinition = new Definition(name, definition, 0, null);
           currentDefinition.setPrevious(newDefinition);
+          this.latest = newDefinition;
           return;
         }
        currentDefinition = currentDefinition.getPrevious();
@@ -46,7 +48,7 @@ public class DefinitionTable {
   public Object lookup(String name) {
     Definition currentDefinition = latest;
     while(currentDefinition != null){
-      if(currentDefinition.getId().equals(name)) return currentDefinition;
+      if(currentDefinition.getId().equals(name)) return currentDefinition.getValue();
       currentDefinition = currentDefinition.getPrevious();
     }
     return null;
