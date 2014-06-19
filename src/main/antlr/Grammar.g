@@ -59,7 +59,7 @@ String: '"' (~'"' | '\\' '"')* '"';
 Symbol: (Letter | Digit | Special)+;
 
 Comment: ';' .* '\n' { $channel=HIDDEN; };
-Ws:(' ' | '\t' | '\f' | '\r' | '\n')+ { $channel=HIDDEN; };
+Ws:(' ' | '\t' | '\f' | '\r' | '\n' | ',')+ { $channel=HIDDEN; };
 
 // Protected lexer rules
 // =============================================================================
