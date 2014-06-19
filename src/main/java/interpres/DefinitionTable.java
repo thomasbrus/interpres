@@ -9,29 +9,26 @@ import java.io.*;
 import interpres.ast.AST;
 
 public class DefinitionTable {
-  // TODO: Allow non-lambda definitions
- private Definition latest;
-  private int level;
-
-  public DefinitionTable() { }
+  private Definition mostRecentDefinition;
+  private int scopeLevel;
 
   public void define(String name, Object definition) {
-    if(this.latest == null) {
+    if(this.mostRecentDefinition == null) {
       Definition newDefinition = new Definition(name, definition, 0, null);
-      this.latest = newDefinition;
+      this.mostRecentDefinition = newDefinition;
     } else {
-      Definition currentDefinition = latest;
+      Definition currentDefinition = this.mostRecentDefinition;
       while(currentDefinition != null){
-        if(currentDefinition.getPrevious() != null && currentDefinition.getPrevious().getLevel() == 0){
+        if(currentDefinition.getPrevious() != null && currentDefinition.getPrevious().getScopeLevel() == 0){
           Definition newDefinition = new Definition(name, definition, 0, currentDefinition.getPrevious());
           currentDefinition.setPrevious(newDefinition);
-          this.latest = newDefinition;
+          this.mostRecentDefinition = newDefinition;
           return;
         } else
         if(currentDefinition.getPrevious() == null){
           Definition newDefinition = new Definition(name, definition, 0, null);
           currentDefinition.setPrevious(newDefinition);
-          this.latest = newDefinition;
+          this.mostRecentDefinition = newDefinition;
           return;
         }
        currentDefinition = currentDefinition.getPrevious();
@@ -40,13 +37,13 @@ public class DefinitionTable {
   }
 
   public void bind(String name, Object definition) {
-    Definition newDefinition = new Definition(name, definition, this.level, this.latest);
-    this.latest = newDefinition;
+    Definition newDefinition = new Definition(name, definition, this.scopeLevel, this.mostRecentDefinition);
+    this.mostRecentDefinition = newDefinition;
   }
 
 
   public Object lookup(String name) {
-    Definition currentDefinition = latest;
+    Definition currentDefinition = this.mostRecentDefinition;
     while(currentDefinition != null){
       if(currentDefinition.getId().equals(name)) return currentDefinition.getValue();
       currentDefinition = currentDefinition.getPrevious();
@@ -55,16 +52,16 @@ public class DefinitionTable {
   }
 
   public void enterScope(){
-    this.level++;
+    this.scopeLevel++;
   }
 
   public void leaveScope(){
-    Definition currentDefinition = this.latest;
-    while(currentDefinition != null && currentDefinition.getLevel() == this.level){
+    Definition currentDefinition = this.mostRecentDefinition;
+    while(currentDefinition != null && currentDefinition.getScopeLevel() == this.scopeLevel){
       currentDefinition = currentDefinition.getPrevious();
     }
-    this.level--;
-    this.latest = currentDefinition;
+    this.scopeLevel--;
+    this.mostRecentDefinition = currentDefinition;
   }
 }
 

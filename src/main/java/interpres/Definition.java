@@ -10,13 +10,13 @@ import interpres.ast.AST;
 public class Definition {
   private String id;
   private Object value;
-  private int level;
+  private int scopeLevel;
   private Definition previous;
 
-  public Definition(String id, Object value, int level, Definition previous) {
+  public Definition(String id, Object value, int scopeLevel, Definition previous) {
     this.id = id;
     this.value = value;
-    this.level = level;
+    this.scopeLevel = scopeLevel;
     this.previous = previous;
   }
 
@@ -28,8 +28,8 @@ public class Definition {
     return this.value;
   }
 
-  public int getLevel(){
-    return this.level;
+  public int getScopeLevel(){
+    return this.scopeLevel;
   }
 
   public Definition getPrevious(){
