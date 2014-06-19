@@ -67,5 +67,17 @@ public class DefinitionTableTest {
 
     assertEquals(null, this.definitionTable.lookup("y"));
   }
+
+  @Test public void lookupFindsADefinition() {
+    this.definitionTable.define("y", 3);
+    assertEquals(3, this.definitionTable.lookup("y"));
+  }
+
+  @Test public void lookupReturnsNullWhenNothingFound() {
+    assertEquals(null, this.definitionTable.lookup("y"));
+  }
+
+  // TODO: Add more #lookup tests
+  // TODO: Add #enterScope and #leaveScope tests
 }
 
