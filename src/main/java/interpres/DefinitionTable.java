@@ -1,38 +1,18 @@
 package interpres;
 
-import java.util.Map;
-import java.util.HashMap;
 import java.util.List;
-import java.util.function.BiFunction;
-import java.io.*;
+import java.util.LinkedList;
+import java.util.Iterator;
+import java.util.ListIterator;
 
 import interpres.ast.AST;
 
 public class DefinitionTable {
-  private Definition mostRecentDefinition;
-  private int scopeLevel;
+  private Definition latest;
 
-  public void define(String name, Object definition) {
-    if(this.mostRecentDefinition == null) {
-      Definition newDefinition = new Definition(name, definition, 0, null);
-      this.mostRecentDefinition = newDefinition;
-    } else {
-      Definition currentDefinition = this.mostRecentDefinition;
-      while(currentDefinition != null){
-        if(currentDefinition.getPrevious() != null && currentDefinition.getPrevious().getScopeLevel() == 0){
-          Definition newDefinition = new Definition(name, definition, 0, currentDefinition.getPrevious());
-          currentDefinition.setPrevious(newDefinition);
-          this.mostRecentDefinition = newDefinition;
-          return;
-        } else
-        if(currentDefinition.getPrevious() == null){
-          Definition newDefinition = new Definition(name, definition, 0, null);
-          currentDefinition.setPrevious(newDefinition);
-          this.mostRecentDefinition = newDefinition;
-          return;
-        }
-       currentDefinition = currentDefinition.getPrevious();
-      }
+  private int scopeLevel;
+  private LinkedList<Definition> definitions = new LinkedList<Definition>();
+
   private static class Definition {
     private String id;
     private Object value;
@@ -49,32 +29,45 @@ public class DefinitionTable {
     public int getScopeLevel() { return this.scopeLevel; }
   }
 
-  public void bind(String name, Object definition) {
-    Definition newDefinition = new Definition(name, definition, this.scopeLevel, this.mostRecentDefinition);
-    this.mostRecentDefinition = newDefinition;
+  public void define(String name, Object value) {
+    int insertionIndex = 0;
+
+    for (int i = this.definitions.size() - 1; i >= 0; i--) {
+      if (this.definitions.get(i).getScopeLevel() == 0) {
+        insertionIndex = i + 1; break;
+      }
+    }
+
+    this.definitions.add(insertionIndex, new Definition(name, value, 0));
   }
 
+  public void bind(String name, Object value) {
+    this.definitions.addLast(new Definition(name, value, this.scopeLevel));
+  }
 
   public Object lookup(String name) {
-    Definition currentDefinition = this.mostRecentDefinition;
-    while(currentDefinition != null){
-      if(currentDefinition.getId().equals(name)) return currentDefinition.getValue();
-      currentDefinition = currentDefinition.getPrevious();
+    Iterator<Definition> it = this.definitions.descendingIterator();
+
+    while (it.hasNext()) {
+      Definition definition = it.next();
+      if (definition.getId().equals(name)) return definition.getValue();
     }
+
     return null;
   }
 
-  public void enterScope(){
+  public void enterScope() {
     this.scopeLevel++;
   }
 
-  public void leaveScope(){
-    Definition currentDefinition = this.mostRecentDefinition;
-    while(currentDefinition != null && currentDefinition.getScopeLevel() == this.scopeLevel){
-      currentDefinition = currentDefinition.getPrevious();
+  public void leaveScope() {
+    Iterator<Definition> it = this.definitions.descendingIterator();
+
+    while (it.hasNext() && it.next().getScopeLevel() == this.scopeLevel) {
+      it.remove();
     }
+
     this.scopeLevel--;
-    this.mostRecentDefinition = currentDefinition;
   }
 }
 
