@@ -8,8 +8,6 @@ import java.util.ListIterator;
 import interpres.ast.AST;
 
 public class DefinitionTable {
-  private Definition latest;
-
   private int scopeLevel;
   private LinkedList<Definition> definitions = new LinkedList<Definition>();
 
