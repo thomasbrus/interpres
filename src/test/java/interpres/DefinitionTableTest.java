@@ -23,8 +23,9 @@ public class DefinitionTableTest {
   @Test public void defineOverridesPreviousDefinitions() {
     this.definitionTable.define("x", 4);
     this.definitionTable.define("x", 5);
+    this.definitionTable.define("x", 6);
 
-    assertEquals(5, this.definitionTable.lookup("x"));
+    assertEquals(6, this.definitionTable.lookup("x"));
   }
 
   @Test public void defineIgnoresScoping() {
@@ -60,6 +61,7 @@ public class DefinitionTableTest {
   @Test public void bindAcknowledgesScoping() {
     this.definitionTable.enterScope();
     this.definitionTable.bind("y", 3);
+    this.definitionTable.bind("z", 2);
 
     assertEquals(3, this.definitionTable.lookup("y"));
 
@@ -69,7 +71,10 @@ public class DefinitionTableTest {
   }
 
   @Test public void lookupFindsADefinition() {
-    this.definitionTable.define("y", 3);
+    this.definitionTable.define("x", 4);
+    assertEquals(4, this.definitionTable.lookup("x"));
+
+    this.definitionTable.bind("y", 3);
     assertEquals(3, this.definitionTable.lookup("y"));
   }
 
