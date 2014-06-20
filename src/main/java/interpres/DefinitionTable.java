@@ -33,7 +33,20 @@ public class DefinitionTable {
         }
        currentDefinition = currentDefinition.getPrevious();
       }
+  private static class Definition {
+    private String id;
+    private Object value;
+    private int scopeLevel;
+
+    public Definition(String id, Object value, int scopeLevel) {
+      this.id = id;
+      this.value = value;
+      this.scopeLevel = scopeLevel;
     }
+
+    public String getId() { return this.id; }
+    public Object getValue() { return this.value; }
+    public int getScopeLevel() { return this.scopeLevel; }
   }
 
   public void bind(String name, Object definition) {
