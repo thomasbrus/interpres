@@ -12,17 +12,17 @@ public class DefinitionTable {
   private LinkedList<Definition> definitions = new LinkedList<Definition>();
 
   private static class Definition {
-    private String id;
+    private String name;
     private Object value;
     private int scopeLevel;
 
-    public Definition(String id, Object value, int scopeLevel) {
-      this.id = id;
+    public Definition(String name, Object value, int scopeLevel) {
+      this.name = name;
       this.value = value;
       this.scopeLevel = scopeLevel;
     }
 
-    public String getId() { return this.id; }
+    public String getName() { return this.name; }
     public Object getValue() { return this.value; }
     public int getScopeLevel() { return this.scopeLevel; }
   }
@@ -48,7 +48,7 @@ public class DefinitionTable {
 
     while (it.hasNext()) {
       Definition definition = it.next();
-      if (definition.getId().equals(name)) return definition.getValue();
+      if (definition.getName().equals(name)) return definition.getValue();
     }
 
     return null;
