@@ -36,8 +36,8 @@ public class App {
     // Setup the definition table
     DefinitionTable definitionTable = new DefinitionTable();
 
-    definitionTable.define("define", (BiFunction<DefinitionTable, List<AST>, Object>) (DefinitionTable dt, List<AST> arguments) -> {
-      Symbol symbol = (Symbol) arguments.get(0).evaluate(dt);
+    definitionTable.define("define", (BiFunction<DefinitionTable, List<AST>, Object>) (dt, arguments) -> {
+      Symbol symbol = (Symbol) arguments.get(0);
       definitionTable.define(symbol.getName(), arguments.get(1).evaluate(dt));
       return null;
     });
