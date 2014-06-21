@@ -1,12 +1,15 @@
 package interpres;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.stream.*;
 
 public class InstructionSequence implements PrintableBytecode, Iterable<String> {
   List<String> instructions;
 
   public InstructionSequence() {
+    this(new ArrayList<String>());
   }
 
   public InstructionSequence(List<String> instructions) {
@@ -22,7 +25,8 @@ public class InstructionSequence implements PrintableBytecode, Iterable<String> 
   }
 
   public String getBytecode() {
-    return "...";
+    String newline = System.getProperty("line.separator");
+    return this.instructions.stream().collect(Collectors.joining(newline));
   }
 }
 
