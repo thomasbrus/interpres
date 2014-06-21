@@ -12,11 +12,11 @@ public class StringLiteral extends AST {
     this.literal = literal;
   }
 
-  public Object evaluate(DefinitionTable definitionTable) {
+  public List<Object> evaluate(DefinitionTable definitionTable) {
     List<Object> instructions = new ArrayList<Object>();
 
     for (int i = literal.length() - 1; i >= 0; i--) {
-      instructions.add("LOADL " + (int)literal.charAt(i));
+      instructions.add("LOADL " + (int) literal.charAt(i));
     }
 
     return instructions;
