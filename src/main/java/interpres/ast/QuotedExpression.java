@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import interpres.DefinitionTable;
+import interpres.PrintableBytecode;
+import interpres.InstructionSequence;
 
 public class QuotedExpression extends AST {
   private AST expression;
@@ -12,10 +14,10 @@ public class QuotedExpression extends AST {
     this.expression = expression;
   }
 
-  public AST evaluate(DefinitionTable definitionTable) {
-    return (AST) (new ListExpression(
+  public PrintableBytecode evaluate(DefinitionTable definitionTable) {
+    return new ListExpression(
       Arrays.asList(new Symbol("quote"), this.expression)
-    ).evaluate(definitionTable));
+    ).evaluate(definitionTable);
   }
 
   public String toString() {

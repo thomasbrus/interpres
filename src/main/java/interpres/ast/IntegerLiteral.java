@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import interpres.DefinitionTable;
+import interpres.PrintableBytecode;
+import interpres.InstructionSequence;
 
 public class IntegerLiteral extends AST {
   private Integer value;
@@ -12,8 +14,8 @@ public class IntegerLiteral extends AST {
     this.value = value;
   }
 
-  public Object evaluate(DefinitionTable definitionTable) {
-    return Arrays.asList("LOADL " + this.value);
+  public PrintableBytecode evaluate(DefinitionTable definitionTable) {
+    return new InstructionSequence(Arrays.asList("LOADL " + this.value));
   }
 
   public String toString() {

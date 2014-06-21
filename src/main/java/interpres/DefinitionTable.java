@@ -13,21 +13,21 @@ public class DefinitionTable {
 
   private static class Definition {
     private String name;
-    private Object value;
+    private PrintableBytecode value;
     private int scopeLevel;
 
-    public Definition(String name, Object value, int scopeLevel) {
+    public Definition(String name, PrintableBytecode value, int scopeLevel) {
       this.name = name;
       this.value = value;
       this.scopeLevel = scopeLevel;
     }
 
     public String getName() { return this.name; }
-    public Object getValue() { return this.value; }
+    public PrintableBytecode getValue() { return this.value; }
     public int getScopeLevel() { return this.scopeLevel; }
   }
 
-  public void define(String name, Object value) {
+  public void define(String name, PrintableBytecode value) {
     int insertionIndex = 0;
 
     for (int i = this.definitions.size() - 1; i >= 0; i--) {
@@ -39,11 +39,11 @@ public class DefinitionTable {
     this.definitions.add(insertionIndex, new Definition(name, value, 0));
   }
 
-  public void bind(String name, Object value) {
+  public void bind(String name, PrintableBytecode value) {
     this.definitions.addLast(new Definition(name, value, this.scopeLevel));
   }
 
-  public Object lookup(String name) {
+  public PrintableBytecode lookup(String name) {
     Iterator<Definition> it = this.definitions.descendingIterator();
 
     while (it.hasNext()) {

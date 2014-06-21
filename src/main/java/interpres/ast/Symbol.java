@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.function.BiFunction;
 
 import interpres.DefinitionTable;
+import interpres.PrintableBytecode;
+import interpres.InstructionSequence;
 
 public class Symbol extends AST {
   private String name;
@@ -13,7 +15,7 @@ public class Symbol extends AST {
     this.name = name;
   }
 
-  public Object evaluate(DefinitionTable definitionTable) {
+  public PrintableBytecode evaluate(DefinitionTable definitionTable) {
     return definitionTable.lookup(this.name);
   }
 

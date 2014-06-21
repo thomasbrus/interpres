@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.stream.*;
 
 import interpres.DefinitionTable;
+import interpres.PrintableBytecode;
+import interpres.InstructionSequence;
 
 public class Program extends AST {
   private List<AST> expressions;
@@ -12,10 +14,16 @@ public class Program extends AST {
     this.expressions = expressions;
   }
 
-  public List<Object> evaluate(DefinitionTable definitionTable) {
-    return this.expressions.stream().map((ast) ->
-      ast.evaluate(definitionTable)
-    ).collect(Collectors.toList());
+  public PrintableBytecode evaluate(DefinitionTable definitionTable) {
+    InstructionSequence instructions = new InstructionSequence();
+
+    for (AST expression : this.expressions) {
+      for (String instruction : expression.evaluate(definitionTable)) {
+        instructions.add(instruction);
+      }
+    }
+
+    return instructions;
   }
 
   public String toString() {

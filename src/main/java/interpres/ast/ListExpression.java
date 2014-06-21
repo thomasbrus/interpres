@@ -5,6 +5,9 @@ import java.util.stream.*;
 import java.util.function.BiFunction;
 
 import interpres.DefinitionTable;
+import interpres.PrintableBytecode;
+import interpres.InstructionSequence;
+import interpres.Lambda;
 
 public class ListExpression extends AST {
   private List<AST> items;
@@ -13,14 +16,11 @@ public class ListExpression extends AST {
     this.items = items;
   }
 
-  @SuppressWarnings("unchecked")
-  public Object evaluate(DefinitionTable definitionTable) {
+  public PrintableBytecode evaluate(DefinitionTable definitionTable) {
     AST functionAST = this.getFunction();
 
-    Object definition = (((Symbol) functionAST).evaluate(definitionTable));
-
-    // Assume that the first item is a Symbol and that its definition is a BiFunction
-    BiFunction<DefinitionTable, List<AST>, Object> lambda = (BiFunction<DefinitionTable, List<AST>, Object>) definition;
+    // Assume that the first item is a Symbol and that its definition is a of type Lambda
+    Lambda lambda = ((Lambda) (((Symbol) functionAST).evaluate(definitionTable)));
 
     return lambda.apply(definitionTable, this.getArguments());
   }

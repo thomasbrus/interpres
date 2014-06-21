@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import interpres.DefinitionTable;
+import interpres.PrintableBytecode;
+import interpres.InstructionSequence;
 
 public class UnquotedExpression extends AST {
   private AST expression;
@@ -12,7 +14,7 @@ public class UnquotedExpression extends AST {
     this.expression = expression;
   }
 
-  public Object evaluate(DefinitionTable definitionTable) {
+  public PrintableBytecode evaluate(DefinitionTable definitionTable) {
     return new ListExpression(
       Arrays.asList(new Symbol("unquote"), this.expression)
     ).evaluate(definitionTable);
