@@ -1,5 +1,7 @@
-(core.define @println (lambda @(str)
-  @(str (core.repeat (core.length @str) @"CALL put"))))
+(define println (lambda (string-instructions)
+  (core.concat
+    string-instructions
+    (core.repeat (core.length string-instructions) (string "CALL put")))))
 
-(println "Hello world!")
+(println "Hello world")
 
