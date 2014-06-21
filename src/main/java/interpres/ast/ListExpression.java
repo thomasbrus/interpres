@@ -29,6 +29,10 @@ public class ListExpression extends AST {
     return this.items.toString();
   }
 
+  public List<AST> getItems() {
+    return this.items;
+  }
+
   private AST getFunction() {
     return this.items.get(0);
   }
