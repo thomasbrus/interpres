@@ -3,7 +3,9 @@ package interpres.ast;
 import java.util.List;
 import java.util.ArrayList;
 
-import interpres.DefinitionTable;
+import interpres.definitions.DefinitionTable;
+import interpres.instructions.PrintableInstructionSequence;
+import interpres.instructions.InstructionSequence;
 
 public class StringLiteral extends AST {
   private String literal;
@@ -12,17 +14,18 @@ public class StringLiteral extends AST {
     this.literal = literal;
   }
 
-  public Object evaluate(DefinitionTable definitionTable) {
-    List<Object> instructions = new ArrayList<Object>();
+  public PrintableInstructionSequence evaluate(DefinitionTable definitionTable) {
+    InstructionSequence instructions = new InstructionSequence();
 
     for (int i = literal.length() - 1; i >= 0; i--) {
-      instructions.add("LOADL " + (int)literal.charAt(i));
+      instructions.add("LOADL " + (int) literal.charAt(i));
     }
 
     return instructions;
   }
 
-  public String toString() {
-    return this.literal.toString();
+  public String quote() {
+    return this.literal;
   }
 }
+

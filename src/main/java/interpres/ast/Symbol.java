@@ -1,10 +1,8 @@
 package interpres.ast;
 
-import java.util.List;
-import java.util.Arrays;
-import java.util.function.BiFunction;
-
-import interpres.DefinitionTable;
+import interpres.definitions.DefinitionTable;
+import interpres.instructions.PrintableInstructionSequence;
+import interpres.instructions.InstructionSequence;
 
 public class Symbol extends AST {
   private String name;
@@ -13,7 +11,7 @@ public class Symbol extends AST {
     this.name = name;
   }
 
-  public Object evaluate(DefinitionTable definitionTable) {
+  public PrintableInstructionSequence evaluate(DefinitionTable definitionTable) {
     return definitionTable.lookup(this.name);
   }
 
@@ -21,7 +19,8 @@ public class Symbol extends AST {
     return this.name;
   }
 
-  public String toString() {
-    return this.name.toString();
+  public String quote() {
+    return this.name;
   }
 }
+
