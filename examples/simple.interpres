@@ -1,4 +1,4 @@
-(define println (lambda (string-instructions)
+(core.define println (core.lambda (string-instructions)
   (core.concat
     string-instructions
     (core.repeat (core.length string-instructions) @"CALL put"))))
