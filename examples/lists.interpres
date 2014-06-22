@@ -1,3 +1,0 @@
-(put-int 1024)
-(put-string "Hello world!")
-
