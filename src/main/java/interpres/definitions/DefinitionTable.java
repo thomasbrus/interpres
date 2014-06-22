@@ -1,4 +1,4 @@
-package interpres;
+package interpres.definitions;
 
 import java.util.List;
 import java.util.LinkedList;
@@ -6,28 +6,14 @@ import java.util.Iterator;
 import java.util.ListIterator;
 
 import interpres.ast.AST;
+import interpres.definitions.Definition;
+import interpres.instructions.PrintableInstructionSequence;
 
 public class DefinitionTable {
   private int scopeLevel;
   private LinkedList<Definition> definitions = new LinkedList<Definition>();
 
-  private static class Definition {
-    private String name;
-    private PrintableBytecode value;
-    private int scopeLevel;
-
-    public Definition(String name, PrintableBytecode value, int scopeLevel) {
-      this.name = name;
-      this.value = value;
-      this.scopeLevel = scopeLevel;
-    }
-
-    public String getName() { return this.name; }
-    public PrintableBytecode getValue() { return this.value; }
-    public int getScopeLevel() { return this.scopeLevel; }
-  }
-
-  public void define(String name, PrintableBytecode value) {
+  public void define(String name, PrintableInstructionSequence value) {
     int insertionIndex = 0;
 
     for (int i = this.definitions.size() - 1; i >= 0; i--) {
@@ -39,11 +25,15 @@ public class DefinitionTable {
     this.definitions.add(insertionIndex, new Definition(name, value, 0));
   }
 
-  public void bind(String name, PrintableBytecode value) {
+  public void define(Definition definition) {
+    this.define(definition.getName(), definition.getValue());
+  }
+
+  public void bind(String name, PrintableInstructionSequence value) {
     this.definitions.addLast(new Definition(name, value, this.scopeLevel));
   }
 
-  public PrintableBytecode lookup(String name) {
+  public PrintableInstructionSequence lookup(String name) {
     Iterator<Definition> it = this.definitions.descendingIterator();
 
     while (it.hasNext()) {

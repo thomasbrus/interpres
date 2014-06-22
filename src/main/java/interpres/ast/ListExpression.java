@@ -1,13 +1,10 @@
 package interpres.ast;
 
 import java.util.List;
-import java.util.stream.*;
-import java.util.function.BiFunction;
 
-import interpres.DefinitionTable;
-import interpres.PrintableBytecode;
-import interpres.InstructionSequence;
-import interpres.Lambda;
+import interpres.definitions.DefinitionTable;
+import interpres.instructions.PrintableInstructionSequence;
+import interpres.instructions.EmptyInstructionSequenceLambda;
 
 public class ListExpression extends AST {
   private List<AST> items;
@@ -16,17 +13,18 @@ public class ListExpression extends AST {
     this.items = items;
   }
 
-  public PrintableBytecode evaluate(DefinitionTable definitionTable) {
+  public PrintableInstructionSequence evaluate(DefinitionTable definitionTable) {
     AST functionAST = this.getFunction();
 
     // Assume that the first item is a Symbol and that its definition is a of type Lambda
-    Lambda lambda = ((Lambda) (((Symbol) functionAST).evaluate(definitionTable)));
+    Object definition = ((Symbol) functionAST).evaluate(definitionTable);
+    EmptyInstructionSequenceLambda lambda = (EmptyInstructionSequenceLambda) definition;
 
     return lambda.apply(definitionTable, this.getArguments());
   }
 
-  public String toString() {
-    return this.items.toString();
+  public List<AST> quote() {
+    return this.items;
   }
 
   public List<AST> getItems() {

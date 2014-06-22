@@ -3,9 +3,9 @@ package interpres.ast;
 import java.util.List;
 import java.util.stream.*;
 
-import interpres.DefinitionTable;
-import interpres.PrintableBytecode;
-import interpres.InstructionSequence;
+import interpres.definitions.DefinitionTable;
+import interpres.instructions.PrintableInstructionSequence;
+import interpres.instructions.InstructionSequence;
 
 public class Program extends AST {
   private List<AST> expressions;
@@ -14,7 +14,8 @@ public class Program extends AST {
     this.expressions = expressions;
   }
 
-  public PrintableBytecode evaluate(DefinitionTable definitionTable) {
+  public PrintableInstructionSequence evaluate(DefinitionTable definitionTable) {
+    // TODO: Utilize core.concat?
     InstructionSequence instructions = new InstructionSequence();
 
     for (AST expression : this.expressions) {
@@ -26,8 +27,8 @@ public class Program extends AST {
     return instructions;
   }
 
-  public String toString() {
-    return this.expressions.toString();
+  public List<AST> quote() {
+    return this.expressions;
   }
 }
 

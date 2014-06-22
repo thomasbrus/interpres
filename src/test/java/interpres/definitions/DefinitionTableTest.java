@@ -1,4 +1,4 @@
-package interpres;
+package interpres.definitions;
 
 import static org.junit.Assert.*;
 
@@ -8,17 +8,21 @@ import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
 import java.util.Iterator;
+import java.io.PrintStream;
+
+import interpres.instructions.PrintableInstructionSequence;
 
 @RunWith(JUnit4.class)
 public class DefinitionTableTest {
-  DefinitionTable definitionTable;
-  DummyDefinition firstDefinition;
-  DummyDefinition secondDefinition;
-  DummyDefinition thirdDefinition;
+  private DefinitionTable definitionTable;
+  private DummyDefinition firstDefinition;
+  private DummyDefinition secondDefinition;
+  private DummyDefinition thirdDefinition;
 
-  private static class DummyDefinition implements PrintableBytecode {
-    public String getBytecode() { return ""; }
+  private static class DummyDefinition implements PrintableInstructionSequence {
+    public void printInstructionSequence(PrintStream printStream) {}
     public Iterator<String> iterator() { return null; }
+    public int length() { return 0; }
   }
 
   @Before public void setUpEmptyDefinitionTable() {
@@ -38,6 +42,7 @@ public class DefinitionTableTest {
     this.definitionTable.define("x", this.secondDefinition);
     this.definitionTable.define("x", this.thirdDefinition);
 
+    assertNotEquals(this.secondDefinition, this.definitionTable.lookup("x"));
     assertEquals(this.thirdDefinition, this.definitionTable.lookup("x"));
   }
 
@@ -48,6 +53,8 @@ public class DefinitionTableTest {
 
     assertEquals(this.firstDefinition, this.definitionTable.lookup("x"));
   }
+
+  // TODO: Add #define(Definition) tests
 
   @Test public void bindAddsADefinition() {
     this.definitionTable.bind("y", this.firstDefinition);

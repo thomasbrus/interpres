@@ -3,9 +3,9 @@ package interpres.ast;
 import java.util.List;
 import java.util.ArrayList;
 
-import interpres.DefinitionTable;
-import interpres.PrintableBytecode;
-import interpres.InstructionSequence;
+import interpres.definitions.DefinitionTable;
+import interpres.instructions.PrintableInstructionSequence;
+import interpres.instructions.InstructionSequence;
 
 public class StringLiteral extends AST {
   private String literal;
@@ -14,7 +14,7 @@ public class StringLiteral extends AST {
     this.literal = literal;
   }
 
-  public PrintableBytecode evaluate(DefinitionTable definitionTable) {
+  public PrintableInstructionSequence evaluate(DefinitionTable definitionTable) {
     InstructionSequence instructions = new InstructionSequence();
 
     for (int i = literal.length() - 1; i >= 0; i--) {
@@ -24,7 +24,8 @@ public class StringLiteral extends AST {
     return instructions;
   }
 
-  public String toString() {
-    return this.literal.toString();
+  public String quote() {
+    return this.literal;
   }
 }
+
