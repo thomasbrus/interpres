@@ -7,29 +7,22 @@ import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import java.util.Iterator;
-import java.io.PrintStream;
-
-import interpres.instructions.PrintableInstructionSequence;
+import interpres.language.values.Integer;
+import interpres.language.values.Value;
+import interpres.language.DefinitionTable;
 
 @RunWith(JUnit4.class)
 public class DefinitionTableTest {
   private DefinitionTable definitionTable;
-  private DummyDefinition firstDefinition;
-  private DummyDefinition secondDefinition;
-  private DummyDefinition thirdDefinition;
-
-  private static class DummyDefinition implements PrintableInstructionSequence {
-    public void printInstructionSequence(PrintStream printStream) {}
-    public Iterator<String> iterator() { return null; }
-    public int length() { return 0; }
-  }
+  private Value firstDefinition;
+  private Value secondDefinition;
+  private Value thirdDefinition;
 
   @Before public void setUpEmptyDefinitionTable() {
     this.definitionTable = new DefinitionTable();
-    this.firstDefinition = new DummyDefinition();
-    this.secondDefinition = new DummyDefinition();
-    this.thirdDefinition = new DummyDefinition();
+    this.firstDefinition = new interpres.language.values.Integer(1);
+    this.secondDefinition = new interpres.language.values.Integer(2);
+    this.thirdDefinition = new interpres.language.values.Integer(3);
   }
 
   @Test public void defineAddsADefinition() {

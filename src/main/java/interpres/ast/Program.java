@@ -1,11 +1,10 @@
 package interpres.ast;
 
 import java.util.List;
-import java.util.stream.*;
+import java.util.ArrayList;
 
-import interpres.definitions.DefinitionTable;
-import interpres.instructions.PrintableInstructionSequence;
-import interpres.instructions.InstructionSequence;
+import interpres.language.DefinitionTable;
+import interpres.language.values.Value;
 
 public class Program extends AST {
   private List<AST> expressions;
@@ -14,21 +13,19 @@ public class Program extends AST {
     this.expressions = expressions;
   }
 
-  public PrintableInstructionSequence evaluate(DefinitionTable definitionTable) {
-    // TODO: Utilize core.concat?
-    InstructionSequence instructions = new InstructionSequence();
+  public Value evaluate(DefinitionTable definitionTable) {
+    List<String> instructions = new ArrayList<String>();
 
     for (AST expression : this.expressions) {
-      for (String instruction : expression.evaluate(definitionTable)) {
+      for (String instruction : expression.evaluate(definitionTable).getInstructions()) {
         instructions.add(instruction);
       }
     }
 
-    return instructions;
+    return new interpres.language.values.List(instructions);
   }
 
   public List<AST> quote() {
     return this.expressions;
   }
 }
-

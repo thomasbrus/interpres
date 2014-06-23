@@ -1,11 +1,11 @@
 package interpres.ast;
 
 import java.util.List;
-import interpres.definitions.DefinitionTable;
-import interpres.instructions.PrintableInstructionSequence;
+import interpres.language.DefinitionTable;
+import interpres.language.values.Value;
 
 public abstract class AST {
-  public abstract PrintableInstructionSequence evaluate(DefinitionTable definitionTable);
+  public abstract Value evaluate(DefinitionTable definitionTable);
   public abstract Object quote();
   // FIXME: Should throw UnsupportedOperationException
   public Object unquote(DefinitionTable definitionTable) { return null; }

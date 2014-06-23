@@ -3,9 +3,8 @@ package interpres.ast;
 import java.util.Arrays;
 import java.util.List;
 
-import interpres.definitions.DefinitionTable;
-import interpres.instructions.PrintableInstructionSequence;
-import interpres.instructions.InstructionSequence;
+import interpres.language.DefinitionTable;
+import interpres.language.values.Value;
 
 public class QuotedExpression extends AST {
   private AST expression;
@@ -14,7 +13,7 @@ public class QuotedExpression extends AST {
     this.expression = expression;
   }
 
-  public PrintableInstructionSequence evaluate(DefinitionTable definitionTable) {
+  public Value evaluate(DefinitionTable definitionTable) {
     return new ListExpression(
       Arrays.asList(new Symbol("core.quote"), this.expression)
     ).evaluate(definitionTable);
@@ -24,7 +23,7 @@ public class QuotedExpression extends AST {
     return this.expression;
   }
 
-  public PrintableInstructionSequence unquote(DefinitionTable definitionTable) {
+  public Value unquote(DefinitionTable definitionTable) {
     return this.expression.evaluate(definitionTable);
   }
 }

@@ -2,9 +2,8 @@ package interpres.ast;
 
 import java.util.Arrays;
 
-import interpres.definitions.DefinitionTable;
-import interpres.instructions.PrintableInstructionSequence;
-import interpres.instructions.InstructionSequence;
+import interpres.language.DefinitionTable;
+import interpres.language.values.Value;
 
 public class UnquotedExpression extends AST {
   private AST expression;
@@ -13,7 +12,7 @@ public class UnquotedExpression extends AST {
     this.expression = expression;
   }
 
-  public PrintableInstructionSequence evaluate(DefinitionTable definitionTable) {
+  public Value evaluate(DefinitionTable definitionTable) {
     return new ListExpression(
       Arrays.asList(new Symbol("core.unquote"), this.expression)
     ).evaluate(definitionTable);

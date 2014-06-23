@@ -1,10 +1,11 @@
 package interpres.ast;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-import interpres.definitions.DefinitionTable;
-import interpres.instructions.PrintableInstructionSequence;
-import interpres.instructions.EmptyInstructionSequenceLambda;
+import interpres.language.DefinitionTable;
+import interpres.language.values.Value;
+import interpres.language.values.Lambda;
 
 public class ListExpression extends AST {
   private List<AST> items;
@@ -13,30 +14,25 @@ public class ListExpression extends AST {
     this.items = items;
   }
 
-  public PrintableInstructionSequence evaluate(DefinitionTable definitionTable) {
-    AST functionAST = this.getFunction();
-
-    // Assume that the first item is a Symbol and that its definition is a of type Lambda
-    Object definition = ((Symbol) functionAST).evaluate(definitionTable);
-    EmptyInstructionSequenceLambda lambda = (EmptyInstructionSequenceLambda) definition;
-
-    return lambda.apply(definitionTable, this.getArguments());
+  public Value evaluate(DefinitionTable definitionTable) {
+    Symbol functionNameSymbol = this.getFunction();
+    Lambda lambdaValue = (Lambda) functionNameSymbol.evaluate(definitionTable);
+    return lambdaValue.getValue().apply(definitionTable, this.getArguments());
   }
 
-  public List<AST> quote() {
-    return this.items;
+  public List<String> quote() {
+    return this.items.stream().map(AST::toString).collect(Collectors.toList());
   }
 
   public List<AST> getItems() {
     return this.items;
   }
 
-  private AST getFunction() {
-    return this.items.get(0);
+  private Symbol getFunction() {
+    return (Symbol) this.items.get(0);
   }
 
   private List<AST> getArguments() {
     return this.items.subList(1, this.items.size());
   }
 }
-

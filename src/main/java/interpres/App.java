@@ -9,16 +9,14 @@ import java.io.PrintStream;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.function.BiFunction;
-import java.util.stream.*;
 
 import interpres.ast.AST;
 import interpres.ast.QuotedExpression;
 import interpres.ast.ListExpression;
 import interpres.ast.Symbol;
 
-import interpres.definitions.DefinitionTable;
-import interpres.instructions.PrintableInstructionSequence;
+import interpres.language.DefinitionTable;
+import interpres.language.values.Value;
 
 public class App {
   private DefinitionTable definitionTable;
@@ -27,7 +25,7 @@ public class App {
     this.definitionTable = definitionTable;
   }
 
-  public PrintableInstructionSequence evaluate(InputStream inputStream) throws IOException, RecognitionException {
+  public Value evaluate(InputStream inputStream) throws IOException, RecognitionException {
     AST ast = this.transform(this.parse(inputStream));
     return ast.evaluate(this.definitionTable);
   }
@@ -54,18 +52,20 @@ public class App {
   public static void main(String[] args) throws IOException, RecognitionException {
     DefinitionTable definitionTable = new DefinitionTable();
 
-    definitionTable.define(new interpres.definitions.core.Define());
-    definitionTable.define(new interpres.definitions.core.Lambda());
-    definitionTable.define(new interpres.definitions.core.Quote());
-    definitionTable.define(new interpres.definitions.core.Unquote());
-    definitionTable.define(new interpres.definitions.core.Concat());
-    definitionTable.define(new interpres.definitions.core.Repeat());
-    definitionTable.define(new interpres.definitions.core.Length());
+    definitionTable.define(new interpres.language.definitions.core.Define());
+    definitionTable.define(new interpres.language.definitions.core.Lambda());
+    definitionTable.define(new interpres.language.definitions.core.Quote());
+    definitionTable.define(new interpres.language.definitions.core.Unquote());
+    definitionTable.define(new interpres.language.definitions.core.Concat());
+    definitionTable.define(new interpres.language.definitions.core.Repeat());
+    definitionTable.define(new interpres.language.definitions.core.Length());
+    definitionTable.define(new interpres.language.definitions.core.string.Concat());
 
     App app = new App(definitionTable);
 
-    PrintableInstructionSequence instructions = app.evaluate(System.in);
-    instructions.printInstructionSequence(new PrintStream(System.out));
+    Value evaluatedAST = app.evaluate(System.in);
+    System.out.println(evaluatedAST.getInstructions());
+    // instructions.printInstructionSequence(new PrintStream(System.out));
   }
 }
 
