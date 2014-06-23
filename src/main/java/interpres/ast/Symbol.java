@@ -1,8 +1,8 @@
 package interpres.ast;
 
-import interpres.definitions.DefinitionTable;
-import interpres.instructions.PrintableInstructionSequence;
-import interpres.instructions.InstructionSequence;
+import interpres.language.DefinitionTable;
+import interpres.language.SymbolResolver;
+import interpres.language.values.Value;
 
 public class Symbol extends AST {
   private String name;
@@ -11,8 +11,8 @@ public class Symbol extends AST {
     this.name = name;
   }
 
-  public PrintableInstructionSequence evaluate(DefinitionTable definitionTable) {
-    return definitionTable.lookup(this.name);
+  public Value evaluate(DefinitionTable definitionTable) {
+     return new SymbolResolver(definitionTable).resolve(this);
   }
 
   public String getName() {
