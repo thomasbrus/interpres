@@ -35,8 +35,8 @@ public class SymbolResolver {
   }
 
   public Value asInteger(Symbol symbol) {
-    return new ListExpression(
-      Arrays.asList(new Symbol("asm.loadl"), new QuotedExpression(symbol))
+    return ListExpression.buildFunctionCall("asm.loadl",
+        new QuotedExpression(symbol)
     ).evaluate(definitionTable);
   }
 }

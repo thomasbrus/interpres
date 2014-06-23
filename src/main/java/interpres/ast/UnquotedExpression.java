@@ -13,9 +13,7 @@ public class UnquotedExpression extends AST {
   }
 
   public Value evaluate(DefinitionTable definitionTable) {
-    return new ListExpression(
-      Arrays.asList(new Symbol("core.unquote"), this.expression)
-    ).evaluate(definitionTable);
+    return ListExpression.buildFunctionCall("core.unquote", this.expression).evaluate(definitionTable);
   }
 
   public AST quote() {
