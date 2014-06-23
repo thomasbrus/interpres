@@ -1,6 +1,7 @@
 package interpres.ast;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 import interpres.language.DefinitionTable;
@@ -12,6 +13,13 @@ public class ListExpression extends AST {
 
   public ListExpression(List<AST> items) {
     this.items = items;
+  }
+
+  public static ListExpression buildFunctionCall(String name, List<AST> arguments) {
+    List<AST> items = new ArrayList<AST>();
+    items.add(new Symbol(name));
+    items.addAll(arguments);
+    return new ListExpression(items);
   }
 
   public Value evaluate(DefinitionTable definitionTable) {

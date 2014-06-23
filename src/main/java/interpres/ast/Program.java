@@ -1,7 +1,7 @@
 package interpres.ast;
 
 import java.util.List;
-import java.util.ArrayList;
+import java.util.Arrays;
 
 import interpres.language.DefinitionTable;
 import interpres.language.values.Value;
@@ -14,15 +14,7 @@ public class Program extends AST {
   }
 
   public Value evaluate(DefinitionTable definitionTable) {
-    List<String> instructions = new ArrayList<String>();
-
-    for (AST expression : this.expressions) {
-      for (String instruction : expression.evaluate(definitionTable)) {
-        instructions.add(instruction);
-      }
-    }
-
-    return new interpres.language.values.List(instructions);
+    return ListExpression.buildFunctionCall("core.concat", this.expressions).evaluate(definitionTable);
   }
 
   public List<AST> quote() {
