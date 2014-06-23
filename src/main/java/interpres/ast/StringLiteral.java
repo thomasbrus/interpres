@@ -14,13 +14,7 @@ public class StringLiteral extends AST {
   }
 
   public Value evaluate(DefinitionTable definitionTable) {
-    List<String> instructions = new ArrayList<String>();
-
-    for (int i = literal.length() - 1; i >= 0; i--) {
-      instructions.add("LOADL " + (int) literal.charAt(i));
-    }
-
-    return new interpres.language.values.List(instructions);
+    return ListExpression.buildFunctionCall("asm.loads", new QuotedExpression(this)).evaluate(definitionTable);
   }
 
   public String quote() {
