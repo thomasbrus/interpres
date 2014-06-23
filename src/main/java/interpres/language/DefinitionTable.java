@@ -1,4 +1,4 @@
-package interpres.definitions;
+package interpres.language;
 
 import java.util.List;
 import java.util.LinkedList;
@@ -6,14 +6,14 @@ import java.util.Iterator;
 import java.util.ListIterator;
 
 import interpres.ast.AST;
-import interpres.definitions.Definition;
-import interpres.instructions.PrintableInstructionSequence;
+import interpres.language.values.Value;
+import interpres.language.definitions.Definition;
 
 public class DefinitionTable {
   private int scopeLevel;
   private LinkedList<Definition> definitions = new LinkedList<Definition>();
 
-  public void define(String name, PrintableInstructionSequence value) {
+  public void define(String name, Value value) {
     int insertionIndex = 0;
 
     for (int i = this.definitions.size() - 1; i >= 0; i--) {
@@ -29,11 +29,11 @@ public class DefinitionTable {
     this.define(definition.getName(), definition.getValue());
   }
 
-  public void bind(String name, PrintableInstructionSequence value) {
+  public void bind(String name, Value value) {
     this.definitions.addLast(new Definition(name, value, this.scopeLevel));
   }
 
-  public PrintableInstructionSequence lookup(String name) {
+  public Value lookup(String name) {
     Iterator<Definition> it = this.definitions.descendingIterator();
 
     while (it.hasNext()) {
@@ -42,6 +42,11 @@ public class DefinitionTable {
     }
 
     return null;
+  }
+
+  public boolean contains(String name) {
+    return this.definitions.stream().anyMatch(definition ->
+      definition.getName().equals(name));
   }
 
   public void enterScope() {
@@ -58,4 +63,5 @@ public class DefinitionTable {
     this.scopeLevel--;
   }
 }
+
 
