@@ -18,7 +18,7 @@ public class Concat extends Definition {
 
       for (AST argument : arguments) {
         String concatenable = (String) argument.evaluate(definitionTable);
-        strings.add((java.lang.String) concatenable.getValue());
+        strings.add(concatenable.getLiteral());
       }
 
       return new String(java.lang.String.join("", strings));

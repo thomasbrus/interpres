@@ -64,8 +64,7 @@ public class App {
     App app = new App(definitionTable);
 
     Value evaluatedAST = app.evaluate(System.in);
-    System.out.println(evaluatedAST.getInstructions());
-    // instructions.printInstructionSequence(new PrintStream(System.out));
+    System.out.println(evaluatedAST.bytecodeSequence());
   }
 }
 

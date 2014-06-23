@@ -14,7 +14,7 @@ public class Concat extends Definition {
       List<String> instructions = new ArrayList<String>();
 
       for (AST argument : arguments) {
-        for (String instruction : argument.evaluate(definitionTable).getInstructions()) {
+        for (String instruction : argument.evaluate(definitionTable)) {
           instructions.add(instruction);
         }
       }

@@ -17,7 +17,7 @@ public class Program extends AST {
     List<String> instructions = new ArrayList<String>();
 
     for (AST expression : this.expressions) {
-      for (String instruction : expression.evaluate(definitionTable).getInstructions()) {
+      for (String instruction : expression.evaluate(definitionTable)) {
         instructions.add(instruction);
       }
     }

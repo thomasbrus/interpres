@@ -17,7 +17,7 @@ public class ListExpression extends AST {
   public Value evaluate(DefinitionTable definitionTable) {
     Symbol functionNameSymbol = this.getFunction();
     Lambda lambdaValue = (Lambda) functionNameSymbol.evaluate(definitionTable);
-    return lambdaValue.getValue().apply(definitionTable, this.getArguments());
+    return lambdaValue.getFunction().apply(definitionTable, this.getArguments());
   }
 
   public List<String> quote() {
