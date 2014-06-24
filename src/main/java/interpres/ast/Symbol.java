@@ -19,8 +19,8 @@ public class Symbol extends AST {
     return this.name;
   }
 
-  public String quote() {
-    return this.name;
+  public interpres.language.values.String quote() {
+    return new interpres.language.values.String(this.name);
   }
 }
 

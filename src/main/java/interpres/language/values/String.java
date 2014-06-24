@@ -17,5 +17,9 @@ public class String extends Value {
   public List<java.lang.String> bytecodeSequence() {
     return Arrays.asList(this.literal);
   }
+
+  public java.lang.String toString() {
+    return this.literal.toString();
+  }
 }
 

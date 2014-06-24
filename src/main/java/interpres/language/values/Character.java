@@ -3,14 +3,14 @@ package interpres.language.values;
 import java.util.List;
 import java.util.Arrays;
 
-public class Integer extends Value {
-  private java.lang.Integer value;
+public class Character extends Value {
+  private java.lang.Character value;
 
-  public Integer(java.lang.Integer value) {
+  public Character(java.lang.Character value) {
     this.value = value;
   }
 
-  public java.lang.Integer getValue() {
+  public java.lang.Character getValue() {
     return this.value;
   }
 

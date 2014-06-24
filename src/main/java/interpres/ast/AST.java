@@ -6,7 +6,7 @@ import interpres.language.values.Value;
 
 public abstract class AST {
   public abstract Value evaluate(DefinitionTable definitionTable);
-  public abstract Object quote();
+  public abstract Value quote();
   // FIXME: Should throw UnsupportedOperationException
   public Object unquote(DefinitionTable definitionTable) { return null; }
 }

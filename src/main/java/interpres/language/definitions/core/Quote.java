@@ -16,12 +16,12 @@ public class Quote extends Definition {
   public Quote() {
     super("core.quote", new Lambda((definitionTable, arguments) -> {
       AST quotable = arguments.get(0);
+      return quotable.quote();
+      // if (quotable instanceof ListExpression) {
+      //   return new List(((ListExpression) quotable).quote());
+      // }
 
-      if (quotable instanceof ListExpression) {
-        return new List(((ListExpression) quotable).quote());
-      }
-
-      return new String(quotable.quote().toString());
+      // return new String(quotable.quote().toString());
     }), 0);
   }
 

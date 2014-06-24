@@ -16,8 +16,9 @@ public class UnquotedExpression extends AST {
     return ListExpression.buildFunctionCall("core.unquote", this.expression).evaluate(definitionTable);
   }
 
-  public AST quote() {
-    return this.expression;
+  public Value quote() {
+    // return this.expression;
+    return null; // FIXME
   }
 }
 

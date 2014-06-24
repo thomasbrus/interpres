@@ -28,13 +28,16 @@ public class ListExpression extends AST {
   }
 
   public Value evaluate(DefinitionTable definitionTable) {
-    Symbol functionNameSymbol = this.getFunction();
-    Lambda lambdaValue = (Lambda) functionNameSymbol.evaluate(definitionTable);
+    Lambda lambdaValue = (Lambda) this.getFunction().evaluate(definitionTable);
     return lambdaValue.getFunction().apply(definitionTable, this.getArguments());
   }
 
-  public List<Object> quote() {
-    return this.items.stream().collect(Collectors.toList());
+  public interpres.language.values.List quote() {
+    return new interpres.language.values.List(
+       this.items.stream().map(item ->
+         new interpres.language.values.String(item.toString())
+       ).collect(Collectors.toList())
+    );
   }
 
   public List<AST> getItems() {

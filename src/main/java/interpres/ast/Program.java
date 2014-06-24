@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.ArrayList;
 
 import interpres.language.DefinitionTable;
+
 import interpres.language.values.Value;
+import interpres.language.values.String;
 
 public class Program extends AST {
   private List<AST> expressions;
@@ -14,18 +16,19 @@ public class Program extends AST {
   }
 
   public Value evaluate(DefinitionTable definitionTable) {
-    List<Object> instructions = new ArrayList<Object>();
+    List<Value> instructions = new ArrayList<Value>();
 
     for (AST expression : this.expressions) {
-      for (String instruction : expression.evaluate(definitionTable)) {
-        instructions.add(instruction);
+      for (java.lang.String instruction : expression.evaluate(definitionTable)) {
+        instructions.add(new String(instruction));
       }
     }
 
     return new interpres.language.values.List(instructions);
   }
 
-  public List<AST> quote() {
-    return this.expressions;
+  public Value quote() {
+    // return this.expressions;
+    return null; // FIXME
   }
 }
