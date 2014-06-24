@@ -1,33 +1,42 @@
 package interpres.language.definitions.core;
 
+import java.util.ArrayList;
+
 import interpres.ast.Symbol;
 import interpres.ast.AST;
 
 import interpres.language.definitions.Definition;
 
+import interpres.language.values.Value;
+import interpres.language.values.Lambda;
+import interpres.language.values.Integer;
+import interpres.language.values.String;
+import interpres.language.values.List;
+
 public class Repeat extends Definition {
 
-  @SuppressWarnings("unchecked")
   public Repeat() {
-    super("-", null, 0);
-    // super("core.repeat", new EmptyInstructionSequenceLambda((definitionTable, arguments) -> {
-    //   InstructionSequence repeatedInstructions = new InstructionSequence();
+    super("core.repeat", new Lambda((definitionTable, arguments) -> {
+      Object repeatable = null;
+      java.util.List<Object> repeatedItems = new ArrayList<Object>();
 
-    //   PrintableInstructionSequence lengthIS = arguments.get(0).evaluate(definitionTable);
-    //   EmptyInstructionSequenceAtom<Integer> lengthAtom = ((EmptyInstructionSequenceAtom<Integer>) lengthIS);
+      Integer lengthValue = (Integer) arguments.get(0).evaluate(definitionTable);
+      Value repeatableValue = arguments.get(1).evaluate(definitionTable);
 
-    //   PrintableInstructionSequence repeatableIS = arguments.get(1).evaluate(definitionTable);
-    //   EmptyInstructionSequenceAtom<Object> repeatableAtom = ((EmptyInstructionSequenceAtom<Object>) repeatableIS);
+      if (repeatableValue instanceof String) {
+        repeatable = ((String) repeatableValue).getLiteral();
+      } else if (repeatableValue instanceof Integer) {
+        repeatable = ((Integer) repeatableValue).getValue();
+      } else if (repeatableValue instanceof List) {
+        repeatable = ((List) repeatableValue).getItems();
+      }
 
-    //   Integer length = lengthAtom.getValue();
-    //   Object repeatable = repeatableAtom.getValue();
+      for (int i = 0; i < lengthValue.getValue() && repeatable instanceof Object; i++) {
+        repeatedItems.add(repeatable);
+      }
 
-    //   for (int i = 0; i < lengthAtom.getValue(); i++) {
-    //     repeatedInstructions.add(repeatable.toString());
-    //   }
-
-    //   return repeatedInstructions;
-    // }), 0);
+      return new interpres.language.values.List(repeatedItems);
+    }), 0);
   }
 
 }

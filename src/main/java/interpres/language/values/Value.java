@@ -14,9 +14,5 @@ public abstract class Value implements AsBytecode {
   public Iterator<java.lang.String> iterator() {
     return this.bytecodeSequence().iterator();
   }
-
-  public int length() {
-    return this.bytecodeSequence().size();
-  }
 }
 

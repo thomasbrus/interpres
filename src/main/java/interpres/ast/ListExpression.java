@@ -33,8 +33,8 @@ public class ListExpression extends AST {
     return lambdaValue.getFunction().apply(definitionTable, this.getArguments());
   }
 
-  public List<String> quote() {
-    return this.items.stream().map(AST::toString).collect(Collectors.toList());
+  public List<Object> quote() {
+    return this.items.stream().collect(Collectors.toList());
   }
 
   public List<AST> getItems() {
