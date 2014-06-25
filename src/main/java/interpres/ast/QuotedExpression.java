@@ -14,7 +14,8 @@ public class QuotedExpression extends AST {
   }
 
   public Value evaluate(DefinitionTable definitionTable) {
-    return ListExpression.buildFunctionCall("core.quote", this.expression).evaluate(definitionTable);
+    return ListExpression.buildFunctionCall("core.quote", this.expression)
+      .evaluate(definitionTable);
   }
 
   public Value quote() {

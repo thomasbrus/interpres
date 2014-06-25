@@ -13,12 +13,12 @@ public class UnquotedExpression extends AST {
   }
 
   public Value evaluate(DefinitionTable definitionTable) {
-    return ListExpression.buildFunctionCall("core.unquote", this.expression).evaluate(definitionTable);
+    return ListExpression.buildFunctionCall("core.unquote", this.expression)
+      .evaluate(definitionTable);
   }
 
   public Value quote() {
-    // return this.expression;
-    return null; // FIXME
+    return this.expression.quote();
   }
 }
 
