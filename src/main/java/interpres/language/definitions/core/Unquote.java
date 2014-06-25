@@ -1,18 +1,19 @@
 package interpres.language.definitions.core;
 
+import java.util.Arrays;
+
 import interpres.ast.AST;
-import interpres.ast.QuotedExpression;
 
 import interpres.language.definitions.Definition;
+import interpres.language.values.Lambda;
 
 public class Unquote extends Definition {
 
   public Unquote() {
-    super("-", null, 0);
-    // super("core.unquote", new EmptyInstructionSequenceLambda((definitionTable, arguments) -> {
-    //   Object unquotedObject = arguments.get(0).unquote(definitionTable);
-    //   return new EmptyInstructionSequenceAtom<Object>(unquotedObject);
-    // }), 0);
+    super("core.unquote", new Lambda((definitionTable, arguments) -> {
+      AST unquotable = arguments.get(0);
+      return unquotable.unquote(definitionTable);
+    }), 0);
   }
 
 }
