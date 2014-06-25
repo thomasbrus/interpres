@@ -1,7 +1,0 @@
-(core.define println (core.lambda (string-instructions)
-  (core.concat
-    string-instructions
-    (core.repeat (core.length string-instructions) @"CALL put"))))
-
-(println "Hello world")
-
