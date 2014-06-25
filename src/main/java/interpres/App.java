@@ -60,12 +60,14 @@ public class App {
     definitionTable.define(new interpres.language.definitions.core.List());
     definitionTable.define(new interpres.language.definitions.core.StringToList());
     definitionTable.define(new interpres.language.definitions.core.IntegerToString());
+    definitionTable.define(new interpres.language.definitions.core.SymbolToString());
     definitionTable.define(new interpres.language.definitions.core.list.Concat());
     definitionTable.define(new interpres.language.definitions.core.list.Size());
     definitionTable.define(new interpres.language.definitions.core.list.Reverse());
     definitionTable.define(new interpres.language.definitions.core.list.Map());
     definitionTable.define(new interpres.language.definitions.core.string.Concat());
     definitionTable.define(new interpres.language.definitions.core.character.Ord());
+    definitionTable.define(new interpres.language.definitions.core.integer.Add());
 
     App app = new App(definitionTable);
 
