@@ -1,4 +1,4 @@
-package interpres.definitions;
+package interpres.language.definitions;
 
 import static org.junit.Assert.*;
 
