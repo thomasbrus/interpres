@@ -16,19 +16,8 @@ public class Program extends AST {
   }
 
   public Value evaluate(DefinitionTable definitionTable) {
-    List<Value> instructions = new ArrayList<Value>();
-
-    for (AST expression : this.expressions) {
-      for (java.lang.String instruction : expression.evaluate(definitionTable)) {
-        instructions.add(new String(instruction));
-      }
-    }
-
-    return new interpres.language.values.List(instructions);
-  }
-
-  public Value quote() {
-    // return this.expressions;
-    return null; // FIXME
+    return ListExpression.buildFunctionCall("core.list", this.expressions)
+      .evaluate(definitionTable);
   }
 }
+
