@@ -71,7 +71,7 @@ public class App {
     App app = new App(definitionTable);
 
     Value evaluatedAST = app.evaluate(System.in);
-    System.out.println(evaluatedAST.bytecodeSequence());
+    evaluatedAST.printBytecode(new PrintStream(System.out));
   }
 }
 

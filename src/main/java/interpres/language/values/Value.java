@@ -3,6 +3,7 @@ package interpres.language.values;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
+import java.io.PrintStream;
 
 import interpres.ast.AST;
 
@@ -14,5 +15,10 @@ public abstract class Value implements AsBytecode {
   public Iterator<java.lang.String> iterator() {
     return this.bytecodeSequence().iterator();
   }
-}
 
+  public void printBytecode(PrintStream printStream) {
+    for (java.lang.String bytecode : this.bytecodeSequence()) {
+      printStream.println(bytecode);
+    }
+  }
+}
