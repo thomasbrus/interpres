@@ -29,7 +29,7 @@ public class Map extends Definition {
       }
 
       return new List(mappedItems);
-    }), 0);
+    }));
   }
 
 }

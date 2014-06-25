@@ -36,7 +36,7 @@ public class Lambda extends Definition {
           "core.let", letArguments
         ).evaluate(definitionTable);
       });
-    }), 0);
+    }));
   }
 
 }

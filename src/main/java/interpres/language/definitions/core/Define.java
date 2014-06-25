@@ -18,7 +18,7 @@ public class Define extends Definition {
       Value value = arguments.get(1).evaluate(definitionTable);
       definitionTable.define(symbol.getName(), value);
       return new Void();
-    }), 0);
+    }));
   }
 
 }

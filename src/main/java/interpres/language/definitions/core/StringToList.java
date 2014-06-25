@@ -26,7 +26,7 @@ public class StringToList extends Definition {
       }
 
       return new interpres.language.values.List(characters);
-    }), 0);
+    }));
   }
 
 }

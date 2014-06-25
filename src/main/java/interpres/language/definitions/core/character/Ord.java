@@ -16,7 +16,7 @@ public class Ord extends Definition {
     super("core.character.ord", new Lambda((definitionTable, arguments) -> {
       Character characterValue = (Character) arguments.get(0).evaluate(definitionTable);
       return new Integer((int) characterValue.getValue().charValue());
-    }), 0);
+    }));
   }
 
 }

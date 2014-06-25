@@ -23,7 +23,7 @@ public class Repeat extends Definition {
       return ListExpression.buildFunctionCall(
         "core.list", Collections.nCopies(countValue.getValue(), arguments.get(1))
       ).evaluate(definitionTable);
-    }), 0);
+    }));
   }
 
 }

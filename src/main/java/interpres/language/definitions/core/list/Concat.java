@@ -21,7 +21,7 @@ public class Concat extends Definition {
       }
 
       return new List(concatenatedItems);
-    }), 0);
+    }));
   }
 
 }

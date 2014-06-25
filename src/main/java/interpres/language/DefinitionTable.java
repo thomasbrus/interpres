@@ -22,7 +22,7 @@ public class DefinitionTable {
       }
     }
 
-    this.definitions.add(insertionIndex, new Definition(name, value, 0));
+    this.definitions.add(insertionIndex, new Definition(name, value));
   }
 
   public void define(Definition definition) {

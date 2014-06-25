@@ -13,7 +13,7 @@ public class Unquote extends Definition {
     super("core.unquote", new Lambda((definitionTable, arguments) -> {
       AST unquotable = arguments.get(0);
       return unquotable.unquote(definitionTable);
-    }), 0);
+    }));
   }
 
 }
