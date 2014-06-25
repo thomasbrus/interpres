@@ -1,6 +1,7 @@
 package interpres.language.definitions.core;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 import interpres.ast.AST;
@@ -20,20 +21,20 @@ public class Lambda extends Definition {
       List<AST> expressions = arguments.subList(1, arguments.size());
 
       return new interpres.language.values.Lambda((lambdaDefinitionTable, actualArguments) -> {
-        lambdaDefinitionTable.enterScope();
+        List<AST> letArguments = new ArrayList<AST>();
+        List<AST> localBindingASTs = new ArrayList<AST>();
 
         for (int i = 0; i < formalArguments.size(); i++) {
-          String localBindingName = ((Symbol) formalArguments.get(i)).getName();
-          Value localBindingValue = actualArguments.get(i).evaluate(lambdaDefinitionTable);
-          lambdaDefinitionTable.bind(localBindingName, localBindingValue);
+          localBindingASTs.add(formalArguments.get(i));
+          localBindingASTs.add(actualArguments.get(i));
         }
 
-        List<Value> evaluatedExpressions = expressions.stream().map(e ->
-          e.evaluate(lambdaDefinitionTable)).collect(Collectors.toList());
+        letArguments.add(new ListExpression(localBindingASTs));
+        letArguments.addAll(expressions);
 
-        lambdaDefinitionTable.leaveScope();
-
-        return evaluatedExpressions.get(evaluatedExpressions.size() - 1);
+        return ListExpression.buildFunctionCall(
+          "core.let", letArguments
+        ).evaluate(definitionTable);
       });
     }), 0);
   }
