@@ -17,7 +17,7 @@ public class SymbolToString extends Definition {
     super("core.symbol-to-string", new Lambda((definitionTable, arguments) -> {
       Symbol symbolValue = (Symbol) arguments.get(0).evaluate(definitionTable);
       return new String(symbolValue.getIntern());
-    }), 0);
+    }));
   }
 
 }

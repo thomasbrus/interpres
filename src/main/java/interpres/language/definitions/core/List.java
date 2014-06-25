@@ -22,7 +22,7 @@ public class List extends Definition {
       }
 
       return new interpres.language.values.List(listItems);
-    }), 0);
+    }));
   }
 
 }

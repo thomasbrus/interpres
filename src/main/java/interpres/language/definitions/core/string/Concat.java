@@ -22,7 +22,7 @@ public class Concat extends Definition {
       }
 
       return new String(java.lang.String.join("", strings));
-    }), 0);
+    }));
   }
 
 }

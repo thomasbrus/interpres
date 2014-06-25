@@ -12,7 +12,7 @@ public class Quote extends Definition {
     super("core.quote", new Lambda((definitionTable, arguments) -> {
       AST quotable = arguments.get(0);
       return quotable.quote();
-    }), 0);
+    }));
   }
 
 }

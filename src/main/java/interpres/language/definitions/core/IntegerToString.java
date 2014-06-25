@@ -17,7 +17,7 @@ public class IntegerToString extends Definition {
     super("core.integer-to-string", new Lambda((definitionTable, arguments) -> {
       Integer integerValue = (Integer) arguments.get(0).evaluate(definitionTable);
       return new String(integerValue.getValue().toString());
-    }), 0);
+    }));
   }
 
 }

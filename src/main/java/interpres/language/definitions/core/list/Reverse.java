@@ -17,7 +17,7 @@ public class Reverse extends Definition {
       // FIXME: Shouldn't modify original list (?)
       Collections.reverse(reversableValue.getItems());
       return reversableValue;
-    }), 0);
+    }));
   }
 
 }
