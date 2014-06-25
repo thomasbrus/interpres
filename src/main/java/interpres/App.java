@@ -56,7 +56,6 @@ public class App {
     definitionTable.define(new interpres.language.definitions.core.Lambda());
     definitionTable.define(new interpres.language.definitions.core.Quote());
     definitionTable.define(new interpres.language.definitions.core.Unquote());
-    definitionTable.define(new interpres.language.definitions.core.Unquote());
     definitionTable.define(new interpres.language.definitions.core.Repeat());
     definitionTable.define(new interpres.language.definitions.core.List());
     definitionTable.define(new interpres.language.definitions.core.StringToList());
