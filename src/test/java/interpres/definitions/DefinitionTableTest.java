@@ -14,58 +14,60 @@ import interpres.language.DefinitionTable;
 @RunWith(JUnit4.class)
 public class DefinitionTableTest {
   private DefinitionTable definitionTable;
-  private Value firstDefinition;
-  private Value secondDefinition;
-  private Value thirdDefinition;
+  private Value firstValue;
+  private Value secondValue;
+  private Value thirdValue;
 
   @Before public void setUpEmptyDefinitionTable() {
     this.definitionTable = new DefinitionTable();
-    this.firstDefinition = new interpres.language.values.Integer(1);
-    this.secondDefinition = new interpres.language.values.Integer(2);
-    this.thirdDefinition = new interpres.language.values.Integer(3);
+    this.firstValue = new interpres.language.values.Integer(1);
+    this.secondValue = new interpres.language.values.Integer(2);
+    this.thirdValue = new interpres.language.values.Integer(3);
   }
 
   @Test public void defineAddsADefinition() {
-    this.definitionTable.define("x", this.firstDefinition);
-    assertEquals(this.firstDefinition, this.definitionTable.lookup("x"));
+    // TODO: Add assertions
+  }
+
+  @Test public void defineAddsADefinitionGivenANameAndValue() {
+    this.definitionTable.define("x", this.firstValue);
+    assertEquals(this.firstValue, this.definitionTable.lookup("x"));
   }
 
   @Test public void defineOverridesPreviousDefinitions() {
-    this.definitionTable.define("x", this.firstDefinition);
-    this.definitionTable.define("x", this.secondDefinition);
-    this.definitionTable.define("x", this.thirdDefinition);
+    this.definitionTable.define("x", this.firstValue);
+    this.definitionTable.define("x", this.secondValue);
+    this.definitionTable.define("x", this.thirdValue);
 
-    assertNotEquals(this.secondDefinition, this.definitionTable.lookup("x"));
-    assertEquals(this.thirdDefinition, this.definitionTable.lookup("x"));
+    assertNotEquals(this.secondValue, this.definitionTable.lookup("x"));
+    assertEquals(this.thirdValue, this.definitionTable.lookup("x"));
   }
 
   @Test public void defineIgnoresScoping() {
     this.definitionTable.enterScope();
-    this.definitionTable.define("x", this.firstDefinition);
+    this.definitionTable.define("x", this.firstValue);
     this.definitionTable.leaveScope();
 
-    assertEquals(this.firstDefinition, this.definitionTable.lookup("x"));
+    assertEquals(this.firstValue, this.definitionTable.lookup("x"));
   }
 
-  // TODO: Add #define(Definition) tests
-
   @Test public void bindAddsADefinition() {
-    this.definitionTable.bind("y", this.firstDefinition);
-    assertEquals(this.firstDefinition, this.definitionTable.lookup("y"));
+    this.definitionTable.bind("y", this.firstValue);
+    assertEquals(this.firstValue, this.definitionTable.lookup("y"));
   }
 
   @Test public void bindOverridesPreviousDefinitions() {
-    this.definitionTable.define("y", this.firstDefinition);
+    this.definitionTable.define("y", this.firstValue);
 
     this.definitionTable.enterScope();
-    this.definitionTable.bind("y", this.firstDefinition);
+    this.definitionTable.bind("y", this.firstValue);
 
-    assertEquals(this.firstDefinition, this.definitionTable.lookup("y"));
+    assertEquals(this.firstValue, this.definitionTable.lookup("y"));
 
     this.definitionTable.enterScope();
-    this.definitionTable.bind("y", this.thirdDefinition);
+    this.definitionTable.bind("y", this.thirdValue);
 
-    assertEquals(this.thirdDefinition, this.definitionTable.lookup("y"));
+    assertEquals(this.thirdValue, this.definitionTable.lookup("y"));
 
     this.definitionTable.leaveScope();
     this.definitionTable.leaveScope();
@@ -73,10 +75,10 @@ public class DefinitionTableTest {
 
   @Test public void bindAcknowledgesScoping() {
     this.definitionTable.enterScope();
-    this.definitionTable.bind("y", this.firstDefinition);
-    this.definitionTable.bind("z", this.secondDefinition);
+    this.definitionTable.bind("y", this.firstValue);
+    this.definitionTable.bind("z", this.secondValue);
 
-    assertEquals(this.firstDefinition, this.definitionTable.lookup("y"));
+    assertEquals(this.firstValue, this.definitionTable.lookup("y"));
 
     this.definitionTable.leaveScope();
 
@@ -84,11 +86,11 @@ public class DefinitionTableTest {
   }
 
   @Test public void lookupFindsADefinition() {
-    this.definitionTable.define("x", this.firstDefinition);
-    assertEquals(this.firstDefinition, this.definitionTable.lookup("x"));
+    this.definitionTable.define("x", this.firstValue);
+    assertEquals(this.firstValue, this.definitionTable.lookup("x"));
 
-    this.definitionTable.bind("y", this.secondDefinition);
-    assertEquals(this.secondDefinition, this.definitionTable.lookup("y"));
+    this.definitionTable.bind("y", this.secondValue);
+    assertEquals(this.secondValue, this.definitionTable.lookup("y"));
   }
 
   @Test public void lookupReturnsNullWhenNothingFound() {
