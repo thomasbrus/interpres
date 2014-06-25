@@ -23,7 +23,7 @@ public class Symbol extends AST {
     try {
       return new interpres.language.values.Integer(Integer.parseInt(this.name));
     } catch (NumberFormatException e) {
-      return new interpres.language.values.String(this.name);
+      return new interpres.language.values.Symbol(this.name);
     }
   }
 }
