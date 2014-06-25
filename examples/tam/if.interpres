@@ -2,12 +2,14 @@
 
 (core.define asm.loadl (core.lambda (quoted-integer)
     (core.list (core.string.concat
-        @"LOADL" @" " (core.integer-to-string quoted-integer)))))
+        @"LOADL " (core.integer-to-string quoted-integer)))))
+
+(core.define asm.loadc (core.lambda (quoted-character)
+    (asm.loadl (core.character.ord quoted-character))))
 
 (core.define asm.loads (core.lambda (quoted-string)
   (core.list.map
-    (core.lambda (quoted-character)
-      (asm.loadl (core.character.ord quoted-character)))
+    (core.lambda (quoted-character) (asm.loadc quoted-character))
     (core.list.reverse (core.string-to-list quoted-string)))))
 
 (core.define asm.address (core.lambda (offset register)
