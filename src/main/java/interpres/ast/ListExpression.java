@@ -34,9 +34,7 @@ public class ListExpression extends AST {
 
   public interpres.language.values.List quote() {
     return new interpres.language.values.List(
-       this.items.stream().map(item ->
-         new interpres.language.values.String(item.toString())
-       ).collect(Collectors.toList())
+       this.items.stream().map(AST::quote).collect(Collectors.toList())
     );
   }
 
