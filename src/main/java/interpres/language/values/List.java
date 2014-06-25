@@ -1,6 +1,6 @@
 package interpres.language.values;
 
-import java.util.stream.Collectors;
+import java.util.ArrayList;
 
 public class List extends Value {
   private java.util.List<Value> items;
@@ -14,7 +14,13 @@ public class List extends Value {
   }
 
   public java.util.List<java.lang.String> bytecodeSequence() {
-    return this.items.stream().map(Object::toString).collect(Collectors.toList());
+    java.util.List<java.lang.String> bytecodeSequence = new ArrayList<java.lang.String>();
+
+    for (Value item : this.items) {
+      bytecodeSequence.addAll(item.bytecodeSequence());
+    }
+
+    return bytecodeSequence;
   }
 
   public java.lang.String toString() {
