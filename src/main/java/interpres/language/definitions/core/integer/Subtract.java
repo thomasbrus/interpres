@@ -9,10 +9,10 @@ import interpres.language.definitions.Definition;
 import interpres.language.values.Lambda;
 import interpres.language.values.Integer;
 
-public class Sub extends Definition {
+public class Subtract extends Definition {
 
-  public Sub() {
-    super("core.integer.sub", new Lambda((definitionTable, arguments) -> {
+  public Subtract() {
+    super("core.integer.subtract", new Lambda((definitionTable, arguments) -> {
       Integer firstInteger = (Integer) arguments.get(0).evaluate(definitionTable);
       Integer secondInteger = (Integer) arguments.get(1).evaluate(definitionTable);
       return new Integer(firstInteger.getValue() - secondInteger.getValue());
