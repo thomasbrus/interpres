@@ -17,18 +17,7 @@ public class Map extends Definition {
 
   public Map() {
     super("core.list.map", new Lambda((definitionTable, arguments) -> {
-      java.util.List<Value> mappedItems = new ArrayList<Value>();
-
-      Lambda lambdaValue = (Lambda) arguments.get(0).evaluate(definitionTable);
-      List listValue = (List) arguments.get(1).evaluate(definitionTable);
-
-      for (Value item : listValue.getItems()) {
-        java.util.List<AST> mapableItem = Arrays.asList(new VirtualExpression(item));
-        Value mappedItem = lambdaValue.getFunction().apply(definitionTable, mapableItem);
-        mappedItems.add(mappedItem);
-      }
-
-      return new List(mappedItems);
+      return new interpres.language.invocations.core.list.Map(definitionTable, arguments).invoke();
     }));
   }
 

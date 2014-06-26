@@ -18,13 +18,8 @@ import interpres.language.values.Void;
 import interpres.language.invocations.Invocation;
 
 public class Let extends Invocation {
-  private ListExpression localBindingsAST;
-  private List<AST> expressionsAST;
-
   public Let(DefinitionTable definitionTable, List<AST> arguments) {
     super(definitionTable, arguments);
-    this.localBindingsAST = (ListExpression) arguments.get(0);
-    this.expressionsAST = arguments.subList(1, arguments.size());
   }
 
   public Value invoke() {
@@ -39,7 +34,7 @@ public class Let extends Invocation {
   }
 
   private void bindLocals() {
-    Iterator<AST> localBindingsIterator = this.localBindingsAST.getItems().iterator();
+    Iterator<AST> localBindingsIterator = this.getLocalBindingsAST().getItems().iterator();
 
     while (localBindingsIterator.hasNext()) {
       String localBindingName = ((Symbol) localBindingsIterator.next()).getName();
@@ -49,9 +44,17 @@ public class Let extends Invocation {
   }
 
   private List<Value> evaluateExpressions() {
-    return this.expressionsAST.stream().map(expression ->
+    return this.getExpressionsAST().stream().map(expression ->
       expression.evaluate(this.getDefinitionTable())
     ).collect(Collectors.toList());
+  }
+
+  private ListExpression getLocalBindingsAST() {
+    return (ListExpression) this.getArguments().get(0);
+  }
+
+  private List<AST> getExpressionsAST() {
+    return this.getArguments().subList(1, this.getArguments().size());
   }
 }
 
