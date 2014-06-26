@@ -16,9 +16,9 @@ import interpres.language.values.List;
 public class Map extends Definition {
 
   public Map() {
-    super("core.list.map", new Lambda((definitionTable, arguments) -> {
-      return new interpres.language.invocations.core.list.Map(definitionTable, arguments).invoke();
-    }));
+    super("core.list.map", new Lambda((definitionTable, arguments) ->
+      new interpres.language.invocations.core.list.Map(definitionTable, arguments).invoke()
+    ));
   }
 
 }
