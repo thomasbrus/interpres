@@ -1,0 +1,19 @@
+; = Prelude.JVM ================================================================
+
+(core.define asm.generate-label core.random.uuid)
+
+(core.define asm.goto (core.lambda (address)
+    (core.string.concat @"goto " address)))
+
+(core.define label-demo (core.lambda ()
+    (core.let (jump-label (asm.generate-label))
+      (core.list
+        (asm.goto jump-label)
+        (core.string.concat jump-label @": <continue here>")))))
+
+; ==============================================================================
+
+(label-demo)
+; => goto 5e388bb3-0bfe-4fc7-a029-27d8f7380093
+; => 5e388bb3-0bfe-4fc7-a029-27d8f7380093: <continue here>
+
