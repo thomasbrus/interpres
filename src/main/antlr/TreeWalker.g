@@ -39,11 +39,7 @@ list returns [AST ast]
     List<AST> items = new ArrayList<AST>();
   }
   @after {
-    if (items.isEmpty()) {
-      $ast = new QuotedExpression(new ListExpression(items));
-    } else {
-      $ast = new ListExpression(items);
-    }
+    $ast = new ListExpression(items);
   }
   :
   ^(LIST (expression { items.add($expression.ast); })*)
