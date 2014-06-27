@@ -70,6 +70,7 @@ public class App {
     definitionTable.define(new interpres.language.definitions.core.character.Ord());
     definitionTable.define(new interpres.language.definitions.core.integer.Add());
     definitionTable.define(new interpres.language.definitions.core.integer.Subtract());
+    definitionTable.define(new interpres.language.definitions.core.random.UUID());
 
     App app = new App(definitionTable);
 
