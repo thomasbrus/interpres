@@ -8,7 +8,7 @@ public class UUID extends Definition {
 
   public UUID() {
     super("core.random.uuid", new Lambda((definitionTable, arguments) -> {
-      return new String(java.util.UUID.randomUUID().toString());
+      return new String((new java.util.Random()).nextInt(1000) +  "");
     }));
   }
 
