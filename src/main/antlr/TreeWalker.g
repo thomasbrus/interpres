@@ -9,6 +9,7 @@ options {
 @header {
   package interpres;
   import interpres.ast.*;
+  import org.apache.commons.lang3.StringEscapeUtils;
 }
 
 walk returns [AST ast]: program { $ast = $program.ast; };
@@ -47,7 +48,7 @@ list returns [AST ast]
 
 literal returns [AST ast]
   : ^(STRING string=String) {
-    String literal = org.apache.commons.lang3.StringEscapeUtils.unescapeJava($string.text);
+    String literal = StringEscapeUtils.unescapeJava($string.text);
     $ast = new StringLiteral(literal.substring(1, literal.length() - 1));
   }
   | ^(SYMBOL symbol=Symbol) {
