@@ -67,6 +67,6 @@ Ws:(' ' | '\t' | '\f' | '\r' | '\n' | ',')+ { $channel=HIDDEN; };
 fragment Digit: ('0'..'9');
 fragment Lower: ('a'..'z');
 fragment Upper: ('A'..'Z');
-fragment Special: '+' | '-' | '*' | '/' | '%' | '&' | '|' | '=' | '>' | '<' | '$' | '!' | '?' | '_' | '.';
+fragment Special: '+' | '-' | '*' | '/' | '%' | '&' | '|' | '=' | '>' | '<' | '$' | '!' | '?' | '_' | '.' | ':';
 fragment Letter: Lower | Upper;
 
