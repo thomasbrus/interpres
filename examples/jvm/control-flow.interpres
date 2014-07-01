@@ -1,0 +1,223 @@
+; = prelude.jvm ================================================================
+
+(core.define @asm.labels.counter @0)
+
+(core.define @asm.label (core.lambda (label-name)
+    (core.string.concat label-name @":")))
+
+(core.define @asm.next-label (core.lambda ()
+  (core.define @asm.labels.counter (core.integer.add @1 asm.labels.counter))
+  (core.string.concat @"label-" (core.integer-to-string asm.labels.counter))))
+
+(core.define @asm.header (core.lambda ()
+    @(".class public Program"
+      ".super java/lang/Object"
+      ".method public <init>()V"
+      "  aload_0"
+      "  invokespecial java/lang/Object/<init>()V"
+      "  return"
+      ".end method"
+      ".method public static main([Ljava/lang/String;)V"
+      "  .limit stack 100"
+      "  .limit locals 100"
+      "  ; ----- main program -----")))
+
+(core.define @asm.footer (core.lambda ()
+    @("  ; --- end main program ---"
+      "  return"
+      ".end method")))
+
+(core.define @asm.load (core.lambda (address)
+    (core.list (core.string.concat @"iload " address))))
+
+(core.define @asm.loadl (core.lambda (integer)
+    (core.list (core.string.concat @"sipush " (core.integer-to-string integer)))))
+
+(core.define @asm.loadc (core.lambda (character)
+    (asm.loadl (core.character.ord character))))
+
+(core.define @asm.loads (core.lambda (string)
+    (core.list (core.string.concat @"ldc \"" string @"\""))))
+
+(core.define @asm.store (core.lambda (address)
+    (core.list (core.string.concat @"istore " address))))
+
+(core.define @asm.jump (core.lambda (address)
+    (core.list (core.string.concat @"goto " address))))
+
+(core.define @asm.jumpifeq (core.lambda (address)
+    (core.list (core.string.concat @"ifeq " address))))
+
+(core.define @print-int (core.lambda (integer)
+    (core.list
+      @("getstatic java/lang/System/out Ljava/io/PrintStream;")
+      integer
+      @("invokevirtual java/io/PrintStream/println(I)V"))))
+
+(core.define @print-string (core.lambda (string)
+    (core.list
+      @("getstatic java/lang/System/out Ljava/io/PrintStream;")
+      string
+      @("invokevirtual java/io/PrintStream/println(Ljava/lang/String;)V"))))
+
+(core.define @+ (core.lambda (left, right)
+    (core.list left right @("iadd"))))
+
+(core.define @- (core.lambda (left, right)
+    (core.list left right @("isub"))))
+
+(core.define @* (core.lambda (left, right)
+    (core.list left right @("imul"))))
+
+(core.define @/ (core.lambda (left, right)
+    (core.list left right @("idiv"))))
+
+(core.define @% (core.lambda (left, right)
+    (core.list left right @("irem"))))
+
+(core.define @< (core.lambda (left, right)
+    (core.let (true-label (asm.next-label), done-label (asm.next-label))
+      (core.list
+        left right
+        (core.string.concat @"if_icmplt " true-label)
+        @"iconst_0"
+        (asm.jump done-label)
+        (asm.label true-label)
+        @"iconst_1"
+        (asm.label done-label)))))
+
+(core.define @> (core.lambda (left, right)
+    (core.let (true-label (asm.next-label), done-label (asm.next-label))
+      (core.list
+        left right
+        (core.string.concat @"if_icmpgt " true-label)
+        @"iconst_0"
+        (asm.jump done-label)
+        (asm.label true-label)
+        @"iconst_1"
+        (asm.label done-label)))))
+
+(core.define @<= (core.lambda (left, right)
+    (core.let (true-label (asm.next-label), done-label (asm.next-label))
+      (core.list
+        left right
+        (core.string.concat @"if_icmple " true-label)
+        @"iconst_0"
+        (asm.jump done-label)
+        (asm.label true-label)
+        @"iconst_1"
+        (asm.label done-label)))))
+
+(core.define @>= (core.lambda (left, right)
+    (core.let (true-label (asm.next-label), done-label (asm.next-label))
+      (core.list
+        left right
+        (core.string.concat @"if_icmpge " true-label)
+        @"iconst_0"
+        (asm.jump done-label)
+        (asm.label true-label)
+        @"iconst_1"
+        (asm.label done-label)))))
+
+(core.define @!= (core.lambda (left, right)
+    (core.let (true-label (asm.next-label), done-label (asm.next-label))
+      (core.list
+        left right
+        (core.string.concat @"if_icmpne " true-label)
+        @"iconst_0"
+        (asm.jump done-label)
+        (asm.label true-label
+        @"iconst_1"
+        (asm.label done-label))))))
+
+(core.define @== (core.lambda (left, right)
+    (core.let (true-label (asm.next-label), done-label (asm.next-label))
+      (core.list
+        left right
+        (core.string.concat @"if_icmpeq " true-label)
+        @"iconst_0"
+        (asm.jump done-label)
+        (asm.label true-label)
+        @"iconst_1"
+        (asm.label done-label)))))
+
+(core.define @&& (core.lambda (left, right) (core.list left right @"iand")))
+
+(core.define @and &&)
+
+(core.define @|| (core.lambda (left, right) (core.list left right @"ior")))
+
+(core.define @or ||)
+
+(core.define @if (core.lambda (predicate, consequent, alternative)
+    (core.let (false-label (asm.next-label), done-label (asm.next-label))
+      (core.list
+        predicate
+        (asm.jumpifeq false-label)
+        consequent
+        (asm.jump done-label)
+        (asm.label false-label)
+        alternative
+        (asm.label done-label)))))
+
+(core.define @while (core.lambda (condition, body)
+    (core.let (reset-label (asm.next-label), done-label (asm.next-label))
+      (core.list
+        (asm.label reset-label)
+        condition
+        (asm.jumpifeq done-label)
+        body
+        (asm.jump reset-label)
+        (asm.label done-label)))))
+
+(core.define @get-int (core.lambda (variable-symbol)
+    (assign
+      variable-symbol
+      @("new java/util/Scanner"
+        "dup"
+        "getstatic java/lang/System/in Ljava/io/InputStream;"
+        "invokespecial java/util/Scanner/<init>(Ljava/io/InputStream;)V"
+        "invokevirtual java/util/Scanner/nextInt()I"))))
+
+(core.define @get-string (core.lambda (variable-symbol)
+    (assign
+      variable-symbol
+      @("new java/util/Scanner"
+        "dup"
+        "getstatic java/lang/System/in Ljava/io/InputStream;"
+        "invokespecial java/util/Scanner/<init>(Ljava/io/InputStream;)V"
+        "invokevirtual java/util/Scanner/next()Ljava/lang/String;"))))
+
+(core.define @do core.list)
+
+; = prelude.jvm.variables ======================================================
+
+(core.define @asm.variables.counter @0)
+
+(core.define @assign (core.lambda (identifier, value)
+    (core.list value (asm.store ~(core.symbol.concat identifier @: @address)))))
+
+(core.define @var (core.lambda (identifier, initial-value)
+    (core.let (address (core.integer-to-string asm.variables.counter))
+      (core.define @asm.variables.counter (core.integer.add @1 asm.variables.counter))
+      (core.define identifier (asm.load address))
+      (core.define (core.symbol.concat identifier @: @address) address)
+      (assign identifier initial-value))))
+
+; ==============================================================================
+
+(var @count-down 0)
+
+(while (== count-down 0)
+  (do
+    (print-string "Pick a number between 1 and 10")
+    (get-int @count-down)
+    (if (or (<= count-down 0) (> count-down 10))
+      (do (print-string "Input is out of range, please try again.") (assign @count-down 0))
+      @())))
+
+(print-string "Counting down...")
+
+(while (> count-down 0)
+  (do (print-int count-down) (assign @count-down (- count-down 1))))
+
