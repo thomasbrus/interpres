@@ -1,0 +1,148 @@
+; = prelude.tam ================================================================
+
+(core.define @asm.address (core.lambda (offset register)
+    (core.string.concat
+        (core.integer-to-string offset)
+        @"[" (core.symbol-to-string register) @"]")))
+
+(core.define @asm.push (core.lambda (amount)
+    (core.list (core.string.concat @"PUSH " (core.integer-to-string amount)))))
+
+(core.define @asm.pop (core.lambda (amount)
+    (core.list (core.string.concat @"POP(0) " (core.integer-to-string amount)))))
+
+(core.define @asm.load (core.lambda (address)
+    (core.list (core.string.concat @"LOAD(1) " address))))
+
+(core.define @asm.loadl (core.lambda (quoted-integer)
+    (core.list (core.string.concat
+        @"LOADL " (core.integer-to-string quoted-integer)))))
+
+(core.define @asm.loadc (core.lambda (quoted-character)
+    (asm.loadl (core.character.ord quoted-character))))
+
+(core.define @asm.loads (core.lambda (quoted-string)
+  (core.list.map
+    (core.lambda (quoted-character) (asm.loadc quoted-character))
+    (core.list.reverse (core.string-to-list quoted-string)))))
+
+(core.define @asm.store (core.lambda (address)
+    (core.list (core.string.concat @"STORE(1) " address))))
+
+(core.define @asm.jump (core.lambda (address)
+    (core.list (core.string.concat @"JUMP " address))))
+
+(core.define @asm.jumpif (core.lambda (truth-value address)
+    (core.list (core.string.concat
+        @"JUMPIF(" (core.integer-to-string truth-value) @") " address))))
+
+(core.define @print-int (core.lambda (integer)
+    (core.list.concat integer @("CALL putint" "CALL puteol"))))
+
+(core.define @print-str (core.lambda (string)
+    (core.list.concat
+      string
+      (core.repeat (core.list.size string) @"CALL put")
+      @("CALL puteol"))))
+
+(core.define @+ (core.lambda (a b)
+    (core.list.concat a b @("CALL add"))))
+
+(core.define @- (core.lambda (a b)
+    (core.list.concat a b @("CALL sub"))))
+
+(core.define @* (core.lambda (a b)
+    (core.list.concat a b @("CALL mult"))))
+
+(core.define @/ (core.lambda (a b)
+    (core.list.concat a b @("CALL div"))))  
+
+(core.define @% (core.lambda (a b)
+    (core.list.concat a b @("CALL mod"))))   
+
+(core.define @<= (core.lambda (a b)
+    (core.list.concat a b @("CALL le"))))           
+
+(core.define @< (core.lambda (a b)
+    (core.list.concat a b @("CALL lt"))))
+
+(core.define @== (core.lambda (a b)
+    (core.list.concat a b @("CALL ne"))))           
+
+(core.define @!= (core.lambda (a b)
+    (core.list.concat a b @("CALL eq"))))
+
+(core.define @> (core.lambda (a b)
+    (core.list.concat a b @("CALL gt"))))           
+
+(core.define @>= (core.lambda (a b)
+    (core.list.concat a b @("CALL ge")))) 
+
+(core.define @&& (core.lambda (a b)
+    (core.list.concat a b @("CALL and"))))
+
+(core.define @|| (core.lambda (a b)
+    (core.list.concat a b @("CALL or"))))
+
+(core.define @get-int (core.lambda (varname)
+    (core.list.concat (core.list (core.string.concat @"LOADA " ~(core.symbol.concat varname @: @address))) @("CALL getint"))))
+
+; = prelude.tam.variables ======================================================
+
+(core.define @asm.variables.counter @0)
+
+(core.define @assign (core.lambda (identifier value)
+    (core.list.concat value (asm.store ~(core.symbol.concat identifier @: @address)))))
+
+(core.define @var (core.lambda (identifier initial-value)
+    (core.let (address (asm.address asm.variables.counter @SB))
+      (core.define @asm.variables.counter (core.integer.add @1 asm.variables.counter))
+      (core.define identifier (asm.load address))
+      (core.define (core.symbol.concat identifier @: @address) address)
+      (core.list.concat
+        (asm.push @1)
+        (assign identifier initial-value)))))
+
+(core.define @if (core.lambda (predicate consequent alternative)
+    (core.list.concat
+      predicate
+      (asm.jumpif @0 (asm.address (core.integer.add @2 (core.list.size consequent)) @CP))
+      consequent
+      (asm.jump (asm.address (core.integer.add @1 (core.list.size alternative)) @CP))
+      alternative)))
+
+
+; ==============================================================================
+
+(var @firstAssignmentGrade 0)
+(var @secondAssignmentGrade 0)
+(var @totalAssignmentGrade 0)
+(var @projectGrade 0)
+(var @finalGrade 0)
+
+(print-str "= GRADE FORMULA ===========")
+
+(print-str "Enter the grade of the first assignment:")
+(get-int @firstAssignmentGrade)
+
+(print-str "Enter the grade of the second assignment:")
+(get-int @secondAssignmentGrade)
+
+(print-str "Enter the grade of the final project:")
+(get-int @projectGrade)
+
+(assign @totalAssignmentGrade (/ (+ firstAssignmentGrade secondAssignmentGrade) 2))
+(assign @finalGrade (/ (+ totalAssignmentGrade projectGrade) 2))
+
+(print-str "")
+(print-str "-------------")
+(print-str "Final grade:")
+(print-int (if (|| (&& (>= totalAssignmentGrade 50) (>= projectGrade 50)) (<= finalGrade 40)) finalGrade 40))
+
+
+; ==============================================================================
+
+(asm.pop asm.variables.counter)
+
+@HALT
+
