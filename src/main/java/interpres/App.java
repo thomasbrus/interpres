@@ -74,6 +74,9 @@ public class App {
     definitionTable.define(new interpres.language.definitions.core.integer.Subtract());
     definitionTable.define(new interpres.language.definitions.core.random.UUID());
 
+    definitionTable.define(new interpres.language.definitions.asm.Header());
+    definitionTable.define(new interpres.language.definitions.asm.Footer());
+
     App app = new App(definitionTable);
 
     Value evaluatedAST = app.evaluate(System.in);

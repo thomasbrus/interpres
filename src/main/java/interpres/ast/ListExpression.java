@@ -3,6 +3,7 @@ package interpres.ast;
 import java.util.List;
 import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.stream.Collectors;
 
 import interpres.language.DefinitionTable;
@@ -25,6 +26,10 @@ public class ListExpression extends AST {
 
   public static ListExpression buildFunctionCall(String name, AST argument) {
     return buildFunctionCall(name, Arrays.asList(argument));
+  }
+
+  public static ListExpression buildFunctionCall(String name) {
+    return buildFunctionCall(name, Collections.emptyList());
   }
 
   public Value evaluate(DefinitionTable definitionTable) {
