@@ -47,7 +47,7 @@ list returns [AST ast]
 
 literal returns [AST ast]
   : ^(STRING string=String) {
-    String literal = $string.text;
+    String literal = org.apache.commons.lang3.StringEscapeUtils.unescapeJava($string.text);
     $ast = new StringLiteral(literal.substring(1, literal.length() - 1));
   }
   | ^(SYMBOL symbol=Symbol) {
