@@ -62,13 +62,6 @@
 
 ; = prelude.tam.variables ======================================================
 
-; TODO: Create IntegerLiteral
-; TODO: Add Integer parsing rules
-; TODO: Always treat @4 as symbol
-; TODO: Create quoted.values
-; TODO: Add set!/redefine
-; TODO: Alter syntax: (core/list/concat a b c)
-
 (core.define @asm.variables.counter @0)
 
 (core.define @assign (core.lambda (identifier value)
