@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.io.PrintStream;
 
 import interpres.ast.AST;
+import interpres.language.DefinitionTable;
 
 public abstract class Value implements AsBytecode {
   public List<java.lang.String> bytecodeSequence() {
@@ -21,4 +22,9 @@ public abstract class Value implements AsBytecode {
       printStream.println(bytecode);
     }
   }
+
+  public Value unquote(DefinitionTable definitionTable) {
+    throw new UnsupportedOperationException("Unquoting is not supported for " + this.getClass());
+  }
 }
+

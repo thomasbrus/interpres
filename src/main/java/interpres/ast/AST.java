@@ -8,11 +8,7 @@ public abstract class AST {
   public abstract Value evaluate(DefinitionTable definitionTable);
 
   public Value quote() {
-    throw new UnsupportedOperationException("Quoting is not supported for " + this);
-  }
-
-  public Value unquote(DefinitionTable definitionTable) {
-    throw new UnsupportedOperationException("Unquoting is not supported for " + this);
+    throw new UnsupportedOperationException("Quoting is not supported for " + this.getClass());
   }
 }
 

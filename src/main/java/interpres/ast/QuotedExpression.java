@@ -21,9 +21,5 @@ public class QuotedExpression extends AST {
   public Value quote() {
     return this.expression.quote();
   }
-
-  public Value unquote(DefinitionTable definitionTable) {
-    return this.expression.evaluate(definitionTable);
-  }
 }
 
