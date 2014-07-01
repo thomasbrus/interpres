@@ -1,51 +1,59 @@
-; = Prelude.JBC ================================================================
+; = prelude.jbc ================================================================
 
-(core.define asm.generate-label core.random.uuid)
+(core.define @asm.generate-label core.random.uuid)
 
-(core.define HEADER @(".class public Program" ".super java/lang/Object" "" ".method public <init>()V" "aload_0 ; push this" "invokespecial java/lang/Object/<init>()V ; call super" "return" ".end method" "" ".method public static main([Ljava/lang/String;)V" ".limit stack 100"))
+(core.define @HEADER @(".class public Program" ".super java/lang/Object" "" ".method public <init>()V" "aload_0 ; push this" "invokespecial java/lang/Object/<init>()V ; call super" "return" ".end method" "" ".method public static main([Ljava/lang/String;)V" ".limit stack 100" ".limit locals 100"))
 
-(core.define FOOTER @("return" ".end method"))
+(core.define @FOOTER @("return" ".end method"))
 
-(core.define asm.loadl (core.lambda (quoted-integer)
+(core.define @asm.load (core.lambda (address)
+    (core.list (core.string.concat @"iload " address))))
+
+(core.define @asm.loadl (core.lambda (quoted-integer)
     (core.list (core.string.concat
         @"sipush " (core.integer-to-string quoted-integer)))))
 
-(core.define asm.loadc (core.lambda (quoted-character)
+(core.define @asm.loadc (core.lambda (quoted-character)
     (asm.loadl (core.character.ord quoted-character))))
 
-(core.define asm.loads (core.lambda (quoted-string)
+(core.define @asm.loads (core.lambda (quoted-string)
   (core.list (core.string.concat
         @"ldc \"" quoted-string @"\""))))
 
-(core.define asm.jump (core.lambda (address)
+(core.define @asm.store (core.lambda (address)
+    (core.list (core.string.concat @"istore " address))))
+
+(core.define @asm.jump (core.lambda (address)
     (core.list (core.string.concat @"goto " address))))
 
-(core.define asm.jumpifeq (core.lambda (address)
+(core.define @asm.jumpifeq (core.lambda (address)
     (core.list (core.string.concat
         @"ifeq " address))))
 
-(core.define print-int (core.lambda (integer)
+
+
+(core.define @print-int (core.lambda (integer)
     (core.list.concat @("getstatic java/lang/System/out Ljava/io/PrintStream;") integer @("invokevirtual java/io/PrintStream/println(I)V"))))
 
-(core.define print-string (core.lambda (string)
+(core.define @print-string (core.lambda (string)
     (core.list.concat @("getstatic java/lang/System/out Ljava/io/PrintStream;") string @("invokevirtual java/io/PrintStream/println(Ljava/lang/String;)V"))))
 
-(core.define + (core.lambda (a b)
+(core.define @+ (core.lambda (a b)
     (core.list.concat a b @("iadd"))))
 
-(core.define - (core.lambda (a b)
+(core.define @- (core.lambda (a b)
     (core.list.concat a b @("isub"))))
 
-(core.define * (core.lambda (a b)
+(core.define @* (core.lambda (a b)
     (core.list.concat a b @("imul"))))
 
-(core.define / (core.lambda (a b)
+(core.define @/ (core.lambda (a b)
     (core.list.concat a b @("idiv"))))  
 
-(core.define % (core.lambda (a b)
+(core.define @% (core.lambda (a b)
     (core.list.concat a b @("irem"))))  
 
-(core.define <= (core.lambda (a b) (core.let (jump-label (asm.generate-label), jump-label-2 (asm.generate-label))
+(core.define @<= (core.lambda (a b) (core.let (jump-label (asm.generate-label), jump-label-2 (asm.generate-label))
     (core.list.concat a b 
       (core.list (core.string.concat @"if_icmple " jump-label))
       @("iconst_0")
@@ -55,7 +63,7 @@
     )
 )))
     
-(core.define < (core.lambda (a b) (core.let (jump-label (asm.generate-label), jump-label-2 (asm.generate-label))
+(core.define @< (core.lambda (a b) (core.let (jump-label (asm.generate-label), jump-label-2 (asm.generate-label))
     (core.list.concat a b 
       (core.list (core.string.concat @"if_icmplt " jump-label))
       @("iconst_0")
@@ -65,7 +73,7 @@
     )
 )))
 
-(core.define > (core.lambda (a b) (core.let (jump-label (asm.generate-label), jump-label-2(asm.generate-label))
+(core.define @> (core.lambda (a b) (core.let (jump-label (asm.generate-label), jump-label-2(asm.generate-label))
     (core.list.concat a b 
       (core.list (core.string.concat @"if_icmpgt " jump-label))
       @("iconst_0")
@@ -75,7 +83,7 @@
     )
 )))
 
-(core.define >= (core.lambda (a b) (core.let (jump-label (asm.generate-label), jump-label-2 (asm.generate-label))
+(core.define @>= (core.lambda (a b) (core.let (jump-label (asm.generate-label), jump-label-2 (asm.generate-label))
     (core.list.concat a b 
       (core.list (core.string.concat @"if_icmpge " jump-label))
       @("iconst_0")
@@ -85,7 +93,7 @@
     )
 )))
 
-(core.define != (core.lambda (a b) (core.let (jump-label (asm.generate-label), jump-label-2 (asm.generate-label))
+(core.define @!= (core.lambda (a b) (core.let (jump-label (asm.generate-label), jump-label-2 (asm.generate-label))
     (core.list.concat a b 
       (core.list (core.string.concat @"if_icmpne " jump-label))
       @("iconst_0")
@@ -95,7 +103,7 @@
     )
 )))
 
-(core.define == (core.lambda (a b) (core.let (jump-label (asm.generate-label), jump-label-2 (asm.generate-label))
+(core.define @== (core.lambda (a b) (core.let (jump-label (asm.generate-label), jump-label-2 (asm.generate-label))
     (core.list.concat a b 
       (core.list (core.string.concat @"if_icmpeq " jump-label))
       @("iconst_0")
@@ -105,14 +113,14 @@
     )
 )))
 
-(core.define && (core.lambda (a b)
+(core.define @&& (core.lambda (a b)
     (core.list.concat a b @("iand"))))
 
-(core.define || (core.lambda (a b)
+(core.define @|| (core.lambda (a b)
     (core.list.concat a b @("ior"))))
 
 
-(core.define if (core.lambda (predicate consequent alternative) (core.let (jump-label (asm.generate-label), jump-label-2 (asm.generate-label))
+(core.define @if (core.lambda (predicate consequent alternative) (core.let (jump-label (asm.generate-label), jump-label-2 (asm.generate-label))
     (core.list.concat
       predicate
       (asm.jumpifeq jump-label)
@@ -124,7 +132,7 @@
 
             ))))
 
-(core.define while (core.lambda (condition body) (core.let (jump-label (asm.generate-label), jump-label-2 (asm.generate-label))
+(core.define @while (core.lambda (condition body) (core.let (jump-label (asm.generate-label), jump-label-2 (asm.generate-label))
     (core.list.concat    
       (core.list (core.string.concat jump-label @": nop"))      
       condition
@@ -135,11 +143,48 @@
     )
 )))
 
+(core.define @get-int (core.lambda (varname)
+    (assign varname (core.list.concat @("new java/util/Scanner" "dup" "getstatic java/lang/System/in Ljava/io/InputStream;" "invokespecial java/util/Scanner/<init>(Ljava/io/InputStream;)V" "invokevirtual java/util/Scanner/nextInt()I")
+ ))))
+
+(core.define @get-string (core.lambda (varname)
+    (assign varname (core.list.concat @("new java/util/Scanner" "dup" "getstatic java/lang/System/in Ljava/io/InputStream;" "invokespecial java/util/Scanner/<init>(Ljava/io/InputStream;)V" "invokevirtual java/util/Scanner/next()Ljava/lang/String;")
+ ))))
+
+; = prelude.jbc.variables ======================================================
+
+(core.define @asm.variables.counter @0)
+
+(core.define @assign (core.lambda (identifier value)
+    (core.list.concat value (asm.store ~(core.symbol.concat identifier @: @address)))))
+
+(core.define @var (core.lambda (identifier initial-value)
+    (core.let (address (core.integer-to-string asm.variables.counter))
+      (core.define @asm.variables.counter (core.integer.add @1 asm.variables.counter))
+      (core.define identifier (asm.load address))
+      (core.define (core.symbol.concat identifier @: @address) address)
+      (assign identifier initial-value))))
+    
+
 ; ==============================================================================
 
 HEADER
 
-(while (<= 0 (% 10 3)) (print-string (if (< (* 5 3) (/ (- 5 3) (+ 8 4))) "HEY!" "DOEI")))
+(var @i 0)
+
+(while (== i 0) 
+  (core.list.concat 
+    (print-string "Pick a number between 0 and 25") 
+    (get-int @i) 
+    (if (|| (<= i 0) (> i 25)) 
+      (core.list.concat (print-string "INVALID VALUE. Please try again") (assign @i 0)) 
+      (print-string "Start countdown:") 
+    )
+  )
+)
+
+(while (> i 0) (core.list.concat (print-int i) (assign @i (- i 1))))
+
 
 FOOTER
 

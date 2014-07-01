@@ -54,7 +54,13 @@ unquoted_expression: TILDE expression -> ^(UNQUOTED expression);
 // Lexer rules
 // =============================================================================
 
-String: '"' (~'"' | '\\' '"')* '"';
+String
+@init { StringBuilder buf = new StringBuilder(); }
+:
+    '"'
+    ( ESCAPE[buf]  | i =  ~('"' | '\\') { buf.appendCodePoint(i); } )*
+    '"'
+    { setText("\"" + buf.toString() +  "\""); };
 
 Symbol: (Letter | Digit | Special)+;
 
@@ -69,4 +75,8 @@ fragment Lower: ('a'..'z');
 fragment Upper: ('A'..'Z');
 fragment Special: '+' | '-' | '*' | '/' | '%' | '&' | '|' | '=' | '>' | '<' | '$' | '!' | '?' | '_' | '.' | ':';
 fragment Letter: Lower | Upper;
-
+fragment ESCAPE[StringBuilder buf] :
+    '\\'
+    ( '"' { buf.append('\"'); }
+    | '\\' { buf.append('\\'); }
+    );
