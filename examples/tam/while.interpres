@@ -1,5 +1,7 @@
 ; = Prelude.TAM ================================================================
 
+(core.define @asm.footer (core.lambda () @HALT))
+
 (core.define @asm.loadl (core.lambda (quoted-integer)
     (core.list (core.string.concat
         @"LOADL " (core.integer-to-string quoted-integer)))))
@@ -91,6 +93,4 @@
 ; ==============================================================================
 
 (while (<= 9 0) (print-int (if (< 0 1) 1 2)))
-
-@HALT
 

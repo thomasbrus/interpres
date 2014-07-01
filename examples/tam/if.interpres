@@ -1,5 +1,7 @@
 ; = Prelude.TAM ================================================================
 
+(core.define @asm.footer (core.lambda () @HALT))
+
 (core.define @asm.loadl (core.lambda (quoted-integer)
     (core.list (core.string.concat
         @"LOADL " (core.integer-to-string quoted-integer)))))
@@ -55,6 +57,4 @@
 (if (< (+ 4 3) (- 10 2))
   (print-str "Yes")
   (print-str "No"))
-
-@HALT
 

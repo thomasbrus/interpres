@@ -1,5 +1,8 @@
 ; = prelude.tam ================================================================
 
+(core.define @asm.footer (core.lambda ()
+    (core.list (asm.pop asm.variables.counter) @HALT)))
+
 (core.define @asm.address (core.lambda (offset register)
     (core.string.concat
         (core.integer-to-string offset)
@@ -89,10 +92,4 @@
 (print-int my-height)
 
 (assign @my-height 188)
-
-; ==============================================================================
-
-(asm.pop asm.variables.counter)
-
-@HALT
 
