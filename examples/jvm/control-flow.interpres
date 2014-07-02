@@ -12,6 +12,7 @@
 (core.define @asm.header (core.lambda ()
     @(".class public Program"
       ".super java/lang/Object"
+      ".field public static scanner Ljava/util/Scanner;"    
       ".method public <init>()V"
       "  aload_0"
       "  invokespecial java/lang/Object/<init>()V"
@@ -20,6 +21,11 @@
       ".method public static main([Ljava/lang/String;)V"
       "  .limit stack 100"
       "  .limit locals 100"
+      "  new java/util/Scanner"  
+      "  dup" 
+      "  getstatic java/lang/System/in Ljava/io/InputStream;" 
+      "  invokespecial java/util/Scanner/<init>(Ljava/io/InputStream;)V" 
+      "  putstatic Program/scanner Ljava/util/Scanner;"
       "  ; ----- main program -----")))
 
 (core.define @asm.footer (core.lambda ()
@@ -170,22 +176,16 @@
         (asm.jump reset-label)
         (asm.label done-label)))))
 
-(core.define @get-int (core.lambda (variable-symbol)
+(core.define @read-int (core.lambda (variable-symbol)
     (assign
       variable-symbol
-      @("new java/util/Scanner"
-        "dup"
-        "getstatic java/lang/System/in Ljava/io/InputStream;"
-        "invokespecial java/util/Scanner/<init>(Ljava/io/InputStream;)V"
+      @("getstatic Program/scanner Ljava/util/Scanner;" 
         "invokevirtual java/util/Scanner/nextInt()I"))))
 
-(core.define @get-string (core.lambda (variable-symbol)
+(core.define @read-string (core.lambda (variable-symbol)
     (assign
       variable-symbol
-      @("new java/util/Scanner"
-        "dup"
-        "getstatic java/lang/System/in Ljava/io/InputStream;"
-        "invokespecial java/util/Scanner/<init>(Ljava/io/InputStream;)V"
+      @("getstatic Program/scanner Ljava/util/Scanner;" 
         "invokevirtual java/util/Scanner/next()Ljava/lang/String;"))))
 
 (core.define @do core.list)
@@ -211,7 +211,7 @@
 (while (== count-down 0)
   (do
     (print-string "Pick a number between 1 and 10")
-    (get-int @count-down)
+    (read-int @count-down)
     (if (or (<= count-down 0) (> count-down 10))
       (do (print-string "Input is out of range, please try again.") (assign @count-down 0))
       @())))
