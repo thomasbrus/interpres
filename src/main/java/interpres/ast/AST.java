@@ -10,5 +10,10 @@ public abstract class AST {
   public Value quote() {
     throw new UnsupportedOperationException("Quoting is not supported for " + this.getClass());
   }
+
+  public boolean isQuotedSymbol() {
+    return (this instanceof QuotedExpression &&
+      ((QuotedExpression) this).getExpression() instanceof Symbol);
+  }
 }
 

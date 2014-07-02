@@ -18,6 +18,10 @@ public class QuotedExpression extends AST {
       .evaluate(definitionTable);
   }
 
+  public AST getExpression() {
+    return this.expression;
+  }
+
   public Value quote() {
     return this.expression.quote();
   }

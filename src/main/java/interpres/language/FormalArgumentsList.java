@@ -24,11 +24,19 @@ public class FormalArgumentsList {
 
   public void bindActualArguments(List<AST> actualArguments) {
     for (int i = 0; i < this.getFormalArgumentASTs().size(); i++) {
-      if (actualArguments.size() > i) {
-        this.bindings.put(this.getFormalArgumentASTs().get(i), actualArguments.get(i));
-      } else {
-        this.bindings.put(this.getFormalArgumentASTs().get(i), this.getDefaultArgumentASTs().get(i));
+      AST actualArgument, formalArgument = this.getFormalArgumentASTs().get(i);
+
+      if (actualArguments.size() > i)
+        actualArgument = actualArguments.get(i);
+      else
+        actualArgument = this.getDefaultArgumentASTs().get(i);
+
+      if (formalArgument.isQuotedSymbol()) {
+        actualArgument = new QuotedExpression(actualArgument);
+        formalArgument = ((QuotedExpression) formalArgument).getExpression();
       }
+
+      this.bindings.put(formalArgument, actualArgument);
     }
   }
 
