@@ -84,7 +84,7 @@
 (core.define @|| (core.lambda (a b)
     (core.list.concat a b @("CALL or"))))
 
-(core.define @get-int (core.lambda (varname)
+(core.define @read-int (core.lambda (varname)
     (core.list.concat (core.list (core.string.concat @"LOADA " ~(core.symbol.concat varname @: @address))) @("CALL getint"))))
 
 ; = prelude.tam.variables ======================================================
@@ -114,30 +114,30 @@
 
 ; ==============================================================================
 
-(var @firstAssignmentGrade 0)
-(var @secondAssignmentGrade 0)
-(var @totalAssignmentGrade 0)
-(var @projectGrade 0)
-(var @finalGrade 0)
+(var @first-assignment-grade 0)
+(var @second-assignment-grade 0)
+(var @total-assignment-grade 0)
+(var @project-grade 0)
+(var @final-grade 0)
 
 (print-str "= GRADE FORMULA ===========")
 
 (print-str "Enter the grade of the first assignment:")
-(get-int @firstAssignmentGrade)
+(read-int @first-assignment-grade)
 
 (print-str "Enter the grade of the second assignment:")
-(get-int @secondAssignmentGrade)
+(read-int @second-assignment-grade)
 
 (print-str "Enter the grade of the final project:")
-(get-int @projectGrade)
+(read-int @project-grade)
 
-(assign @totalAssignmentGrade (/ (+ firstAssignmentGrade secondAssignmentGrade) 2))
-(assign @finalGrade (/ (+ totalAssignmentGrade projectGrade) 2))
+(assign @total-assignment-grade (/ (+ first-assignment-grade second-assignment-grade) 2))
+(assign @final-grade (/ (+ total-assignment-grade project-grade) 2))
 
 (print-str "")
 (print-str "-------------")
 (print-str "Final grade:")
-(print-int (if (|| (&& (>= totalAssignmentGrade 50) (>= projectGrade 50)) (<= finalGrade 40)) finalGrade 40))
+(print-int (if (|| (&& (>= total-assignment-grade 50) (>= project-grade 50)) (<= final-grade 40)) final-grade 40))
 
 
 ; ==============================================================================
