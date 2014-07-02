@@ -75,7 +75,7 @@
     (core.list.concat a b @("CALL or"))))
 
 
-(core.define @if (core.lambda (predicate consequent alternative)
+(core.define @if (core.lambda (predicate consequent (alternative @()))
     (core.list.concat
       predicate
       (asm.jumpif @0 (asm.address (core.integer.add @2 (core.list.size consequent)) @CP))

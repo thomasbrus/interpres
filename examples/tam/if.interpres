@@ -44,7 +44,10 @@
 (core.define @< (core.lambda (a b)
     (core.list.concat a b @("CALL lt"))))
 
-(core.define @if (core.lambda (predicate consequent alternative)
+(core.define @> (core.lambda (a b)
+    (core.list.concat a b @("CALL gt"))))
+
+(core.define @if (core.lambda (predicate, consequent, (alternative @()))
     (core.list.concat
       predicate
       (asm.jumpif @0 (asm.address (core.integer.add @2 (core.list.size consequent)) @CP))
@@ -57,4 +60,7 @@
 (if (< (+ 4 3) (- 10 2))
   (print-str "Yes")
   (print-str "No"))
+
+(if (> (+ 6 5) 12)
+  (print-str "OK"))
 
