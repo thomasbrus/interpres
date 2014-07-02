@@ -1,0 +1,4 @@
+(require "./examples/interpres/require/prelude.interpres")
+
+(+ 1 2)
+
