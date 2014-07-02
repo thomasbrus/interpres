@@ -1,7 +1,5 @@
 package interpres.language.definitions.core;
 
-import java.util.Arrays;
-
 import interpres.language.definitions.Definition;
 
 import interpres.language.values.Value;

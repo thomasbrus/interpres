@@ -52,6 +52,7 @@ public class App {
   public static void main(String[] args) throws IOException, RecognitionException {
     DefinitionTable definitionTable = new DefinitionTable();
 
+    definitionTable.define(new interpres.language.definitions.Require());
     definitionTable.define(new interpres.language.definitions.core.Define());
     definitionTable.define(new interpres.language.definitions.core.Let());
     definitionTable.define(new interpres.language.definitions.core.Lambda());

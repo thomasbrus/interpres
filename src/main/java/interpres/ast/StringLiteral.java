@@ -20,6 +20,10 @@ public class StringLiteral extends AST {
       .evaluate(definitionTable);
   }
 
+  public java.lang.String getLiteral() {
+    return this.literal;
+  }
+
   public String quote() {
     return new String(this.literal);
   }
