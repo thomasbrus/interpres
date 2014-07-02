@@ -47,6 +47,10 @@ public class ListExpression extends AST {
     return this.items;
   }
 
+  public AST getItem(int index) {
+    return this.items.get(index);
+  }
+
   private Symbol getFunction() {
     return (Symbol) this.items.get(0);
   }
