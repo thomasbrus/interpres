@@ -1,0 +1,6 @@
+(core.define @if (core.lambda (condition, consequent, (alternative @nop))
+  (core.list @if condition consequent alternative)))
+
+(if @true @yes)
+(if @false @yes @no)
+
