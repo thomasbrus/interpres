@@ -2,11 +2,13 @@ package interpres.language.invocations.core;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Map;
 
 import interpres.ast.AST;
 import interpres.ast.ListExpression;
 
 import interpres.language.DefinitionTable;
+import interpres.language.FormalArgumentsList;
 
 import interpres.language.values.Value;
 import interpres.language.invocations.Invocation;
@@ -21,17 +23,18 @@ public class Lambda extends Invocation {
       List<AST> letArguments = new ArrayList<AST>();
       List<AST> localBindingASTs = new ArrayList<AST>();
 
-      for (int i = 0; i < this.getFormalArguments().size(); i++) {
-        localBindingASTs.add(this.getFormalArguments().get(i));
-        localBindingASTs.add(actualArguments.get(i));
+      FormalArgumentsList formalArgs = new FormalArgumentsList(this.getFormalArgumentAST());
+      formalArgs.bindActualArguments(actualArguments);
+
+      for (Map.Entry<AST, AST> binding : formalArgs.getBindings().entrySet()) {
+        localBindingASTs.add(binding.getKey());
+        localBindingASTs.add(binding.getValue());
       }
 
       letArguments.add(new ListExpression(localBindingASTs));
       letArguments.addAll(this.getExpressionASTs());
 
-      return ListExpression.buildFunctionCall(
-        "core.let", letArguments
-      ).evaluate(this.getDefinitionTable());
+      return ListExpression.buildFunctionCall("core.let", letArguments).evaluate(this.getDefinitionTable());
     });
   }
 
@@ -39,8 +42,8 @@ public class Lambda extends Invocation {
     return this.getArguments().subList(1, this.getArguments().size());
   }
 
-  private List<AST> getFormalArguments() {
-    return ((ListExpression) this.getArguments().get(0)).getItems();
+  private ListExpression getFormalArgumentAST() {
+    return (ListExpression) this.getArguments().get(0);
   }
 }
 
