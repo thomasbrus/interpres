@@ -1,0 +1,5 @@
+(require "prelude-2.interpres")
+
+(core.define @+ (core.lambda (left right)
+  @("LOADL <left>" "LOADL <right>" "CALL add")))
+

@@ -2,6 +2,3 @@
     (core.list (core.string.concat
         @"LOADL " (core.integer-to-string quoted-integer)))))
 
-(core.define @+ (core.lambda (left right)
-  @("LOADL <left>" "LOADL <right>" "CALL add")))
-

@@ -5,7 +5,11 @@ import org.antlr.runtime.tree.*;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.FileInputStream;
 import java.io.PrintStream;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -50,9 +54,18 @@ public class App {
   }
 
   public static void main(String[] args) throws IOException, RecognitionException {
-    DefinitionTable definitionTable = new DefinitionTable();
+    InputStream inputStream = new FileInputStream(args[0]);
+    Path basePath = Paths.get(args[0]).getParent();
 
-    definitionTable.define(new interpres.language.definitions.Require());
+    DefinitionTable definitionTable = new DefinitionTable();
+    definitionTable.define(new interpres.language.definitions.Require(basePath));
+    setupDefinitionTable(definitionTable);
+
+    App app = new App(definitionTable);
+    app.evaluate(inputStream).printBytecode(new PrintStream(System.out));
+  }
+
+  public static void setupDefinitionTable(DefinitionTable definitionTable) {
     definitionTable.define(new interpres.language.definitions.core.Define());
     definitionTable.define(new interpres.language.definitions.core.Let());
     definitionTable.define(new interpres.language.definitions.core.Lambda());
@@ -76,11 +89,6 @@ public class App {
 
     definitionTable.define(new interpres.language.definitions.asm.Header());
     definitionTable.define(new interpres.language.definitions.asm.Footer());
-
-    App app = new App(definitionTable);
-
-    Value evaluatedAST = app.evaluate(System.in);
-    evaluatedAST.printBytecode(new PrintStream(System.out));
   }
 }
 

@@ -1,4 +1,4 @@
-(require "./examples/interpres/require/prelude.interpres")
+(require "preludes/prelude.interpres")
 
 (+ 1 2)
 
