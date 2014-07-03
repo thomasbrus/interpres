@@ -2,13 +2,16 @@ package interpres.language.values.quoted;
 
 import interpres.ast.AST;
 
-public class String extends Quoted {
-  public String(AST unquotedAST, java.lang.String literal) {
-    super(unquotedAST, new interpres.language.values.String(literal));
+public class String extends interpres.language.values.String implements Unquotable {
+  private AST stringAST;
+
+  public String(AST stringAST, java.lang.String literal) {
+    super(literal);
+    this.stringAST = stringAST;
   }
 
-  public java.lang.String getLiteral() {
-    return ((interpres.language.values.String) this.getQuotedValue()).getLiteral();
+  public AST getUnquotedAST() {
+    return this.stringAST;
   }
 }
 

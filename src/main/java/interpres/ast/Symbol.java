@@ -3,7 +3,7 @@ package interpres.ast;
 import interpres.language.DefinitionTable;
 import interpres.language.SymbolResolver;
 import interpres.language.values.Value;
-import interpres.language.values.quoted.Quoted;
+import interpres.language.values.quoted.Unquotable;
 
 public class Symbol extends AST {
   private String name;
@@ -20,7 +20,7 @@ public class Symbol extends AST {
     return this.name;
   }
 
-  public Quoted quote() {
+  public Value quote() {
     try {
       return new interpres.language.values.quoted.Integer(this, Integer.parseInt(this.name));
     } catch (NumberFormatException e) {

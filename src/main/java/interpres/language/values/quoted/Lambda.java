@@ -7,13 +7,16 @@ import interpres.ast.AST;
 import interpres.language.DefinitionTable;
 import interpres.language.values.Value;
 
-public class Lambda extends Quoted {
+public class Lambda extends interpres.language.values.Lambda implements Unquotable {
+  private AST lambdaAST;
+
   public Lambda(AST unquotedAST, BiFunction<DefinitionTable, List<AST>, Value> function) {
-    super(unquotedAST, new interpres.language.values.Lambda(function));
+    super(function);
+    this.lambdaAST = lambdaAST;
   }
 
-  public BiFunction<DefinitionTable, List<AST>, Value> getFunction() {
-    return ((interpres.language.values.Lambda) this.getQuotedValue()).getFunction();
+  public AST getUnquotedAST() {
+    return this.lambdaAST;
   }
 }
 
