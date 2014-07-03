@@ -7,7 +7,7 @@ import interpres.ast.ListExpression;
 import interpres.ast.QuotedExpression;
 
 import interpres.language.values.Value;
-import interpres.language.values.quoted.Integer;
+import interpres.language.values.Integer;
 
 public class SymbolResolver {
   private DefinitionTable definitionTable;
