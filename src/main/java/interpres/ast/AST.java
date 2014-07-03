@@ -15,4 +15,8 @@ public abstract class AST {
     return (this instanceof QuoteExpression &&
       ((QuoteExpression) this).getExpression() instanceof Symbol);
   }
+
+  public Value unquote(DefinitionTable definitionTable) {
+    return this.evaluate(definitionTable).unquote(definitionTable);
+  }
 }

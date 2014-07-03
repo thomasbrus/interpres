@@ -22,8 +22,8 @@ public class QuoteExpression extends AST {
     return this.expression;
   }
 
-  // public Value quote() {
-  //   return this.expression.quote();
-  // }
+  public Value quote() {
+    return this.expression.quote();
+  }
 }
 
