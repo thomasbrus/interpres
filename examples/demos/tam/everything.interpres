@@ -1,0 +1,31 @@
+(require "../../preludes/tam.interpres")
+
+(if (< (+ 4 3) (- 10 2))
+  (print-str "Yes")
+  (print-str "No"))
+
+(if (> (+ 6 5) 12)
+  (print-str "OK"))
+
+; (while (<= 9 0) (print-int (if (< 0 1) 1 2)))
+
+(const @x 2)
+(const @distance (+ 1 x))
+
+(var @my-age 22)
+(var @my-height 187)
+
+(print-int my-age)
+
+(assign @my-age 23)
+
+(print-int my-age)
+(print-int my-height)
+
+(assign @my-height 188)
+
+; (assign @distance 3) ; => can't reassign constant
+
+(print-int distance)
+(print-int x)
+
