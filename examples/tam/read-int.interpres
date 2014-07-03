@@ -39,6 +39,9 @@
 (core.define @print-int (core.lambda (integer)
     (core.list.concat integer @("CALL putint" "CALL puteol"))))
 
+(core.define @print-char (core.lambda (integer)
+    (core.list.concat integer @("CALL put" "CALL puteol"))))    
+
 (core.define @print-str (core.lambda (string)
     (core.list.concat
       string
@@ -67,10 +70,10 @@
     (core.list.concat a b @("CALL lt"))))
 
 (core.define @== (core.lambda (a b)
-    (core.list.concat a b @("CALL ne"))))           
+    (core.list.concat a b @("LOADL 1" "CALL eq"))))           
 
 (core.define @!= (core.lambda (a b)
-    (core.list.concat a b @("CALL eq"))))
+    (core.list.concat a b @("LOADL 1" "CALL ne"))))
 
 (core.define @> (core.lambda (a b)
     (core.list.concat a b @("CALL gt"))))           
@@ -86,6 +89,10 @@
 
 (core.define @read-int (core.lambda (varname)
     (core.list.concat (core.list (core.string.concat @"LOADA " ~(core.symbol.concat varname @: @address))) @("CALL getint"))))
+
+(core.define @read-char (core.lambda (varname)
+    (core.list.concat (core.list (core.string.concat @"LOADA " ~(core.symbol.concat varname @: @address))) @("CALL get" "CALL geteol"))))
+
 
 ; = prelude.tam.variables ======================================================
 
@@ -110,6 +117,15 @@
       consequent
       (asm.jump (asm.address (core.integer.add @1 (core.list.size alternative)) @CP))
       alternative)))
+
+(core.define @while (core.lambda (condition body)
+    (core.list.concat
+      condition
+      (asm.jumpif @0 (asm.address (core.integer.add @2 (core.list.size body)) @CP))
+      body
+      (asm.jump (asm.address (core.integer.subtract @0 (core.integer.add @1 (core.integer.add (core.list.size condition) (core.list.size body)))) @CP)))))
+
+(core.define @do core.list.concat)
 
 
 ; ==============================================================================
@@ -138,6 +154,9 @@
 (print-str "-------------")
 (print-str "Final grade:")
 (print-int (if (|| (&& (>= total-assignment-grade 50) (>= project-grade 50)) (<= final-grade 40)) final-grade 40))
+
+(var @terminate 0)
+(while (!= terminate 'x') (do (print-str "Press x to terminate this program.") (read-char @terminate)))
 
 
 ; ==============================================================================

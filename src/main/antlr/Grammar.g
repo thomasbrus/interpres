@@ -18,6 +18,7 @@ tokens {
   PROGRAM;
   LIST;
   STRING;
+  CHAR;
   SYMBOL;
   QUOTED;
   UNQUOTED;
@@ -42,10 +43,11 @@ expression: list | literal | quoted_expression | unquoted_expression;
 
 list: LPAREN expression* RPAREN -> ^(LIST expression*);
 
-literal: string -> ^(STRING string) | symbol -> ^(SYMBOL symbol);
+literal: string -> ^(STRING string) | symbol -> ^(SYMBOL symbol) | character -> ^(CHAR character);
 
 string: String;
 symbol: Symbol;
+character: Char;
 
 quoted_expression: AT expression -> ^(QUOTED expression);
 
@@ -55,6 +57,7 @@ unquoted_expression: TILDE expression -> ^(UNQUOTED expression);
 // =============================================================================
 
 String: '"' (~'"' | '\\' '"')* '"';
+Char:   '\'' ~'\'' '\'';
 
 Symbol: (Letter | Digit | Special)+;
 

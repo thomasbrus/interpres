@@ -54,6 +54,9 @@ literal returns [AST ast]
   | ^(SYMBOL symbol=Symbol) {
     $ast = new Symbol($symbol.text);
   }
+  | ^(CHAR character=Char) { 
+    $ast = new CharLiteral($character.text.charAt(1)); 
+  }
   ;
 
 quoted_expression returns [AST ast]
