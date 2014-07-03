@@ -14,7 +14,8 @@ public class Size extends Definition {
   public Size() {
     super("core.list.size", new Lambda((definitionTable, arguments) -> {
       List listValue = (List) arguments.get(0).evaluate(definitionTable);
-      return new interpres.language.values.Integer(listValue.getItems().size());
+      // FIXME: Should use #getItems(), use (core.list.flatten) to get instruction size
+      return new interpres.language.values.Integer(listValue.bytecodeSequence().size());
     }), 0);
   }
 
