@@ -10,9 +10,9 @@ public class Symbol extends Value {
   private AST symbolAST;
 
   public Symbol(java.lang.String intern) {
-    this(intern, null);
+    this(intern, new interpres.ast.Symbol(intern));
   }
-  
+
   public Symbol(java.lang.String intern, AST symbolAST) {
     this.intern = intern;
     this.symbolAST = symbolAST;
