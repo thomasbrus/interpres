@@ -12,7 +12,7 @@
 (core.define @asm.header (core.lambda ()
     @(".class public Program"
       ".super java/lang/Object"
-      ".field public static scanner Ljava/util/Scanner;"    
+      ".field public static scanner Ljava/util/Scanner;"
       ".method public <init>()V"
       "  aload_0"
       "  invokespecial java/lang/Object/<init>()V"
@@ -21,10 +21,10 @@
       ".method public static main([Ljava/lang/String;)V"
       "  .limit stack 100"
       "  .limit locals 100"
-      "  new java/util/Scanner"  
-      "  dup" 
-      "  getstatic java/lang/System/in Ljava/io/InputStream;" 
-      "  invokespecial java/util/Scanner/<init>(Ljava/io/InputStream;)V" 
+      "  new java/util/Scanner"
+      "  dup"
+      "  getstatic java/lang/System/in Ljava/io/InputStream;"
+      "  invokespecial java/util/Scanner/<init>(Ljava/io/InputStream;)V"
       "  putstatic Program/scanner Ljava/util/Scanner;"
       "  ; ----- main program -----")))
 
@@ -66,10 +66,10 @@
       string
       @("invokevirtual java/io/PrintStream/println(Ljava/lang/String;)V"))))
 
-(core.define @print-char (core.lambda (char)
+(core.define @print-char (core.lambda (character)
     (core.list
       @("getstatic java/lang/System/out Ljava/io/PrintStream;")
-      char
+      character
       @("invokevirtual java/io/PrintStream/println(C)V"))));
 
 (core.define @+ (core.lambda (left, right)
@@ -185,20 +185,20 @@
 (core.define @read-int (core.lambda (variable-symbol)
     (assign
       variable-symbol
-      @("getstatic Program/scanner Ljava/util/Scanner;" 
+      @("getstatic Program/scanner Ljava/util/Scanner;"
         "invokevirtual java/util/Scanner/nextInt()I"))))
 
 (core.define @read-string (core.lambda (variable-symbol)
     (assign
       variable-symbol
-      @("getstatic Program/scanner Ljava/util/Scanner;" 
+      @("getstatic Program/scanner Ljava/util/Scanner;"
         "invokevirtual java/util/Scanner/next()Ljava/lang/String;"))))
 
 (core.define @read-char (core.lambda (variable-symbol)
     (assign
       variable-symbol
-      @("getstatic Program/scanner Ljava/util/Scanner;" 
-        "invokevirtual java/util/Scanner/next()Ljava/lang/String;"       
+      @("getstatic Program/scanner Ljava/util/Scanner;"
+        "invokevirtual java/util/Scanner/next()Ljava/lang/String;"
         "iconst_0"
         "invokevirtual java/lang/String/charAt(I)C"))))
 
@@ -220,7 +220,6 @@
 
 ; ==============================================================================
 
-
 (var @count-down 0)
 
 (while (== count-down 0)
@@ -231,12 +230,17 @@
       (do (print-string "Input is out of range, please try again.") (assign @count-down 0))
       @())))
 
+(var @continue 0)
 
- (var @continue 0)
- (print-string "Continue? (Press 'y')")
- (read-char @continue)
- (if (== continue 'y') (do 
-  (print-string "Counting down...")
-   (while (> count-down 0)
-    (do (print-int count-down) (assign @count-down (- count-down 1))))) (print-string "Action cancelled."))
+(print-string "Continue? (Press 'y')")
+(read-char @continue)
+
+(if (== continue 'y')
+  (do
+    (print-string "Counting down...")
+    (while (> count-down 0) (do
+      (print-int count-down)
+      (assign @count-down (- count-down 1)))))
+
+  (print-string "Action cancelled."))
 

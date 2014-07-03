@@ -18,7 +18,7 @@ tokens {
   PROGRAM;
   LIST;
   STRING;
-  CHAR;
+  CHARACTER;
   SYMBOL;
   QUOTED;
   UNQUOTED;
@@ -43,11 +43,15 @@ expression: list | literal | quoted_expression | unquoted_expression;
 
 list: LPAREN expression* RPAREN -> ^(LIST expression*);
 
-literal: string -> ^(STRING string) | symbol -> ^(SYMBOL symbol) | character -> ^(CHAR character);
+literal
+  : string -> ^(STRING string)
+  | symbol -> ^(SYMBOL symbol)
+  | character -> ^(CHARACTER character)
+  ;
 
 string: String;
 symbol: Symbol;
-character: Char;
+character: Character;
 
 quoted_expression: AT expression -> ^(QUOTED expression);
 
@@ -57,8 +61,7 @@ unquoted_expression: TILDE expression -> ^(UNQUOTED expression);
 // =============================================================================
 
 String: '"' (~'"' | '\\' '"')* '"';
-Char:   '\'' ~'\'' '\'';
-
+Character: '\'' ~'\'' '\'';
 Symbol: (Letter | Digit | Special)+;
 
 Comment: ';' .* '\n' { $channel=HIDDEN; };

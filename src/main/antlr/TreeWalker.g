@@ -54,8 +54,8 @@ literal returns [AST ast]
   | ^(SYMBOL symbol=Symbol) {
     $ast = new Symbol($symbol.text);
   }
-  | ^(CHAR character=Char) { 
-    $ast = new CharLiteral($character.text.charAt(1)); 
+  | ^(CHARACTER character=Character) {
+    $ast = new CharacterLiteral($character.text.charAt(1));
   }
   ;
 

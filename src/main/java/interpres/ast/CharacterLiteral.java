@@ -9,10 +9,10 @@ import interpres.language.values.Value;
 import interpres.language.values.Character;
 
 
-public class CharLiteral extends AST {
+public class CharacterLiteral extends AST {
   private java.lang.Character literal;
 
-  public CharLiteral(java.lang.Character literal) {
+  public CharacterLiteral(java.lang.Character literal) {
     this.literal = literal;
   }
 
