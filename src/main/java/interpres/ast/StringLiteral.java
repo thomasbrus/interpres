@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import interpres.language.DefinitionTable;
 
 import interpres.language.values.Value;
-import interpres.language.values.String;
 
 public class StringLiteral extends AST {
   private java.lang.String literal;
@@ -24,8 +23,8 @@ public class StringLiteral extends AST {
     return this.literal;
   }
 
-  public String quote() {
-    return new String(this.literal);
+  public interpres.language.values.quoted.String quote() {
+    return new interpres.language.values.quoted.String(this, this.literal);
   }
 }
 

@@ -4,8 +4,8 @@ import java.util.List;
 import interpres.ast.AST;
 
 public class Integer extends Quoted {
-  public Integer(AST unquotedAST, interpres.language.values.Integer integerValue) {
-    super(unquotedAST, integerValue);
+  public Integer(AST unquotedAST, java.lang.Integer representation) {
+    super(unquotedAST, new interpres.language.values.Integer(representation));
   }
 
   public java.lang.Integer getRepresentation() {

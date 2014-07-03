@@ -3,8 +3,8 @@ package interpres.language.values.quoted;
 import interpres.ast.AST;
 
 public class String extends Quoted {
-  public String(AST unquotedAST, interpres.language.values.String stringValue) {
-    super(unquotedAST, stringValue);
+  public String(AST unquotedAST, java.lang.String literal) {
+    super(unquotedAST, new interpres.language.values.String(literal));
   }
 
   public java.lang.String getLiteral() {

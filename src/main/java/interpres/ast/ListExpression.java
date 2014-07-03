@@ -37,9 +37,10 @@ public class ListExpression extends AST {
     return lambdaValue.getFunction().apply(definitionTable, this.getArguments());
   }
 
-  public interpres.language.values.List quote() {
-    return new interpres.language.values.List(
-       this.items.stream().map(AST::quote).collect(Collectors.toList())
+  public interpres.language.values.quoted.List quote() {
+    return new interpres.language.values.quoted.List(
+      this,
+      this.items.stream().map(AST::quote).collect(Collectors.toList())
     );
   }
 

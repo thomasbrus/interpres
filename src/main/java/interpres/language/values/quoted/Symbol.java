@@ -5,8 +5,8 @@ import interpres.ast.AST;
 public class Symbol extends Quoted {
   private java.lang.String intern;
 
-  public Symbol(AST unquotedAST, interpres.language.values.Symbol symbolValue) {
-    super(unquotedAST, symbolValue);
+  public Symbol(AST unquotedAST, java.lang.String intern) {
+    super(unquotedAST, new interpres.language.values.Symbol(intern));
   }
 
   public java.lang.String getIntern() {

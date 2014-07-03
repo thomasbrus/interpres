@@ -14,8 +14,8 @@ public class VirtualExpression extends AST {
     return this.value;
   }
 
-  public Value quote() {
-    return this.value;
-  }
+  // public Value quote() {
+  //   return this.value.quote();
+  // }
 }
 

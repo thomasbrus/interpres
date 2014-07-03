@@ -17,8 +17,8 @@ public class UnquotedExpression extends AST {
       .evaluate(definitionTable);
   }
 
-  public Value quote() {
-    return this.expression.quote();
-  }
+  // public Value quote() {
+  //   return this.expression.quote();
+  // }
 }
 

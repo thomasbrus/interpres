@@ -4,8 +4,8 @@ import java.util.List;
 import interpres.ast.AST;
 
 public class Character extends Quoted {
-  public Character(AST unquotedAST, interpres.language.values.Character characterValue) {
-    super(unquotedAST, characterValue);
+  public Character(AST unquotedAST, java.lang.Character representation) {
+    super(unquotedAST, new interpres.language.values.Character(representation));
   }
 
   public java.lang.Character getRepresentation() {

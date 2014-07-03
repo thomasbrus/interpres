@@ -8,8 +8,8 @@ import interpres.language.DefinitionTable;
 import interpres.language.values.Value;
 
 public class Lambda extends Quoted {
-  public Lambda(AST unquotedAST, interpres.language.values.Lambda lambdaValue) {
-    super(unquotedAST, lambdaValue);
+  public Lambda(AST unquotedAST, BiFunction<DefinitionTable, List<AST>, Value> function) {
+    super(unquotedAST, new interpres.language.values.Lambda(function));
   }
 
   public BiFunction<DefinitionTable, List<AST>, Value> getFunction() {
