@@ -1,0 +1,8 @@
+(require "assembly/layout.interpres")
+
+(require "assembly/addressing.interpres")
+(require "assembly/jumping.interpres")
+(require "assembly/loading.interpres")
+(require "assembly/stack.interpres")
+(require "assembly/storing.interpres")
+

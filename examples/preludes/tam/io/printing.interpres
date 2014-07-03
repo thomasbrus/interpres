@@ -1,0 +1,9 @@
+(core.define @print-int (core.lambda (integer)
+    (core.list integer @("CALL putint" "CALL puteol"))))
+
+(core.define @print-str (core.lambda (string)
+    (core.list
+      string
+      (core.repeat (core.list.size string) @"CALL put")
+      @("CALL puteol"))))
+

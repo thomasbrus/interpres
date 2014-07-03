@@ -1,0 +1,18 @@
+(core.define @<= (core.lambda (a b)
+    (core.list.concat a b @("CALL le"))))
+
+(core.define @< (core.lambda (a b)
+    (core.list.concat a b @("CALL lt"))))
+
+(core.define @== (core.lambda (a b)
+    (core.list.concat a b @("CALL ne"))))
+
+(core.define @!= (core.lambda (a b)
+    (core.list.concat a b @("CALL eq"))))
+
+(core.define @> (core.lambda (a b)
+    (core.list.concat a b @("CALL gt"))))
+
+(core.define @>= (core.lambda (a b)
+    (core.list.concat a b @("CALL ge"))))
+

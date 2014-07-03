@@ -1,0 +1,15 @@
+(core.define @+ (core.lambda (a b)
+    (core.list.concat a b @("CALL add"))))
+
+(core.define @- (core.lambda (a b)
+    (core.list.concat a b @("CALL sub"))))
+
+(core.define @* (core.lambda (a b)
+    (core.list.concat a b @("CALL mult"))))
+
+(core.define @/ (core.lambda (a b)
+    (core.list.concat a b @("CALL div"))))
+
+(core.define @% (core.lambda (a b)
+    (core.list.concat a b @("CALL mod"))))
+

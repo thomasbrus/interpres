@@ -1,0 +1,3 @@
+(core.define @assign (core.lambda (identifier value)
+    (core.list.concat value (asm.store ~(core.symbol.concat identifier @: @address)))))
+

@@ -1,0 +1,11 @@
+(core.define @asm.stack.size @0)
+
+(core.define @asm.stack.increase (core.lambda ((amount @1))
+    (core.define @asm.stack.size (core.integer.add amount asm.stack.size))))
+
+(core.define @asm.push (core.lambda (amount)
+    (core.list (core.string.concat @"PUSH " (core.integer-to-string amount)))))
+
+(core.define @asm.pop (core.lambda (amount)
+    (core.list (core.string.concat @"POP(0) " (core.integer-to-string amount)))))
+

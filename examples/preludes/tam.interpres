@@ -1,0 +1,6 @@
+(require "tam/assembly.interpres")
+(require "tam/control-flow.interpres")
+(require "tam/io.interpres")
+(require "tam/operators.interpres")
+(require "tam/state.interpres")
+

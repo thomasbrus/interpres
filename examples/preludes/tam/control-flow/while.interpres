@@ -1,0 +1,7 @@
+(core.define @while (core.lambda (condition body)
+    (core.list
+      condition
+      (asm.jumpif @0 (asm.address (core.integer.add @2 (core.list.size body)) @CP))
+      body
+      (asm.jump (asm.address (core.integer.subtract @0 (core.integer.add @1 (core.integer.add (core.list.size condition) (core.list.size body)))) @CP)))))
+

@@ -1,0 +1,4 @@
+(require "operators/binary.interpres")
+(require "operators/logical.interpres")
+(require "operators/relational.interpres")
+

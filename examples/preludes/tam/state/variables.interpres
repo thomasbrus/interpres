@@ -1,0 +1,9 @@
+(core.define @var (core.lambda (identifier initial-value)
+    (core.let (address (asm.address asm.stack.size @SB))
+      (asm.stack.increase)
+      (core.define identifier (asm.load address))
+      (core.define (core.symbol.concat identifier @: @address) address)
+      (core.list.concat
+        (asm.push @1)
+        (assign identifier initial-value)))))
+

@@ -1,0 +1,15 @@
+(core.define @asm.load (core.lambda (address)
+    (core.list (core.string.concat @"LOAD(1) " address))))
+
+(core.define @asm.loadl (core.lambda (quoted-integer)
+    (core.list (core.string.concat
+        @"LOADL " (core.integer-to-string quoted-integer)))))
+
+(core.define @asm.loadc (core.lambda (quoted-character)
+    (asm.loadl (core.character.ord quoted-character))))
+
+(core.define @asm.loads (core.lambda (quoted-string)
+  (core.list.map
+    (core.lambda (quoted-character) (asm.loadc quoted-character))
+    (core.list.reverse (core.string-to-list quoted-string)))))
+
