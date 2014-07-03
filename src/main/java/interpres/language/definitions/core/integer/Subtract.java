@@ -15,7 +15,7 @@ public class Subtract extends Definition {
     super("core.integer.subtract", new Lambda((definitionTable, arguments) -> {
       Integer firstInteger = (Integer) arguments.get(0).evaluate(definitionTable);
       Integer secondInteger = (Integer) arguments.get(1).evaluate(definitionTable);
-      return new Integer(firstInteger.getValue() - secondInteger.getValue());
+      return new Integer(firstInteger.getRepresentation() - secondInteger.getRepresentation());
     }));
   }
 

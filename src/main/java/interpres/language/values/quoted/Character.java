@@ -8,8 +8,8 @@ public class Character extends Quoted {
     super(unquotedAST, characterValue);
   }
 
-  public java.lang.Character getValue() {
-    return ((interpres.language.values.Character) this.getQuotedValue()).getValue();
+  public java.lang.Character getRepresentation() {
+    return ((interpres.language.values.Character) this.getQuotedValue()).getRepresentation();
   }
 }
 

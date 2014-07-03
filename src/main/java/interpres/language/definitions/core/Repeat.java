@@ -21,7 +21,7 @@ public class Repeat extends Definition {
       Integer countValue = (Integer) arguments.get(0).evaluate(definitionTable);
 
       return ListExpression.buildFunctionCall(
-        "core.list", Collections.nCopies(countValue.getValue(), arguments.get(1))
+        "core.list", Collections.nCopies(countValue.getRepresentation(), arguments.get(1))
       ).evaluate(definitionTable);
     }));
   }

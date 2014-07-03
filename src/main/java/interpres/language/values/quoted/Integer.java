@@ -8,8 +8,8 @@ public class Integer extends Quoted {
     super(unquotedAST, integerValue);
   }
 
-  public java.lang.Integer getValue() {
-    return ((interpres.language.values.Integer) this.getQuotedValue()).getValue();
+  public java.lang.Integer getRepresentation() {
+    return ((interpres.language.values.Integer) this.getQuotedValue()).getRepresentation();
   }
 }
 

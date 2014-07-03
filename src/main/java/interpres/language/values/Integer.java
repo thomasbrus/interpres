@@ -4,22 +4,22 @@ import java.util.List;
 import java.util.Arrays;
 
 public class Integer extends Value {
-  private java.lang.Integer value;
+  private java.lang.Integer representation;
 
-  public Integer(java.lang.Integer value) {
-    this.value = value;
+  public Integer(java.lang.Integer representation) {
+    this.representation = representation;
   }
 
-  public java.lang.Integer getValue() {
-    return this.value;
+  public java.lang.Integer getRepresentation() {
+    return this.representation;
   }
 
   public List<java.lang.String> bytecodeSequence() {
-    return Arrays.asList(this.value.toString());
+    return Arrays.asList(this.representation.toString());
   }
 
   public java.lang.String toString() {
-    return this.value.toString();
+    return this.representation.toString();
   }
 }
 
