@@ -5,7 +5,7 @@ import interpres.language.definitions.Definition;
 import interpres.language.values.Value;
 import interpres.language.values.Symbol;
 import interpres.language.values.Lambda;
-import interpres.language.values.Void;
+import interpres.language.values.List;
 
 public class Define extends Definition {
 
@@ -14,7 +14,7 @@ public class Define extends Definition {
       Symbol nameSymbol = (Symbol) arguments.get(0).evaluate(definitionTable);
       Value value = arguments.get(1).evaluate(definitionTable);
       definitionTable.define(nameSymbol.getIntern(), value);
-      return new Void();
+      return List.buildEmpty();
     }));
   }
 
