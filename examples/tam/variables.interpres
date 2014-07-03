@@ -12,7 +12,7 @@
     (core.list (core.string.concat @"PUSH " (core.integer-to-string amount)))))
 
 (core.define @asm.pop (core.lambda (amount)
-    (core.list (core.string.concat @"POP " (core.integer-to-string amount)))))
+    (core.list (core.string.concat @"POP(0) " (core.integer-to-string amount)))))
 
 (core.define @asm.load (core.lambda (address)
     (core.list (core.string.concat @"LOAD(1) " address))))
