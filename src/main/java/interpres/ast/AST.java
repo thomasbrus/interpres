@@ -12,8 +12,7 @@ public abstract class AST {
   }
 
   public boolean isQuotedSymbol() {
-    return (this instanceof QuotedExpression &&
-      ((QuotedExpression) this).getExpression() instanceof Symbol);
+    return (this instanceof QuoteExpression &&
+      ((QuoteExpression) this).getExpression() instanceof Symbol);
   }
 }
-

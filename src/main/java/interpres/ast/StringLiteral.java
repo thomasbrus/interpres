@@ -14,7 +14,7 @@ public class StringLiteral extends AST {
   }
 
   public Value evaluate(DefinitionTable definitionTable) {
-    return ListExpression.buildFunctionCall("asm.loads", new QuotedExpression(this))
+    return ListExpression.buildFunctionCall("asm.loads", new QuoteExpression(this))
       .evaluate(definitionTable);
   }
 
@@ -26,4 +26,3 @@ public class StringLiteral extends AST {
     return new interpres.language.values.String(this.literal, this);
   }
 }
-

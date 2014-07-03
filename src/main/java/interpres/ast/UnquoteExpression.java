@@ -5,10 +5,10 @@ import java.util.Arrays;
 import interpres.language.DefinitionTable;
 import interpres.language.values.Value;
 
-public class UnquotedExpression extends AST {
+public class UnquoteExpression extends AST {
   private AST expression;
 
-  public UnquotedExpression(AST expression) {
+  public UnquoteExpression(AST expression) {
     this.expression = expression;
   }
 

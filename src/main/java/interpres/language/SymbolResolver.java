@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 import interpres.ast.Symbol;
 import interpres.ast.ListExpression;
-import interpres.ast.QuotedExpression;
+import interpres.ast.QuoteExpression;
 
 import interpres.language.values.Value;
 import interpres.language.values.Integer;
@@ -33,8 +33,7 @@ public class SymbolResolver {
 
   public Value asInteger(Symbol symbol) {
     return ListExpression.buildFunctionCall(
-      "asm.loadl", new QuotedExpression(symbol)
+      "asm.loadl", new QuoteExpression(symbol)
     ).evaluate(definitionTable);
   }
 }
-
