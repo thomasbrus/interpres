@@ -5,67 +5,46 @@ import org.antlr.runtime.tree.*;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.FileInputStream;
 import java.io.PrintStream;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import java.util.List;
-import java.util.ArrayList;
-
 import interpres.ast.AST;
-import interpres.ast.QuoteExpression;
-import interpres.ast.ListExpression;
-import interpres.ast.Symbol;
 
 import interpres.language.DefinitionTable;
 import interpres.language.values.Value;
 
 public class App {
+  private Evaluator evaluator;
   private DefinitionTable definitionTable;
+  private InputStream inputStream;
+  private PrintStream outputStream;
+  private Path basePath;
 
-  public App(DefinitionTable definitionTable) {
-    this.definitionTable = definitionTable;
+  public App(String filename) throws IOException, RecognitionException{
+    this.basePath = Paths.get(filename).getParent();
+    this.inputStream = new FileInputStream(filename);
+    this.outputStream = new PrintStream(System.out);
+    this.definitionTable = new DefinitionTable();
+
+    definitionTable.define(new interpres.language.definitions.Require(basePath));
+    setupDefinitionTable(this.definitionTable);
+
+    this.evaluator = new Evaluator(definitionTable);
   }
 
-  public Value evaluate(InputStream inputStream) throws IOException, RecognitionException {
-    AST ast = this.transform(this.parse(inputStream));
-    return ast.evaluate(this.definitionTable);
-  }
-
-  private CommonTree parse(InputStream inputStream) throws IOException, RecognitionException {
-    // Create a token stream
-    GrammarLexer lexer = new GrammarLexer(new ANTLRInputStream(inputStream));
-    CommonTokenStream tokens = new CommonTokenStream(lexer);
-
-    // Parse the input using the token stream
-    GrammarParser parser = new GrammarParser(tokens);
-    return (CommonTree) parser.parse().getTree();
-  }
-
-  private AST transform(CommonTree tree) throws RecognitionException {
-    // Transform the ANTLR tree into an Interpres AST
-    CommonTreeNodeStream nodeStream = new CommonTreeNodeStream(tree);
-    TreeWalker walker = new TreeWalker(nodeStream);
-    TreeWalker.walk_return walkReturn = walker.walk();
-
-    return walkReturn.ast;
+  public void run() throws IOException, RecognitionException {
+    evaluator.evaluate(this.inputStream).printBytecode(this.outputStream);
   }
 
   public static void main(String[] args) throws IOException, RecognitionException {
-    InputStream inputStream = new FileInputStream(args[0]);
-    Path basePath = Paths.get(args[0]).getParent();
-
-    DefinitionTable definitionTable = new DefinitionTable();
-    definitionTable.define(new interpres.language.definitions.Require(basePath));
-    setupDefinitionTable(definitionTable);
-
-    App app = new App(definitionTable);
-    app.evaluate(inputStream).printBytecode(new PrintStream(System.out));
+    new App(args[0]).run();
   }
 
-  public static void setupDefinitionTable(DefinitionTable definitionTable) {
+  private void setupDefinitionTable(DefinitionTable definitionTable) {
     definitionTable.define(new interpres.language.definitions.core.Define());
     definitionTable.define(new interpres.language.definitions.core.Let());
     definitionTable.define(new interpres.language.definitions.core.Lambda());
@@ -91,3 +70,4 @@ public class App {
     definitionTable.define(new interpres.language.definitions.asm.Footer());
   }
 }
+

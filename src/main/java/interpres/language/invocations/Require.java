@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import org.antlr.runtime.RecognitionException;
 
-import interpres.App;
+import interpres.Evaluator;
 
 import interpres.ast.AST;
 import interpres.ast.StringLiteral;
@@ -61,7 +61,7 @@ public class Require extends Invocation {
 
     this.getDefinitionTable().define(new interpres.language.definitions.Require(file.getParent()));
 
-    resultValue = new App(this.getDefinitionTable()).evaluate(fileInputStream);
+    resultValue = new Evaluator(this.getDefinitionTable()).evaluate(fileInputStream);
 
     this.getDefinitionTable().define(new interpres.language.definitions.Require(this.basePath));
 
