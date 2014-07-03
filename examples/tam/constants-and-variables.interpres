@@ -1,7 +1,7 @@
 ; = prelude.tam ================================================================
 
 (core.define @asm.footer (core.lambda ()
-    (core.list (asm.pop asm.variables.counter) @HALT)))
+    (core.list (asm.pop asm.stack.size) @HALT)))
 
 (core.define @asm.address (core.lambda (offset register)
     (core.string.concat
@@ -63,23 +63,36 @@
 (core.define @% (core.lambda (a b)
     (core.list.concat a b @("CALL mod"))))
 
-; = prelude.tam.variables ======================================================
+; = prelude.tam.constants-and-variables ======================================================
 
-(core.define @asm.variables.counter @0)
+(core.define @asm.stack.size @0)
+
+(core.define @asm.stack.increase (core.lambda ((amount @1))
+    (core.define @asm.stack.size (core.integer.add amount asm.stack.size))))
 
 (core.define @assign (core.lambda (identifier value)
     (core.list.concat value (asm.store ~(core.symbol.concat identifier @: @address)))))
 
 (core.define @var (core.lambda (identifier initial-value)
-    (core.let (address (asm.address asm.variables.counter @SB))
-      (core.define @asm.variables.counter (core.integer.add @1 asm.variables.counter))
+    (core.let (address (asm.address asm.stack.size @SB))
+      (asm.stack.increase)
       (core.define identifier (asm.load address))
       (core.define (core.symbol.concat identifier @: @address) address)
       (core.list.concat
         (asm.push @1)
         (assign identifier initial-value)))))
 
+(core.define @const (core.lambda (identifier value)
+    (core.let (address (asm.address asm.stack.size @SB))
+      (asm.stack.increase)
+      (core.define identifier (asm.load address))
+      value)))
+
 ; ==============================================================================
+
+(const @x 2)
+
+(const @distance (+ 1 x))
 
 (var @my-age 22)
 (var @my-height 187)
@@ -92,4 +105,12 @@
 (print-int my-height)
 
 (assign @my-height 188)
+
+; (const @x 4)
+(assign @distance 3)
+
+(print-int distance)
+(print-int x)
+
+
 
