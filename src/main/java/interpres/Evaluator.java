@@ -6,10 +6,14 @@ import org.antlr.runtime.tree.*;
 import java.io.IOException;
 import java.io.InputStream;
 
+import java.util.Arrays;
+
 import interpres.ast.AST;
+import interpres.ast.ListExpression;
 
 import interpres.language.DefinitionTable;
 import interpres.language.values.Value;
+import interpres.language.values.List;
 
 public class Evaluator {
   private DefinitionTable definitionTable;
@@ -21,6 +25,13 @@ public class Evaluator {
   public Value evaluate(InputStream inputStream) throws IOException, RecognitionException {
     AST ast = this.transform(this.parse(inputStream));
     return ast.evaluate(this.definitionTable);
+  }
+
+  public Value evaluateWithLayout(InputStream inputStream) throws IOException, RecognitionException {
+    Value body = this.evaluate(inputStream);
+    Value header = this.evaluateHeader();
+    Value footer = this.evaluateFooter();
+    return new List(Arrays.asList(header, body, footer));
   }
 
   private CommonTree parse(InputStream inputStream) throws IOException, RecognitionException {
@@ -40,6 +51,14 @@ public class Evaluator {
     TreeWalker.walk_return walkReturn = walker.walk();
 
     return walkReturn.ast;
+  }
+
+  private Value evaluateHeader() {
+    return ListExpression.buildFunctionCall("asm.header").evaluate(this.definitionTable);
+  }
+
+  private Value evaluateFooter() {
+    return ListExpression.buildFunctionCall("asm.footer").evaluate(this.definitionTable);
   }
 }
 
