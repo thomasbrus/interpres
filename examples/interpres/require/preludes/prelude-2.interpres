@@ -1,4 +1,0 @@
-(core.define @asm.loadl (core.lambda (quoted-integer)
-    (core.list (core.string.concat
-        @"LOADL " (core.integer-to-string quoted-integer)))))
-

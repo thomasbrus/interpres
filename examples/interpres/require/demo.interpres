@@ -1,4 +1,0 @@
-(require "preludes/prelude.interpres")
-
-(+ 1 2)
-

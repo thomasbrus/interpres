@@ -1,0 +1,5 @@
+(core.define @asm.address (core.lambda (offset register)
+    (core.string.concat
+        (core.integer-to-string offset)
+        @"[" (core.symbol-to-string register) @"]")))
+
