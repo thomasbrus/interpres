@@ -4,9 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 import interpres.language.DefinitionTable;
-
 import interpres.language.values.Value;
-import interpres.language.values.String;
 
 public class StringLiteral extends AST {
   private java.lang.String literal;
@@ -16,7 +14,7 @@ public class StringLiteral extends AST {
   }
 
   public Value evaluate(DefinitionTable definitionTable) {
-    return ListExpression.buildFunctionCall("asm.loads", new QuotedExpression(this))
+    return ListExpression.buildFunctionCall("asm.loads", new QuoteExpression(this))
       .evaluate(definitionTable);
   }
 
@@ -24,8 +22,7 @@ public class StringLiteral extends AST {
     return this.literal;
   }
 
-  public String quote() {
-    return new String(this.literal);
+  public interpres.language.values.String quote() {
+    return new interpres.language.values.String(this.literal, this);
   }
 }
-

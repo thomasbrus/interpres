@@ -3,13 +3,19 @@ package interpres.language.values;
 import java.util.List;
 import java.util.Arrays;
 
-import interpres.language.DefinitionTable;
+import interpres.ast.AST;
 
 public class Symbol extends Value {
   private java.lang.String intern;
+  private AST symbolAST;
 
   public Symbol(java.lang.String intern) {
+    this(intern, null);
+  }
+  
+  public Symbol(java.lang.String intern, AST symbolAST) {
     this.intern = intern;
+    this.symbolAST = symbolAST;
   }
 
   public java.lang.String getIntern() {
@@ -20,8 +26,8 @@ public class Symbol extends Value {
     return Arrays.asList(this.intern);
   }
 
-  public Value unquote(DefinitionTable definitionTable) {
-    return new interpres.ast.Symbol(this.intern).evaluate(definitionTable);
+  public AST getUnquotedAST() {
+    return this.symbolAST;
   }
 
   public java.lang.String toString() {

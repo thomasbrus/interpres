@@ -60,10 +60,9 @@ literal returns [AST ast]
   ;
 
 quoted_expression returns [AST ast]
-  : ^(QUOTED expression) { $ast = new QuotedExpression($expression.ast); }
+  : ^(QUOTED expression) { $ast = new QuoteExpression($expression.ast); }
   ;
 
 unquoted_expression returns [AST ast]
-  : ^(UNQUOTED expression) { $ast = new UnquotedExpression($expression.ast); }
+  : ^(UNQUOTED expression) { $ast = new UnquoteExpression($expression.ast); }
   ;
-

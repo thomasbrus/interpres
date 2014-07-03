@@ -3,23 +3,35 @@ package interpres.language.values;
 import java.util.List;
 import java.util.Arrays;
 
-public class Integer extends Value {
-  private java.lang.Integer value;
+import interpres.ast.AST;
 
-  public Integer(java.lang.Integer value) {
-    this.value = value;
+public class Integer extends Value {
+  private java.lang.Integer representation;
+  private AST integerAST;
+
+  public Integer(java.lang.Integer representation) {
+    this(representation, null);
   }
 
-  public java.lang.Integer getValue() {
-    return this.value;
+  public Integer(java.lang.Integer representation, AST integerAST) {
+    this.representation = representation;
+    this.integerAST = integerAST;
+  }
+
+  public java.lang.Integer getRepresentation() {
+    return this.representation;
   }
 
   public List<java.lang.String> bytecodeSequence() {
-    return Arrays.asList(this.value.toString());
+    return Arrays.asList(this.representation.toString());
+  }
+
+  public AST getUnquotedAST() {
+    return this.integerAST;
   }
 
   public java.lang.String toString() {
-    return this.value.toString();
+    return this.representation.toString();
   }
 }
 

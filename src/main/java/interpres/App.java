@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 import interpres.ast.AST;
-import interpres.ast.QuotedExpression;
+import interpres.ast.QuoteExpression;
 import interpres.ast.ListExpression;
 import interpres.ast.Symbol;
 
@@ -91,4 +91,3 @@ public class App {
     definitionTable.define(new interpres.language.definitions.asm.Footer());
   }
 }
-

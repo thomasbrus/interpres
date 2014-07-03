@@ -6,10 +6,10 @@ import java.util.List;
 import interpres.language.DefinitionTable;
 import interpres.language.values.Value;
 
-public class QuotedExpression extends AST {
+public class QuoteExpression extends AST {
   private AST expression;
 
-  public QuotedExpression(AST expression) {
+  public QuoteExpression(AST expression) {
     this.expression = expression;
   }
 

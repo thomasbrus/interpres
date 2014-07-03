@@ -21,9 +21,9 @@ public class Symbol extends AST {
 
   public Value quote() {
     try {
-      return new interpres.language.values.Integer(Integer.parseInt(this.name));
+      return new interpres.language.values.Integer(Integer.parseInt(this.name), this);
     } catch (NumberFormatException e) {
-      return new interpres.language.values.Symbol(this.name);
+      return new interpres.language.values.Symbol(this.name, this);
     }
   }
 }

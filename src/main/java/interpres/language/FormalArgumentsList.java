@@ -9,7 +9,7 @@ import java.util.function.Function;
 
 import interpres.ast.AST;
 import interpres.ast.ListExpression;
-import interpres.ast.QuotedExpression;
+import interpres.ast.QuoteExpression;
 
 import interpres.language.DefinitionTable;
 
@@ -32,8 +32,8 @@ public class FormalArgumentsList {
         actualArgument = this.getDefaultArgumentASTs().get(i);
 
       if (formalArgument.isQuotedSymbol()) {
-        actualArgument = new QuotedExpression(actualArgument);
-        formalArgument = ((QuotedExpression) formalArgument).getExpression();
+        actualArgument = new QuoteExpression(actualArgument);
+        formalArgument = ((QuoteExpression) formalArgument).getExpression();
       }
 
       this.bindings.put(formalArgument, actualArgument);

@@ -23,7 +23,6 @@ import interpres.language.DefinitionTable;
 
 import interpres.language.values.Value;
 import interpres.language.values.Lambda;
-import interpres.language.values.Void;
 
 import interpres.language.invocations.Invocation;
 

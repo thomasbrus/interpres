@@ -23,8 +23,16 @@ public abstract class Value implements AsBytecode {
     }
   }
 
+  public AST getUnquotedAST() {
+    return null;
+  }
+
   public Value unquote(DefinitionTable definitionTable) {
-    throw new UnsupportedOperationException("Unquoting is not supported for " + this.getClass());
+    if (this.getUnquotedAST() instanceof AST) {
+      return this.getUnquotedAST().evaluate(definitionTable);
+    } else {
+      throw new UnsupportedOperationException("Unquoting is not supported for " + this.getClass());
+    }
   }
 }
 
