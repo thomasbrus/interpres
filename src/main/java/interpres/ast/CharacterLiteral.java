@@ -8,25 +8,24 @@ import interpres.language.DefinitionTable;
 import interpres.language.values.Value;
 import interpres.language.values.Character;
 
-
 public class CharacterLiteral extends AST {
-  private java.lang.Character literal;
+  private java.lang.Character representation;
 
-  public CharacterLiteral(java.lang.Character literal) {
-    this.literal = literal;
+  public CharacterLiteral(java.lang.Character representation) {
+    this.representation = representation;
   }
 
   public Value evaluate(DefinitionTable definitionTable) {
-    return ListExpression.buildFunctionCall("asm.loadc", new QuotedExpression(this))
+    return ListExpression.buildFunctionCall("asm.loadc", new QuoteExpression(this))
       .evaluate(definitionTable);
   }
 
-  public java.lang.Character getLiteral() {
-    return this.literal;
+  public java.lang.Character getRepresentation() {
+    return this.representation;
   }
 
-  public Value quote() {
-    return new interpres.language.values.Character(this.literal);
+  public interpres.language.values.Character quote() {
+    return new interpres.language.values.Character(this.representation, this);
   }
 }
 
