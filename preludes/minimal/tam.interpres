@@ -3,4 +3,5 @@
 (require "tam/io.interpres")
 (require "tam/literals.interpres")
 (require "tam/operators.interpres")
+(require "tam/routines.interpres")
 (require "tam/state.interpres")

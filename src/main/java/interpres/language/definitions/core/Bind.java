@@ -1,5 +1,6 @@
 package interpres.language.definitions.core;
 
+<<<<<<< HEAD
 import java.util.Collections;
 
 import interpres.ast.AST;
