@@ -1,0 +1,6 @@
+; Lookup symbol that is not defined
+x
+
+; Invoke function that is also not defined
+(say-hello)
+
