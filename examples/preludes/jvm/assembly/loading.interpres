@@ -1,0 +1,12 @@
+(core.define @asm.load (core.lambda (address)
+    (core.list (core.string.concat @"iload " address))))
+
+(core.define @asm.loadl (core.lambda (integer)
+    (core.list (core.string.concat @"sipush " (core.integer-to-string integer)))))
+
+(core.define @asm.loadc (core.lambda (character)
+    (asm.loadl (core.character.ord character))))
+
+(core.define @asm.loads (core.lambda (string)
+    (core.list (core.string.concat @"ldc \"" string @"\""))))
+

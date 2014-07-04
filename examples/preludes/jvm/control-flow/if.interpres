@@ -1,0 +1,11 @@
+(core.define @if (core.lambda (predicate, consequent, (alternative @()))
+    (core.let (false-label (asm.next-label), done-label (asm.next-label))
+      (core.list
+        predicate
+        (asm.jumpifeq false-label)
+        consequent
+        (asm.jump done-label)
+        (asm.label false-label)
+        alternative
+        (asm.label done-label)))))
+

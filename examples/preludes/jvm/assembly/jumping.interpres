@@ -1,0 +1,6 @@
+(core.define @asm.jump (core.lambda (address)
+    (core.list (core.string.concat @"goto " address))))
+
+(core.define @asm.jumpifeq (core.lambda (address)
+    (core.list (core.string.concat @"ifeq " address))))
+

@@ -1,0 +1,9 @@
+(core.define @&& (core.lambda (left, right)
+    (core.list left right @"iand")))
+
+(core.define @|| (core.lambda (left, right)
+    (core.list left right @"ior")))
+
+(core.define @and &&)
+(core.define @or ||)
+

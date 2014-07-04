@@ -1,0 +1,20 @@
+(core.define @read-int (core.lambda (variable-symbol)
+    (assign
+      variable-symbol
+      @("getstatic Program/scanner Ljava/util/Scanner;"
+        "invokevirtual java/util/Scanner/nextInt()I"))))
+
+(core.define @read-string (core.lambda (variable-symbol)
+    (assign
+      variable-symbol
+      @("getstatic Program/scanner Ljava/util/Scanner;"
+        "invokevirtual java/util/Scanner/next()Ljava/lang/String;"))))
+
+(core.define @read-char (core.lambda (variable-symbol)
+    (assign
+      variable-symbol
+      @("getstatic Program/scanner Ljava/util/Scanner;"
+        "invokevirtual java/util/Scanner/next()Ljava/lang/String;"
+        "iconst_0"
+        "invokevirtual java/lang/String/charAt(I)C"))))
+

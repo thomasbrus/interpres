@@ -1,0 +1,25 @@
+(require "../../preludes/jvm.interpres")
+
+(var @count-down 0)
+
+(while (== count-down 0)
+  (do
+    (print-str "Pick a number between 1 and 10")
+    (read-int @count-down)
+    (if (or (<= count-down 0) (> count-down 10))
+      (do (print-str "Input is out of range, please try again.") (assign @count-down 0))
+      @())))
+
+(var @continue 0)
+
+(print-str "Continue? (Press 'y')")
+(read-char @continue)
+
+(if (== continue 'y')
+  (do
+    (print-str "Counting down...")
+    (while (> count-down 0) (do
+      (print-int count-down)
+      (assign @count-down (- count-down 1)))))
+
+  (print-str "Action cancelled."))

@@ -1,5 +1,5 @@
-(require "assembly/addressing.interpres")
 (require "assembly/jumping.interpres")
+(require "assembly/labeling.interpres")
 (require "assembly/layout.interpres")
 (require "assembly/loading.interpres")
 (require "assembly/stack.interpres")

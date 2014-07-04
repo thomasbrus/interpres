@@ -1,0 +1,6 @@
+(require "jvm/assembly.interpres")
+(require "jvm/control-flow.interpres")
+(require "jvm/io.interpres")
+(require "jvm/operators.interpres")
+(require "jvm/state.interpres")
+
