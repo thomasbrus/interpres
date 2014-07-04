@@ -1,4 +1,5 @@
 (require "../../preludes/tam.interpres")
+; (require "../../preludes/jvm.interpres")
 
 (if (< (+ 4 3) (- 10 2))
   (print-str "Yes")
