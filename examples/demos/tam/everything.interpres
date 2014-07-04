@@ -7,8 +7,6 @@
 (if (> (+ 6 5) 12)
   (print-str "OK"))
 
-; (while (<= 9 0) (print-int (if (< 0 1) 1 2)))
-
 (const @x 2)
 (const @distance (+ 1 x))
 
