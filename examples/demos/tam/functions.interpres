@@ -1,0 +1,9 @@
+(require "../../preludes/tam.interpres")
+
+(asm.push @1)
+
+(asm.stack.increase)
+(fn my-add left right (+ left right))
+
+(my-add 1 2)
+

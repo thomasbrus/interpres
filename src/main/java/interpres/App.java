@@ -46,6 +46,7 @@ public class App {
 
   private void setupDefinitionTable(DefinitionTable definitionTable) {
     definitionTable.define(new interpres.language.definitions.core.Define());
+    definitionTable.define(new interpres.language.definitions.core.Bind());
     definitionTable.define(new interpres.language.definitions.core.Let());
     definitionTable.define(new interpres.language.definitions.core.Lambda());
     definitionTable.define(new interpres.language.definitions.core.Quote());

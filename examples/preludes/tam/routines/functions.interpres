@@ -1,0 +1,26 @@
+(core.define @fn (core.lambda (@name, @first-argument, @second-argument, @body)
+    ; define function address
+    (core.define (core.symbol.concat name @: @address) (asm.next-label))
+
+    (core.let (hello @hello)
+      ; define function call (add 1 2)
+      (core.define name (core.lambda-eager (first-argument second-argument)
+        (core.list @(first-argument second-argument) hello))))
+        ; @(+ b c)
+        ; (core.list
+        ;   first-argument
+        ;   second-argument
+        ;   hello
+        ;   @"CALL (SB) L1[CB]"))))
+
+    ; return function body
+    (core.list
+      (core.let ()
+        (core.bind first-argument @"LOAD (1) -2[LB]")
+        (core.bind second-argument @"LOAD (1) -1[LB]")
+        (core.let (evaluated-body ~body)
+          (core.list
+            (asm.jump (asm.address (core.integer.add @2 (core.list.size evaluated-body)) @CP))
+            @"L1: " evaluated-body)))
+      @"RETURN(1) 2")))
+

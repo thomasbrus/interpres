@@ -1,8 +1,8 @@
 (core.define @&& (core.lambda (a b)
-    (core.list.concat a b @("CALL and"))))
+    (core.list a b @("CALL and"))))
 
 (core.define @|| (core.lambda (a b)
-    (core.list.concat a b @("CALL or"))))
+    (core.list a b @("CALL or"))))
 
 (core.define @and &&)
 (core.define @or ||)
