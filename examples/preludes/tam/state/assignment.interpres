@@ -1,3 +1,6 @@
 (core.define @assign (core.lambda (identifier value)
     (core.list.concat value (asm.store ~(core.symbol.concat identifier @: @address)))))
 
+(core.define @nth (core.lambda (identifier index)
+  (core.list (core.string.concat @"LOAD " ~(core.symbol.concat identifier @: (core.string-to-symbol (core.integer-to-string index)) @: @address))))) 
+
