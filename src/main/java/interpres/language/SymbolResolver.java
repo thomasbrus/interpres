@@ -12,23 +12,24 @@ import interpres.language.values.Integer;
 public class SymbolResolver {
   private DefinitionTable definitionTable;
 
+  public static class IrresolvableSymbolException extends RuntimeException {
+    public IrresolvableSymbolException(Symbol symbol) {
+      super("Could not resolve symbol: " + symbol.getName());
+    }
+  }
+
   public SymbolResolver(DefinitionTable definitionTable) {
     this.definitionTable = definitionTable;
   }
 
   public Value resolve(Symbol symbol) {
-    String symbolName = symbol.getName();
-
-    if (definitionTable.contains(symbolName))
-      return definitionTable.lookup(symbolName);
+    if (definitionTable.contains(symbol))
+      return definitionTable.lookup(symbol);
 
     if (symbol.quote() instanceof Integer)
       return this.asInteger(symbol);
 
-    // FIXME: Throw exception here?
-    System.err.println("Couldn't resolve definition for " + symbolName);
-
-    return null;
+    throw new IrresolvableSymbolException(symbol);
   }
 
   public Value asInteger(Symbol symbol) {
