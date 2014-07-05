@@ -2,6 +2,7 @@ package interpres.ast;
 
 import java.util.Arrays;
 
+import interpres.AsBytecode;
 import interpres.language.DefinitionTable;
 import interpres.language.values.Value;
 
@@ -12,13 +13,13 @@ public class UnquoteExpression extends AST {
     this.expression = expression;
   }
 
-  public Value evaluate(DefinitionTable definitionTable) {
-    return ListExpression.buildFunctionCall("core.unquote", this.expression)
-      .evaluate(definitionTable);
-  }
+  public AsBytecode evaluate(DefinitionTable definitionTable) {
+    AsBytecode valueOrAST = this.expression.evaluate(definitionTable);
 
-  public Value quote() {
-    return this.expression.quote();
+    if (!(valueOrAST instanceof AST))
+      throw new UnsupportedOperationException("Unquoting is not supported for " + valueOrAST);
+
+    return ((AST) valueOrAST).evaluate(definitionTable);
   }
 }
 

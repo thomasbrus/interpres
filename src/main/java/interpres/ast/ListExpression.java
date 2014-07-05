@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.stream.Collectors;
 
 import interpres.SourceLocation;
+import interpres.AsBytecode;
 
 import interpres.language.DefinitionTable;
 import interpres.language.SymbolResolver;
@@ -42,7 +43,7 @@ public class ListExpression extends AST {
     return buildFunctionCall(name, Collections.emptyList());
   }
 
-  public Value evaluate(DefinitionTable definitionTable) {
+  public AsBytecode evaluate(DefinitionTable definitionTable) {
     try {
       Lambda lambdaValue = (Lambda) this.getFunction().evaluate(definitionTable);
       return lambdaValue.getFunction().apply(definitionTable, this.getArguments());
@@ -51,13 +52,6 @@ public class ListExpression extends AST {
         this.getFunctionName(), this.getSourceFileName(), this.getSourceLineNumber()
       );
     }
-  }
-
-  public interpres.language.values.List quote() {
-    return new interpres.language.values.List(
-      this.items.stream().map(AST::quote).collect(Collectors.toList()),
-      this
-    );
   }
 
   public List<AST> getItems() {

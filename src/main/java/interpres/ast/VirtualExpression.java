@@ -1,21 +1,19 @@
 package interpres.ast;
 
+import interpres.AsBytecode;
+
 import interpres.language.DefinitionTable;
 import interpres.language.values.Value;
 
 public class VirtualExpression extends AST {
-  private Value value;
+  private AsBytecode value;
 
-  public VirtualExpression(Value value) {
+  public VirtualExpression(AsBytecode value) {
     this.value = value;
   }
 
-  public Value evaluate(DefinitionTable definitionTable) {
+  public AsBytecode evaluate(DefinitionTable definitionTable) {
     return this.value;
   }
-
-  // public Value quote() {
-  //   return this.value.quote();
-  // }
 }
 

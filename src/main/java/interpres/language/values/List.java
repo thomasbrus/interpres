@@ -3,41 +3,32 @@ package interpres.language.values;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import interpres.AsBytecode;
 import interpres.ast.AST;
 
 public class List extends Value {
-  private java.util.List<Value> items;
-  private AST listAST;
+  private java.util.List<AsBytecode> items;
 
-  public List(java.util.List<Value> items) {
-    this(items, null);
-  }
-
-  public List(java.util.List<Value> items, AST listAST) {
+  public List(java.util.List<AsBytecode> items) {
     this.items = items;
-    this.listAST = listAST;
   }
 
   public static List buildEmpty() {
     return new List(Collections.emptyList());
   }
 
-  public java.util.List<Value> getItems() {
+  public java.util.List<AsBytecode> getItems() {
     return this.items;
   }
 
   public java.util.List<java.lang.String> bytecodeSequence() {
     java.util.List<java.lang.String> bytecodeSequence = new ArrayList<java.lang.String>();
 
-    for (Value item : this.items) {
+    for (AsBytecode item : this.items) {
       bytecodeSequence.addAll(item.bytecodeSequence());
     }
 
     return bytecodeSequence;
-  }
-
-  public AST getUnquotedAST() {
-    return this.listAST;
   }
 
   public java.lang.String toString() {

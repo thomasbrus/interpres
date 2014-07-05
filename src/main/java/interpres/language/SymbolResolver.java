@@ -1,6 +1,9 @@
 package interpres.language;
 
 import java.util.Arrays;
+import org.apache.commons.lang3.StringUtils;
+
+import interpres.AsBytecode;
 
 import interpres.ast.Symbol;
 import interpres.ast.ListExpression;
@@ -22,19 +25,15 @@ public class SymbolResolver {
     this.definitionTable = definitionTable;
   }
 
-  public Value resolve(Symbol symbol) {
+  public AsBytecode resolve(Symbol symbol) {
     if (definitionTable.contains(symbol))
       return definitionTable.lookup(symbol);
 
-    if (symbol.quote() instanceof Integer)
-      return this.asInteger(symbol);
+    if (StringUtils.isNumeric(symbol.getName()))
+      return ListExpression.buildFunctionCall(
+        "asm.loadl", new QuoteExpression(symbol)
+      ).evaluate(definitionTable);
 
     throw new IrresolvableSymbolException(symbol);
-  }
-
-  public Value asInteger(Symbol symbol) {
-    return ListExpression.buildFunctionCall(
-      "asm.loadl", new QuoteExpression(symbol)
-    ).evaluate(definitionTable);
   }
 }

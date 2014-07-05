@@ -3,6 +3,8 @@ package interpres.language.definitions.core;
 import java.util.List;
 import java.util.ArrayList;
 
+import interpres.AsBytecode;
+
 import interpres.ast.Symbol;
 import interpres.ast.AST;
 
@@ -18,7 +20,7 @@ public class StringToList extends Definition {
 
   public StringToList() {
     super("core.string-to-list", new Lambda((definitionTable, arguments) -> {
-      List<Value> characters = new ArrayList<Value>();
+      List<AsBytecode> characters = new ArrayList<AsBytecode>();
       String stringValue = (String) arguments.get(0).evaluate(definitionTable);
 
       for (char c : stringValue.getLiteral().toCharArray()) {

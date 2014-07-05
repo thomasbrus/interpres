@@ -1,12 +1,15 @@
 package interpres.ast;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import interpres.SourceLocation;
+import interpres.AsBytecode;
+
 import interpres.language.DefinitionTable;
 import interpres.language.values.Value;
 
-public abstract class AST {
+public abstract class AST implements AsBytecode {
   private SourceLocation sourceLocation;
 
   public AST() {
@@ -17,7 +20,7 @@ public abstract class AST {
     this.sourceLocation = sourceLocation;
   }
 
-  public abstract Value evaluate(DefinitionTable definitionTable);
+  public abstract AsBytecode evaluate(DefinitionTable definitionTable);
 
   public SourceLocation getSourceLocation() {
     return this.sourceLocation;
@@ -31,12 +34,16 @@ public abstract class AST {
     return this.sourceLocation.getFileName();
   }
 
-  public Value quote() {
-    throw new UnsupportedOperationException("Quoting is not supported for " + this.getClass());
+  public AsBytecode quote() {
+    return this;
   }
 
   public Value unquote(DefinitionTable definitionTable) {
-    return this.evaluate(definitionTable).unquote(definitionTable);
+    throw new UnsupportedOperationException("Unquoting is not supported for " + this.getClass());
+  }
+
+  public List<java.lang.String> bytecodeSequence() {
+    return new ArrayList<java.lang.String>();
   }
 
   public boolean isQuotedSymbol() {
@@ -44,3 +51,4 @@ public abstract class AST {
       ((QuoteExpression) this).getExpression() instanceof Symbol);
   }
 }
+
