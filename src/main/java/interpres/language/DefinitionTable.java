@@ -34,6 +34,19 @@ public class DefinitionTable {
     this.definitions.addLast(new Definition(name, value, this.scopeLevel));
   }
 
+  public void set(String name, AST value) {
+    Iterator<Definition> it = this.definitions.descendingIterator();
+    int i = this.definitions.size()-1;
+
+    while (it.hasNext()) {
+      Definition definition = it.next();
+      if (definition.getName().equals(name)) break;
+      i--;
+    }
+
+    this.definitions.set(i, new Definition(name, value));
+  }
+
   public AST lookup(String name) {
     Iterator<Definition> it = this.definitions.descendingIterator();
 
