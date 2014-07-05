@@ -70,7 +70,7 @@ unquoted_expression: TILDE expression -> ^(UNQUOTED expression);
 
 String: '"' (~'"' | '\\' '"')* '"';
 Character: '\'' ~'\'' '\'';
-Integer: Digit+;
+Integer: ('+' | '-')? Digit+;
 Symbol:  (Letter | Special) (Letter | Special | Digit)*;
 
 Comment: ';' .* '\n' { $channel=HIDDEN; };
