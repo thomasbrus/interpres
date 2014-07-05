@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import java.io.File;
 import java.io.InputStream;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import java.nio.file.Path;
@@ -20,6 +19,7 @@ import interpres.ast.StringLiteral;
 
 import interpres.language.definitions.Definition;
 import interpres.language.DefinitionTable;
+import interpres.language.RuntimeException;
 
 import interpres.language.values.Value;
 import interpres.language.values.Lambda;
@@ -29,6 +29,12 @@ import interpres.language.invocations.Invocation;
 public class Require extends Invocation {
   private Path basePath;
 
+  public static class FileNotFoundException extends RuntimeException {
+    public FileNotFoundException(String message) {
+      super(message);
+    }
+  }
+
   public Require(DefinitionTable definitionTable, List<AST> arguments, Path basePath) {
     super(definitionTable, arguments);
     this.basePath = basePath;
@@ -37,8 +43,8 @@ public class Require extends Invocation {
   public Value invoke() {
     try {
       return this.evaluateFile(new File(this.resolvedFilename()));
-    } catch (FileNotFoundException e) {
-      System.err.println(e);
+    } catch (java.io.FileNotFoundException e) {
+      throw new FileNotFoundException(e.getMessage());
     } catch (IOException e) {
     } catch (RecognitionException e) {
     }
