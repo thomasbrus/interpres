@@ -1,8 +1,6 @@
-(core.define @NEG (core.lambda (operand)
-    (core.list.concat operand @("ineg"))))
+(core.define @minus (core.lambda (operand) (core.list operand @"ineg")))
 
-(core.define @POS (core.lambda (operand)
-    operand))
+(core.define @plus (core.lambda (operand) operand))
 
 (core.define @! (core.lambda (operand)
     (core.let (true-label (asm.next-label), done-label (asm.next-label))
