@@ -7,14 +7,11 @@ import java.util.Collections;
 import java.util.stream.Collectors;
 
 import interpres.SourceLocation;
-import interpres.AsInstructionSequence;
+
 
 import interpres.language.DefinitionTable;
 import interpres.language.SymbolResolver;
 import interpres.language.RuntimeException;
-
-import interpres.language.values.Value;
-import interpres.language.values.Lambda;
 
 public class ListExpression extends AST {
   private List<AST> items;
@@ -43,10 +40,10 @@ public class ListExpression extends AST {
     return buildFunctionCall(name, Collections.emptyList());
   }
 
-  public AsInstructionSequence evaluate(DefinitionTable definitionTable) {
+  public AST evaluate(DefinitionTable definitionTable) {
     try {
-      Lambda lambdaValue = (Lambda) this.getFunction().evaluate(definitionTable);
-      return lambdaValue.getFunction().apply(definitionTable, this.getArguments());
+      LambdaExpression lambda = (LambdaExpression) this.getFunction().evaluate(definitionTable);
+      return lambda.getFunction().apply(definitionTable, this.getArguments());
     } catch (RuntimeException runtimeException) {
       throw runtimeException.registerFunctionCall(
         this.getFunctionName(), this.getSourceFileName(), this.getSourceLineNumber()
@@ -64,12 +61,6 @@ public class ListExpression extends AST {
 
   public String getFunctionName() {
     return this.getFunction().getName();
-  }
-
-  public interpres.language.values.List getValue() {
-    return new interpres.language.values.List(
-      this.items.stream().collect(Collectors.toList())
-    );
   }
 
   private Symbol getFunction() {

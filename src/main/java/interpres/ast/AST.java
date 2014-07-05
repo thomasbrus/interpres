@@ -2,14 +2,13 @@ package interpres.ast;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.io.PrintStream;
 
 import interpres.SourceLocation;
-import interpres.AsInstructionSequence;
-
 import interpres.language.DefinitionTable;
-import interpres.language.values.Value;
 
-public abstract class AST implements AsInstructionSequence {
+public abstract class AST implements Iterable<java.lang.String> {
   private SourceLocation sourceLocation;
 
   public AST() {
@@ -20,7 +19,7 @@ public abstract class AST implements AsInstructionSequence {
     this.sourceLocation = sourceLocation;
   }
 
-  public abstract AsInstructionSequence evaluate(DefinitionTable definitionTable);
+  public abstract AST evaluate(DefinitionTable definitionTable);
 
   public SourceLocation getSourceLocation() {
     return this.sourceLocation;
@@ -34,12 +33,19 @@ public abstract class AST implements AsInstructionSequence {
     return this.sourceLocation.getFileName();
   }
 
-  public AsInstructionSequence quote() {
-    return this;
+  public List<java.lang.String> instructionSequence() {
+    // return this.getValue().instructionSequence();
+    return null;
   }
 
-  public List<java.lang.String> instructionSequence() {
-    return this.getValue().instructionSequence();
+  public Iterator<java.lang.String> iterator() {
+    return this.instructionSequence().iterator();
+  }
+
+  public void printInstructionSequence(PrintStream printStream) {
+    for (java.lang.String bytecode : this.instructionSequence()) {
+      printStream.println(bytecode);
+    }
   }
 
   public boolean isQuotedSymbol() {

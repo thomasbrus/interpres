@@ -1,23 +1,26 @@
 package interpres.language.definitions.core;
 
-import interpres.AsInstructionSequence;
-import interpres.language.definitions.Definition;
+import java.util.Collections;
 
-import interpres.language.values.Value;
-import interpres.language.values.Symbol;
-import interpres.language.values.Lambda;
-import interpres.language.values.List;
+
+
+import interpres.ast.AST;
+import interpres.ast.LambdaExpression;
+import interpres.ast.ListExpression;
+import interpres.ast.Symbol;
+
+import interpres.language.definitions.Definition;
 
 public class Define extends Definition {
 
   public Define() {
-    super("core.define", new Lambda((definitionTable, arguments) -> {
-      Symbol nameSymbol = (Symbol) arguments.get(0).evaluate(definitionTable).getValue();
-      AsInstructionSequence value = arguments.get(1).evaluate(definitionTable);
-      definitionTable.define(nameSymbol.getIntern(), value);
-      // TODO: Fix me
-      return List.buildEmpty();
+    super("core.define", new LambdaExpression((definitionTable, arguments) -> {
+      Symbol symbol = (Symbol) arguments.get(0).evaluate(definitionTable);
+      AST value = arguments.get(1).evaluate(definitionTable);
+      definitionTable.define(symbol.getName(), value);
+      return new ListExpression(Collections.emptyList());
     }));
   }
 
 }
+

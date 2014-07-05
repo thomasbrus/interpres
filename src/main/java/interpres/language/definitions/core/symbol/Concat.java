@@ -4,24 +4,23 @@ import java.util.List;
 import java.util.ArrayList;
 
 import interpres.ast.AST;
-import interpres.language.definitions.Definition;
+import interpres.ast.LambdaExpression;
+import interpres.ast.Symbol;
 
-import interpres.language.values.Value;
-import interpres.language.values.Lambda;
-import interpres.language.values.Symbol;
+import interpres.language.definitions.Definition;
 
 public class Concat extends Definition {
 
   public Concat() {
-    super("core.symbol.concat", new Lambda((definitionTable, arguments) -> {
-      List<String> strings = new ArrayList<String>();
+    super("core.symbol.concat", new LambdaExpression((definitionTable, arguments) -> {
+      List<String> symbolNames = new ArrayList<String>();
 
       for (AST argument : arguments) {
-        Symbol concatenable = (Symbol) argument.evaluate(definitionTable).getValue();
-        strings.add(concatenable.getIntern());
+        Symbol concatenable = (Symbol) argument.evaluate(definitionTable);
+        symbolNames.add(concatenable.getName());
       }
 
-      return new interpres.ast.Symbol(String.join("", strings));
+      return new Symbol(String.join("", symbolNames));
     }));
   }
 

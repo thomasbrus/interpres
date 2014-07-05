@@ -2,16 +2,15 @@ package interpres.language.definitions.asm;
 
 import java.util.Collections;
 
+import interpres.ast.LambdaExpression;
+import interpres.ast.ListExpression;
 import interpres.language.definitions.Definition;
-
-import interpres.language.values.List;
-import interpres.language.values.Lambda;
 
 public class Header extends Definition {
 
   public Header() {
-    super("asm.header", new Lambda((definitionTable, arguments) -> {
-      return new List(Collections.emptyList());
+    super("asm.header", new LambdaExpression((definitionTable, arguments) -> {
+      return new ListExpression(Collections.emptyList());
     }));
   }
 

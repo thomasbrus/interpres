@@ -4,26 +4,23 @@ import java.util.List;
 import java.util.ArrayList;
 
 import interpres.ast.AST;
-import interpres.ast.StringLiteral;
+import interpres.ast.StringValue;
+import interpres.ast.LambdaExpression;
 
 import interpres.language.definitions.Definition;
-
-import interpres.language.values.Value;
-import interpres.language.values.Lambda;
-import interpres.language.values.String;
 
 public class Concat extends Definition {
 
   public Concat() {
-    super("core.string.concat", new Lambda((definitionTable, arguments) -> {
+    super("core.string.concat", new LambdaExpression((definitionTable, arguments) -> {
       List<java.lang.String> strings = new ArrayList<java.lang.String>();
 
       for (AST argument : arguments) {
-        String concatenable = (String) argument.evaluate(definitionTable).getValue();
+        StringValue concatenable = (StringValue) argument.evaluate(definitionTable);
         strings.add(concatenable.getLiteral());
       }
 
-      return new StringLiteral(java.lang.String.join("", strings));
+      return new StringValue(java.lang.String.join("", strings));
     }));
   }
 

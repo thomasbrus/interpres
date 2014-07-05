@@ -2,26 +2,20 @@ package interpres.language.definitions.core;
 
 import java.util.Collections;
 
-import interpres.ast.Symbol;
-import interpres.ast.AST;
+import interpres.ast.LambdaExpression;
 import interpres.ast.ListExpression;
+import interpres.ast.IntegerValue;
 
 import interpres.language.definitions.Definition;
-
-import interpres.language.values.Value;
-import interpres.language.values.Lambda;
-import interpres.language.values.Integer;
-import interpres.language.values.String;
-import interpres.language.values.List;
 
 public class Repeat extends Definition {
 
   public Repeat() {
-    super("core.repeat", new Lambda((definitionTable, arguments) -> {
-      Integer countValue = (Integer) arguments.get(0).evaluate(definitionTable).getValue();
+    super("core.repeat", new LambdaExpression((definitionTable, arguments) -> {
+      IntegerValue countLiteral = (IntegerValue) arguments.get(0).evaluate(definitionTable);
 
       return ListExpression.buildFunctionCall(
-        "core.list", Collections.nCopies(countValue.getRepresentation(), arguments.get(1))
+        "core.list", Collections.nCopies(countLiteral.getValue(), arguments.get(1))
       ).evaluate(definitionTable);
     }));
   }

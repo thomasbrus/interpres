@@ -2,7 +2,6 @@ package interpres.language.invocations;
 
 import java.util.List;
 
-import interpres.AsInstructionSequence;
 import interpres.ast.AST;
 import interpres.language.DefinitionTable;
 
@@ -23,6 +22,6 @@ public abstract class Invocation {
     return this.definitionTable;
   }
 
-  public abstract AsInstructionSequence invoke();
+  public abstract AST invoke();
 }
 
