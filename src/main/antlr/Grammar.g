@@ -32,6 +32,12 @@ tokens {
   package interpres;
 }
 
+@members {
+  public void emitErrorMessage(String message) {
+    throw new RuntimeException(message);
+  }
+}
+
 parse: program EOF -> program;
 
 // Parser rules
