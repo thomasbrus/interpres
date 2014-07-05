@@ -4,12 +4,12 @@ import java.util.List;
 import java.util.ArrayList;
 
 import interpres.SourceLocation;
-import interpres.AsBytecode;
+import interpres.AsInstructionSequence;
 
 import interpres.language.DefinitionTable;
 import interpres.language.values.Value;
 
-public abstract class AST implements AsBytecode {
+public abstract class AST implements AsInstructionSequence {
   private SourceLocation sourceLocation;
 
   public AST() {
@@ -20,7 +20,7 @@ public abstract class AST implements AsBytecode {
     this.sourceLocation = sourceLocation;
   }
 
-  public abstract AsBytecode evaluate(DefinitionTable definitionTable);
+  public abstract AsInstructionSequence evaluate(DefinitionTable definitionTable);
 
   public SourceLocation getSourceLocation() {
     return this.sourceLocation;
@@ -34,7 +34,7 @@ public abstract class AST implements AsBytecode {
     return this.sourceLocation.getFileName();
   }
 
-  public AsBytecode quote() {
+  public AsInstructionSequence quote() {
     return this;
   }
 
@@ -42,7 +42,7 @@ public abstract class AST implements AsBytecode {
     throw new UnsupportedOperationException("Unquoting is not supported for " + this.getClass());
   }
 
-  public List<java.lang.String> bytecodeSequence() {
+  public List<java.lang.String> instructionSequence() {
     return new ArrayList<java.lang.String>();
   }
 

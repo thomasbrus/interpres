@@ -3,7 +3,7 @@ package interpres.language;
 import java.util.Arrays;
 import org.apache.commons.lang3.StringUtils;
 
-import interpres.AsBytecode;
+import interpres.AsInstructionSequence;
 
 import interpres.ast.Symbol;
 import interpres.ast.ListExpression;
@@ -25,7 +25,7 @@ public class SymbolResolver {
     this.definitionTable = definitionTable;
   }
 
-  public AsBytecode resolve(Symbol symbol) {
+  public AsInstructionSequence resolve(Symbol symbol) {
     if (definitionTable.contains(symbol))
       return definitionTable.lookup(symbol);
 

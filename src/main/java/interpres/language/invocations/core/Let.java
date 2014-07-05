@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Iterator;
 import java.util.stream.Collectors;
 
-import interpres.AsBytecode;
+import interpres.AsInstructionSequence;
 
 import interpres.ast.AST;
 import interpres.ast.Symbol;
@@ -23,11 +23,11 @@ public class Let extends Invocation {
     super(definitionTable, arguments);
   }
 
-  public AsBytecode invoke() {
+  public AsInstructionSequence invoke() {
     this.getDefinitionTable().enterScope();
 
     this.bindLocals();
-    List<AsBytecode> evaluatedExpressions = this.evaluateExpressions();
+    List<AsInstructionSequence> evaluatedExpressions = this.evaluateExpressions();
 
     this.getDefinitionTable().leaveScope();
 
@@ -39,12 +39,12 @@ public class Let extends Invocation {
 
     while (localBindingsIterator.hasNext()) {
       String localBindingName = ((Symbol) localBindingsIterator.next()).getName();
-      AsBytecode localBindingValue = localBindingsIterator.next().evaluate(this.getDefinitionTable());
+      AsInstructionSequence localBindingValue = localBindingsIterator.next().evaluate(this.getDefinitionTable());
       this.getDefinitionTable().bind(localBindingName, localBindingValue);
     }
   }
 
-  private List<AsBytecode> evaluateExpressions() {
+  private List<AsInstructionSequence> evaluateExpressions() {
     return this.getExpressionsAST().stream().map(expression ->
       expression.evaluate(this.getDefinitionTable())
     ).collect(Collectors.toList());

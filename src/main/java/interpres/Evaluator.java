@@ -23,15 +23,15 @@ public class Evaluator {
     this.sourceFileName = sourceFileName;
   }
 
-  public AsBytecode evaluate(InputStream inputStream) {
+  public AsInstructionSequence evaluate(InputStream inputStream) {
     AST ast = this.transform(this.parse(inputStream));
     return ast.evaluate(this.definitionTable);
   }
 
-  public AsBytecode evaluateWithLayout(InputStream inputStream) {
-    AsBytecode body = this.evaluate(inputStream);
-    AsBytecode header = this.evaluateHeader();
-    AsBytecode footer = this.evaluateFooter();
+  public AsInstructionSequence evaluateWithLayout(InputStream inputStream) {
+    AsInstructionSequence body = this.evaluate(inputStream);
+    AsInstructionSequence header = this.evaluateHeader();
+    AsInstructionSequence footer = this.evaluateFooter();
     return new List(Arrays.asList(header, body, footer));
   }
 
@@ -69,11 +69,11 @@ public class Evaluator {
     }
   }
 
-  private AsBytecode evaluateHeader() {
+  private AsInstructionSequence evaluateHeader() {
     return ListExpression.buildFunctionCall("asm.header").evaluate(this.definitionTable);
   }
 
-  private AsBytecode evaluateFooter() {
+  private AsInstructionSequence evaluateFooter() {
     return ListExpression.buildFunctionCall("asm.footer").evaluate(this.definitionTable);
   }
 }

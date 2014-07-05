@@ -1,6 +1,6 @@
 package interpres.ast;
 
-import interpres.AsBytecode;
+import interpres.AsInstructionSequence;
 
 import interpres.language.DefinitionTable;
 import interpres.language.SymbolResolver;
@@ -13,7 +13,7 @@ public class Symbol extends AST {
     this.name = name;
   }
 
-  public AsBytecode evaluate(DefinitionTable definitionTable) {
+  public AsInstructionSequence evaluate(DefinitionTable definitionTable) {
      return new SymbolResolver(definitionTable).resolve(this);
   }
 

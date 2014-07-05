@@ -16,7 +16,7 @@ public class Symbol extends Value {
     return this.intern;
   }
 
-  public List<java.lang.String> bytecodeSequence() {
+  public List<java.lang.String> instructionSequence() {
     return Arrays.asList(this.intern);
   }
 

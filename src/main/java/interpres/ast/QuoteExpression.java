@@ -3,7 +3,7 @@ package interpres.ast;
 import java.util.Arrays;
 import java.util.List;
 
-import interpres.AsBytecode;
+import interpres.AsInstructionSequence;
 import interpres.language.DefinitionTable;
 import interpres.language.values.Value;
 
@@ -14,7 +14,7 @@ public class QuoteExpression extends AST {
     this.expression = expression;
   }
 
-  public AsBytecode evaluate(DefinitionTable definitionTable) {
+  public AsInstructionSequence evaluate(DefinitionTable definitionTable) {
     return this;
   }
 

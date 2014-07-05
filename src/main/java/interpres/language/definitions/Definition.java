@@ -1,24 +1,24 @@
 package interpres.language.definitions;
 
-import interpres.AsBytecode;
+import interpres.AsInstructionSequence;
 
 public class Definition {
   private String name;
-  private AsBytecode value;
+  private AsInstructionSequence value;
   private int scopeLevel;
 
-  public Definition(String name, AsBytecode value, int scopeLevel) {
+  public Definition(String name, AsInstructionSequence value, int scopeLevel) {
     this.name = name;
     this.value = value;
     this.scopeLevel = scopeLevel;
   }
 
-  public Definition(String name, AsBytecode value) {
+  public Definition(String name, AsInstructionSequence value) {
     this(name, value, 0);
   }
 
   public String getName() { return this.name; }
-  public AsBytecode getValue() { return this.value; }
+  public AsInstructionSequence getValue() { return this.value; }
   public int getScopeLevel() { return this.scopeLevel; }
 }
 

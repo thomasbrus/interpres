@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.stream.Collectors;;
 
-import interpres.AsBytecode;
+import interpres.AsInstructionSequence;
 
 import interpres.ast.AST;
 import interpres.ast.VirtualExpression;

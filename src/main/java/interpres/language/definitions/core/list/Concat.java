@@ -2,7 +2,7 @@ package interpres.language.definitions.core.list;
 
 import java.util.ArrayList;
 
-import interpres.AsBytecode;
+import interpres.AsInstructionSequence;
 
 import interpres.ast.AST;
 import interpres.language.definitions.Definition;
@@ -15,7 +15,7 @@ public class Concat extends Definition {
 
   public Concat() {
     super("core.list.concat", new Lambda((definitionTable, arguments) -> {
-      java.util.List<AsBytecode> concatenatedItems = new ArrayList<AsBytecode>();
+      java.util.List<AsInstructionSequence> concatenatedItems = new ArrayList<AsInstructionSequence>();
 
       for (AST argument : arguments) {
         List listValue = (List) argument.evaluate(definitionTable);

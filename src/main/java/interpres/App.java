@@ -38,7 +38,7 @@ public class App {
   }
 
   public void run() throws IOException, RecognitionException {
-    evaluator.evaluateWithLayout(this.inputStream).printBytecode(this.outputStream);
+    evaluator.evaluateWithLayout(this.inputStream).printInstructionSequence(this.outputStream);
   }
 
   public static void main(String[] args) throws IOException, RecognitionException {

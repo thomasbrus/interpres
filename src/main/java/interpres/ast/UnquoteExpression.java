@@ -2,7 +2,7 @@ package interpres.ast;
 
 import java.util.Arrays;
 
-import interpres.AsBytecode;
+import interpres.AsInstructionSequence;
 import interpres.language.DefinitionTable;
 import interpres.language.values.Value;
 
@@ -13,8 +13,8 @@ public class UnquoteExpression extends AST {
     this.expression = expression;
   }
 
-  public AsBytecode evaluate(DefinitionTable definitionTable) {
-    AsBytecode valueOrAST = this.expression.evaluate(definitionTable);
+  public AsInstructionSequence evaluate(DefinitionTable definitionTable) {
+    AsInstructionSequence valueOrAST = this.expression.evaluate(definitionTable);
 
     if (!(valueOrAST instanceof AST))
       throw new UnsupportedOperationException("Unquoting is not supported for " + valueOrAST);

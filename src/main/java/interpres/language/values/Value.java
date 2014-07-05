@@ -5,12 +5,12 @@ import java.util.List;
 import java.util.ArrayList;
 import java.io.PrintStream;
 
-import interpres.AsBytecode;
+import interpres.AsInstructionSequence;
 import interpres.ast.AST;
 import interpres.language.DefinitionTable;
 
-public abstract class Value implements AsBytecode {
-  public List<java.lang.String> bytecodeSequence() {
+public abstract class Value implements AsInstructionSequence {
+  public List<java.lang.String> instructionSequence() {
     return new ArrayList<java.lang.String>();
   }
 }

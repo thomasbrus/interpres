@@ -3,7 +3,7 @@ package interpres.ast;
 import java.util.List;
 import java.util.ArrayList;
 
-import interpres.AsBytecode;
+import interpres.AsInstructionSequence;
 import interpres.language.DefinitionTable;
 
 import interpres.language.values.Value;
@@ -16,7 +16,7 @@ public class CharacterLiteral extends AST {
     this.representation = representation;
   }
 
-  public AsBytecode evaluate(DefinitionTable definitionTable) {
+  public AsInstructionSequence evaluate(DefinitionTable definitionTable) {
     return ListExpression.buildFunctionCall("asm.loadc", new QuoteExpression(this))
       .evaluate(definitionTable);
   }
