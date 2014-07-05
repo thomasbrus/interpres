@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.ListIterator;
 
 import interpres.ast.AST;
+import interpres.ast.Symbol;
 import interpres.language.values.Value;
 import interpres.language.definitions.Definition;
 
@@ -44,9 +45,17 @@ public class DefinitionTable {
     return null;
   }
 
+  public Value lookup(Symbol symbol) {
+    return this.lookup(symbol.getName());
+  }
+
   public boolean contains(String name) {
     return this.definitions.stream().anyMatch(definition ->
       definition.getName().equals(name));
+  }
+
+  public boolean contains(Symbol symbol) {
+    return this.contains(symbol.getName());
   }
 
   public void enterScope() {
