@@ -24,35 +24,50 @@ public class Evaluator {
     this.sourceFileName = sourceFileName;
   }
 
-  public Value evaluate(InputStream inputStream) throws IOException, RecognitionException {
+  public Value evaluate(InputStream inputStream) {
     AST ast = this.transform(this.parse(inputStream));
     return ast.evaluate(this.definitionTable);
   }
 
-  public Value evaluateWithLayout(InputStream inputStream) throws IOException, RecognitionException {
+  public Value evaluateWithLayout(InputStream inputStream) {
     Value body = this.evaluate(inputStream);
     Value header = this.evaluateHeader();
     Value footer = this.evaluateFooter();
     return new List(Arrays.asList(header, body, footer));
   }
 
-  private CommonTree parse(InputStream inputStream) throws IOException, RecognitionException {
-    // Create a token stream
-    GrammarLexer lexer = new GrammarLexer(new ANTLRInputStream(inputStream));
-    CommonTokenStream tokens = new CommonTokenStream(lexer);
-
+  private CommonTree parse(InputStream inputStream) {
     // Parse the input using the token stream
-    GrammarParser parser = new GrammarParser(tokens);
-    return (CommonTree) parser.parse().getTree();
+    GrammarParser parser = new GrammarParser(this.tokenize(inputStream));
+
+    try {
+      return (CommonTree) parser.parse().getTree();
+    } catch (RecognitionException recognitionException) {
+      throw new RuntimeException(recognitionException);
+    }
   }
 
-  private AST transform(CommonTree tree) throws RecognitionException {
+  private CommonTokenStream tokenize(InputStream inputStream) {
+    try {
+      // Create a token stream
+      GrammarLexer lexer = new GrammarLexer(new ANTLRInputStream(inputStream));
+      return new CommonTokenStream(lexer);
+    } catch (IOException ioException) {
+      throw new RuntimeException(ioException);
+    }
+  }
+
+  private AST transform(CommonTree tree) {
     // Transform the ANTLR tree into an Interpres AST
     CommonTreeNodeStream nodeStream = new CommonTreeNodeStream(tree);
     Transformer transformer = new Transformer(nodeStream, this.sourceFileName);
-    Transformer.transform_return transformReturn = transformer.transform();
 
-    return transformReturn.ast;
+    try {
+      Transformer.transform_return transformReturn = transformer.transform();
+      return transformReturn.ast;
+    } catch (RecognitionException recognitionException) {
+      throw new RuntimeException(recognitionException);
+    }
   }
 
   private Value evaluateHeader() {
