@@ -25,9 +25,7 @@ public class Map extends Invocation {
   }
 
   public ListExpression invoke() {
-    System.out.println("Invoking lambda, with: " + this.list);
     return new ListExpression(this.list.getItems().stream().map(item -> {
-      System.out.println("Current item: " + item);
       return this.lambda.getFunction().apply(
         this.getDefinitionTable(), Arrays.asList(new QuoteExpression(item))
       );
