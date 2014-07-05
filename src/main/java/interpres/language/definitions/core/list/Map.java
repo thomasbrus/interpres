@@ -13,8 +13,8 @@ public class Map extends Definition {
 
   public Map() {
     super("core.list.map", new LambdaExpression((definitionTable, arguments) ->
-      new interpres.language.invocations.core.list.Map(definitionTable, arguments).invoke()
-    ));
+      new interpres.language.invocations.core.list.Map(definitionTable, arguments).invoke(),
+    2));
   }
 
 }

@@ -16,7 +16,7 @@ public class Size extends Definition {
       ListExpression list = (ListExpression) arguments.get(0).evaluate(definitionTable);
       // FIXME: Should use #getItems(), use (core.list.flatten) to get instruction size
       return new IntegerValue(list.instructionSequence().size());
-    }));
+    }, 1));
   }
 
 }

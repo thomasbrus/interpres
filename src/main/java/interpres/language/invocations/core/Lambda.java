@@ -35,7 +35,7 @@ public class Lambda extends Invocation {
       letArguments.addAll(this.getExpressionASTs());
 
       return ListExpression.buildFunctionCall("core.let", letArguments).evaluate(this.getDefinitionTable());
-    });
+    }, this.getFormalArgumentAST().getItems().size());
   }
 
   private List<AST> getExpressionASTs() {

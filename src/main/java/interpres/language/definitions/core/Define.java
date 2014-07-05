@@ -17,7 +17,7 @@ public class Define extends Definition {
       AST value = arguments.get(1).evaluate(definitionTable);
       definitionTable.define(symbol.getName(), value);
       return new ListExpression(Collections.emptyList());
-    }));
+    }, 2));
   }
 
 }

@@ -11,7 +11,7 @@ public class Footer extends Definition {
   public Footer() {
     super("asm.footer", new LambdaExpression((definitionTable, arguments) -> {
       return new ListExpression(Collections.emptyList());
-    }));
+    }, 0));
   }
 
 }

@@ -11,7 +11,7 @@ public class Unquote extends Definition {
   public Unquote() {
     super("core.unquote", new LambdaExpression((definitionTable, arguments) -> {
       return new UnquoteExpression(arguments.get(0)).evaluate(definitionTable);
-    }));
+    }, 1));
   }
 
 }

@@ -18,7 +18,7 @@ public class Concat extends Definition {
       }
 
       return new ListExpression(concatenatedItems);
-    }));
+    }, Integer.MAX_VALUE));
   }
 
 }

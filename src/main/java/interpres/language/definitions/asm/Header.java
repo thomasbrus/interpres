@@ -11,7 +11,7 @@ public class Header extends Definition {
   public Header() {
     super("asm.header", new LambdaExpression((definitionTable, arguments) -> {
       return new ListExpression(Collections.emptyList());
-    }));
+    }, 0));
   }
 
 }

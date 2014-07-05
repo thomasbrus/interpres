@@ -23,7 +23,7 @@ public class StringToList extends Definition {
       }
 
       return new ListExpression(characters);
-    }));
+    }, 1));
   }
 
 }

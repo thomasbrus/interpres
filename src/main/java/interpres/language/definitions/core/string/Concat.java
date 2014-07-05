@@ -21,7 +21,7 @@ public class Concat extends Definition {
       }
 
       return new StringValue(java.lang.String.join("", strings));
-    }));
+    }, Integer.MAX_VALUE));
   }
 
 }

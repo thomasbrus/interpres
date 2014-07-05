@@ -13,7 +13,7 @@ public class Quote extends Definition {
   public Quote() {
     super("core.quote", new LambdaExpression((definitionTable, arguments) -> {
       return new QuoteExpression(arguments.get(0)).evaluate(definitionTable);
-    }));
+    }, 1));
   }
 
 }

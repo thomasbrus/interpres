@@ -15,7 +15,7 @@ public class SymbolToString extends Definition {
     super("core.symbol-to-string", new LambdaExpression((definitionTable, arguments) -> {
       Symbol symbolValue = (Symbol) arguments.get(0).evaluate(definitionTable);
       return new StringValue(symbolValue.getName());
-    }));
+    }, 1));
   }
 
 }

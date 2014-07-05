@@ -7,8 +7,8 @@ public class Let extends Definition {
 
   public Let() {
     super("core.let", new LambdaExpression((definitionTable, arguments) ->
-      new interpres.language.invocations.core.Let(definitionTable, arguments).invoke()
-    ));
+      new interpres.language.invocations.core.Let(definitionTable, arguments).invoke(),
+    2));
   }
 
 }

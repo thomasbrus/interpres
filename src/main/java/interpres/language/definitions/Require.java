@@ -11,8 +11,8 @@ public class Require extends Definition {
 
   public Require(Path basePath) {
     super("require", new LambdaExpression((definitionTable, arguments) ->
-      new interpres.language.invocations.Require(definitionTable, arguments, basePath).invoke()
-    ));
+      new interpres.language.invocations.Require(definitionTable, arguments, basePath).invoke(),
+    1));
   }
 
   public Require(String basePath) {

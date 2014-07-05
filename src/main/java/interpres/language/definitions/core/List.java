@@ -20,7 +20,7 @@ public class List extends Definition {
       }
 
       return new ListExpression(listItems);
-    }));
+    }, Integer.MAX_VALUE));
   }
 
 }

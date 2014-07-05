@@ -12,7 +12,7 @@ public class Add extends Definition {
       IntegerValue firstInteger = (IntegerValue) arguments.get(0).evaluate(definitionTable);
       IntegerValue secondInteger = (IntegerValue) arguments.get(1).evaluate(definitionTable);
       return new IntegerValue(firstInteger.getValue() + secondInteger.getValue());
-    }));
+    }, 2));
   }
 
 }

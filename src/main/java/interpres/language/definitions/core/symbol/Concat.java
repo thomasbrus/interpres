@@ -21,7 +21,7 @@ public class Concat extends Definition {
       }
 
       return new Symbol(String.join("", symbolNames));
-    }));
+    }, Integer.MAX_VALUE));
   }
 
 }
