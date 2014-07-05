@@ -12,7 +12,6 @@ import interpres.ast.AST;
 import interpres.ast.ListExpression;
 
 import interpres.language.DefinitionTable;
-import interpres.language.values.List;
 
 public class Evaluator {
   private DefinitionTable definitionTable;
@@ -23,16 +22,16 @@ public class Evaluator {
     this.sourceFileName = sourceFileName;
   }
 
-  public AsInstructionSequence evaluate(InputStream inputStream) {
+  public AST evaluate(InputStream inputStream) {
     AST ast = this.transform(this.parse(inputStream));
-    return ast.evaluate(this.definitionTable);
+    return (AST) ast.evaluate(this.definitionTable);
   }
 
-  public AsInstructionSequence evaluateWithLayout(InputStream inputStream) {
-    AsInstructionSequence body = this.evaluate(inputStream);
-    AsInstructionSequence header = this.evaluateHeader();
-    AsInstructionSequence footer = this.evaluateFooter();
-    return new List(Arrays.asList(header, body, footer));
+  public AST evaluateWithLayout(InputStream inputStream) {
+    AST body = (AST) this.evaluate(inputStream);
+    AST header = this.evaluateHeader();
+    AST footer = this.evaluateFooter();
+    return new ListExpression(Arrays.asList(header, body, footer));
   }
 
   private CommonTree parse(InputStream inputStream) {
@@ -69,11 +68,11 @@ public class Evaluator {
     }
   }
 
-  private AsInstructionSequence evaluateHeader() {
+  private AST evaluateHeader() {
     return ListExpression.buildFunctionCall("asm.header").evaluate(this.definitionTable);
   }
 
-  private AsInstructionSequence evaluateFooter() {
+  private AST evaluateFooter() {
     return ListExpression.buildFunctionCall("asm.footer").evaluate(this.definitionTable);
   }
 }

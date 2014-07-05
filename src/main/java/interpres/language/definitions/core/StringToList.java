@@ -3,31 +3,28 @@ package interpres.language.definitions.core;
 import java.util.List;
 import java.util.ArrayList;
 
-import interpres.AsInstructionSequence;
 
-import interpres.ast.Symbol;
+
 import interpres.ast.AST;
+import interpres.ast.LambdaExpression;
+import interpres.ast.CharacterValue;
+import interpres.ast.StringValue;
+import interpres.ast.ListExpression;
 
 import interpres.language.definitions.Definition;
-
-import interpres.language.values.Value;
-import interpres.language.values.Lambda;
-import interpres.language.values.Integer;
-import interpres.language.values.String;
-import interpres.language.values.Character;
 
 public class StringToList extends Definition {
 
   public StringToList() {
-    super("core.string-to-list", new Lambda((definitionTable, arguments) -> {
-      List<AsInstructionSequence> characters = new ArrayList<AsInstructionSequence>();
-      String stringValue = (String) arguments.get(0).evaluate(definitionTable).getValue();
+    super("core.string-to-list", new LambdaExpression((definitionTable, arguments) -> {
+      List<AST> characters = new ArrayList<AST>();
+      StringValue string = (StringValue) arguments.get(0).evaluate(definitionTable);
 
-      for (char c : stringValue.getLiteral().toCharArray()) {
-        characters.add(new Character(c));
+      for (char c : string.getLiteral().toCharArray()) {
+        characters.add(new CharacterValue(c));
       }
 
-      return new interpres.language.values.List(characters);
+      return new ListExpression(characters);
     }));
   }
 

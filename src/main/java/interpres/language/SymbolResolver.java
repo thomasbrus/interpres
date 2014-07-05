@@ -3,14 +3,12 @@ package interpres.language;
 import java.util.Arrays;
 import org.apache.commons.lang3.StringUtils;
 
-import interpres.AsInstructionSequence;
 
+
+import interpres.ast.AST;
 import interpres.ast.Symbol;
 import interpres.ast.ListExpression;
-import interpres.ast.QuoteExpression;
-
-import interpres.language.values.Value;
-import interpres.language.values.Integer;
+import interpres.ast.IntegerValue;
 
 public class SymbolResolver {
   private DefinitionTable definitionTable;
@@ -25,14 +23,12 @@ public class SymbolResolver {
     this.definitionTable = definitionTable;
   }
 
-  public AsInstructionSequence resolve(Symbol symbol) {
+  public AST resolve(Symbol symbol) {
     if (definitionTable.contains(symbol))
       return definitionTable.lookup(symbol);
 
     if (StringUtils.isNumeric(symbol.getName()))
-      return ListExpression.buildFunctionCall(
-        "asm.loadl", new QuoteExpression(symbol)
-      ).evaluate(definitionTable);
+      return new IntegerValue(Integer.parseInt(symbol.getName()));
 
     throw new IrresolvableSymbolException(symbol);
   }

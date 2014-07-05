@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import interpres.ast.AST;
+import interpres.ast.LambdaExpression;
 import interpres.ast.ListExpression;
 
 import interpres.language.DefinitionTable;
 import interpres.language.FormalArgumentsList;
 
-import interpres.language.values.Value;
 import interpres.language.invocations.Invocation;
 
 public class Lambda extends Invocation {
@@ -18,8 +18,8 @@ public class Lambda extends Invocation {
     super(definitionTable, arguments);
   }
 
-  public Value invoke() {
-    return new interpres.language.values.Lambda((lambdaDefinitionTable, actualArguments) -> {
+  public AST invoke() {
+    return new interpres.ast.LambdaExpression((lambdaDefinitionTable, actualArguments) -> {
       List<AST> letArguments = new ArrayList<AST>();
       List<AST> localBindingASTs = new ArrayList<AST>();
 

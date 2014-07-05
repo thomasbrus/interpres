@@ -16,7 +16,6 @@ import java.nio.file.Paths;
 import interpres.ast.AST;
 
 import interpres.language.DefinitionTable;
-import interpres.language.values.Value;
 
 public class App {
   private Evaluator evaluator;

@@ -4,10 +4,6 @@ import java.util.Arrays;
 
 import interpres.language.DefinitionTable;
 
-import interpres.language.values.Value;
-import interpres.language.values.String;
-import interpres.language.values.List;
-
 public class Program extends AST {
   private java.util.List<AST> expressions;
 
@@ -15,8 +11,8 @@ public class Program extends AST {
     this.expressions = expressions;
   }
 
-  public List evaluate(DefinitionTable definitionTable) {
-    return (List) ListExpression.buildFunctionCall("core.list", this.expressions)
+  public ListExpression evaluate(DefinitionTable definitionTable) {
+    return (ListExpression) ListExpression.buildFunctionCall("core.list", this.expressions)
       .evaluate(definitionTable);
   }
 }

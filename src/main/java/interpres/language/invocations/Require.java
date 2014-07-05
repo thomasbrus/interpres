@@ -13,16 +13,15 @@ import java.nio.file.Path;
 import org.antlr.runtime.RecognitionException;
 
 import interpres.Evaluator;
-import interpres.AsInstructionSequence;
+
 
 import interpres.ast.AST;
-import interpres.ast.StringLiteral;
+import interpres.ast.StringValue;
+import interpres.ast.LambdaExpression;
 
 import interpres.language.definitions.Definition;
 import interpres.language.DefinitionTable;
 import interpres.language.RuntimeException;
-
-import interpres.language.values.Lambda;
 
 public class Require extends Invocation {
   private Path basePath;
@@ -38,24 +37,24 @@ public class Require extends Invocation {
     this.basePath = basePath;
   }
 
-  public AsInstructionSequence invoke() {
+  public AST invoke() {
     try {
-      return this.evaluateFile(new File(this.resolvedFilename()));
+      return (AST) this.evaluateFile(new File(this.resolvedFilename()));
     } catch (java.io.FileNotFoundException e) {
       throw new FileNotFoundException(e.getMessage());
     }
   }
 
   public String getFileName() {
-    return ((StringLiteral) this.getArguments().get(0)).getLiteral();
+    return ((StringValue) this.getArguments().get(0)).getLiteral();
   }
 
   public String resolvedFilename() {
     return this.basePath.resolve(this.getFileName()).toString();
   }
 
-  private AsInstructionSequence evaluateFile(File file) throws java.io.FileNotFoundException {
-    AsInstructionSequence resultValue;
+  private AST evaluateFile(File file) throws java.io.FileNotFoundException {
+    AST resultValue;
     FileInputStream fileInputStream = new FileInputStream(this.resolvedFilename());
 
     this.getDefinitionTable().define(new interpres.language.definitions.Require(file.getParent()));

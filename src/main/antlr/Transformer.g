@@ -62,13 +62,13 @@ list returns [AST ast]
 literal returns [AST ast]
   : ^(STRING string=String) {
     String literal = StringEscapeUtils.unescapeJava($string.text);
-    $ast = new StringLiteral(literal.substring(1, literal.length() - 1));
+    $ast = new StringValue(literal.substring(1, literal.length() - 1));
   }
   | ^(SYMBOL symbol=Symbol) {
     $ast = new Symbol($symbol.text);
   }
   | ^(CHARACTER character=Character) {
-    $ast = new CharacterLiteral($character.text.charAt(1));
+    $ast = new CharacterValue($character.text.charAt(1));
   }
   ;
 

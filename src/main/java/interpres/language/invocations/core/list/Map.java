@@ -4,34 +4,31 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.stream.Collectors;;
 
-import interpres.AsInstructionSequence;
+
 
 import interpres.ast.AST;
-import interpres.ast.VirtualExpression;
+import interpres.ast.LambdaExpression;
+import interpres.ast.ListExpression;
 
 import interpres.language.definitions.Definition;
 import interpres.language.DefinitionTable;
 
-import interpres.language.values.Value;
-import interpres.language.values.Lambda;
-import interpres.language.values.List;
-
 import interpres.language.invocations.Invocation;
 
 public class Map extends Invocation {
-  private Lambda lambdaValue;
-  private List listValue;
+  private LambdaExpression lambda;
+  private ListExpression list;
 
   public Map(DefinitionTable definitionTable, java.util.List<AST> arguments) {
     super(definitionTable, arguments);
-    this.lambdaValue = (Lambda) this.getLambdaAST().evaluate(definitionTable).getValue();
-    this.listValue = (List) this.getListAST().evaluate(definitionTable).getValue();
+    this.lambda = (LambdaExpression) this.getLambdaAST().evaluate(definitionTable);
+    this.list = (ListExpression) this.getListAST().evaluate(definitionTable);
   }
 
-  public List invoke() {
-    return new List(this.listValue.getItems().stream().map(item ->
-      this.lambdaValue.getFunction().apply(
-        this.getDefinitionTable(), Arrays.asList(new VirtualExpression(item))
+  public ListExpression invoke() {
+    return new ListExpression(this.list.getItems().stream().map(item ->
+      this.lambda.getFunction().apply(
+        this.getDefinitionTable(), Arrays.asList(item)
       )
     ).collect(Collectors.toList()));
   }

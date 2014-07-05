@@ -3,20 +3,19 @@ package interpres.language.definitions.core.list;
 import java.util.Collections;
 
 import interpres.ast.AST;
-import interpres.language.definitions.Definition;
+import interpres.ast.LambdaExpression;
+import interpres.ast.ListExpression;
 
-import interpres.language.values.Value;
-import interpres.language.values.Lambda;
-import interpres.language.values.List;
+import interpres.language.definitions.Definition;
 
 public class Reverse extends Definition {
 
   public Reverse() {
-    super("core.list.reverse", new Lambda((definitionTable, arguments) -> {
-      List reversableValue = (List) arguments.get(0).evaluate(definitionTable).getValue();
+    super("core.list.reverse", new LambdaExpression((definitionTable, arguments) -> {
+      ListExpression reversableList = (ListExpression) arguments.get(0).evaluate(definitionTable);
       // FIXME: Shouldn't modify original list (?)
-      Collections.reverse(reversableValue.getItems());
-      return reversableValue;
+      Collections.reverse(reversableList.getItems());
+      return reversableList;
     }));
   }
 

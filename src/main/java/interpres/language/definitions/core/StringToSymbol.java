@@ -5,17 +5,16 @@ import java.util.ArrayList;
 
 import interpres.ast.AST;
 import interpres.ast.Symbol;
+import interpres.ast.StringValue;
+import interpres.ast.LambdaExpression;
 
 import interpres.language.definitions.Definition;
-
-import interpres.language.values.Lambda;
-import interpres.language.values.String;
 
 public class StringToSymbol extends Definition {
 
   public StringToSymbol() {
-    super("core.string-to-symbol", new Lambda((definitionTable, arguments) -> {
-      String stringValue = (String) arguments.get(0).evaluate(definitionTable).getValue();
+    super("core.string-to-symbol", new LambdaExpression((definitionTable, arguments) -> {
+      StringValue stringValue = (StringValue) arguments.get(0).evaluate(definitionTable);
       return new Symbol(stringValue.getLiteral());
     }));
   }
