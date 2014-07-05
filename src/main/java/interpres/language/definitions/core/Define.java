@@ -1,6 +1,6 @@
 package interpres.language.definitions.core;
 
-import interpres.AsBytecode;
+import interpres.AsInstructionSequence;
 import interpres.language.definitions.Definition;
 
 import interpres.language.values.Value;
@@ -13,7 +13,7 @@ public class Define extends Definition {
   public Define() {
     super("core.define", new Lambda((definitionTable, arguments) -> {
       Symbol nameSymbol = (Symbol) arguments.get(0).evaluate(definitionTable);
-      AsBytecode value = arguments.get(1).evaluate(definitionTable);
+      AsInstructionSequence value = arguments.get(1).evaluate(definitionTable);
       definitionTable.define(nameSymbol.getIntern(), value);
       return List.buildEmpty();
     }));

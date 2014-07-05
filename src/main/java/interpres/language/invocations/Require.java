@@ -13,7 +13,7 @@ import java.nio.file.Path;
 import org.antlr.runtime.RecognitionException;
 
 import interpres.Evaluator;
-import interpres.AsBytecode;
+import interpres.AsInstructionSequence;
 
 import interpres.ast.AST;
 import interpres.ast.StringLiteral;
@@ -38,7 +38,7 @@ public class Require extends Invocation {
     this.basePath = basePath;
   }
 
-  public AsBytecode invoke() {
+  public AsInstructionSequence invoke() {
     try {
       return this.evaluateFile(new File(this.resolvedFilename()));
     } catch (java.io.FileNotFoundException e) {
@@ -54,8 +54,8 @@ public class Require extends Invocation {
     return this.basePath.resolve(this.getFileName()).toString();
   }
 
-  private AsBytecode evaluateFile(File file) throws java.io.FileNotFoundException {
-    AsBytecode resultValue;
+  private AsInstructionSequence evaluateFile(File file) throws java.io.FileNotFoundException {
+    AsInstructionSequence resultValue;
     FileInputStream fileInputStream = new FileInputStream(this.resolvedFilename());
 
     this.getDefinitionTable().define(new interpres.language.definitions.Require(file.getParent()));

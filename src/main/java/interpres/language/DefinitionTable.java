@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.Iterator;
 import java.util.ListIterator;
 
-import interpres.AsBytecode;
+import interpres.AsInstructionSequence;
 
 import interpres.ast.AST;
 import interpres.ast.Symbol;
@@ -16,7 +16,7 @@ public class DefinitionTable {
   private int scopeLevel;
   private LinkedList<Definition> definitions = new LinkedList<Definition>();
 
-  public void define(String name, AsBytecode value) {
+  public void define(String name, AsInstructionSequence value) {
     int insertionIndex = 0;
 
     for (int i = this.definitions.size() - 1; i >= 0; i--) {
@@ -32,11 +32,11 @@ public class DefinitionTable {
     this.define(definition.getName(), definition.getValue());
   }
 
-  public void bind(String name, AsBytecode value) {
+  public void bind(String name, AsInstructionSequence value) {
     this.definitions.addLast(new Definition(name, value, this.scopeLevel));
   }
 
-  public AsBytecode lookup(String name) {
+  public AsInstructionSequence lookup(String name) {
     Iterator<Definition> it = this.definitions.descendingIterator();
 
     while (it.hasNext()) {
@@ -47,7 +47,7 @@ public class DefinitionTable {
     return null;
   }
 
-  public AsBytecode lookup(Symbol symbol) {
+  public AsInstructionSequence lookup(Symbol symbol) {
     return this.lookup(symbol.getName());
   }
 

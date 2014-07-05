@@ -16,7 +16,7 @@ public class String extends Value {
     return this.literal;
   }
 
-  public List<java.lang.String> bytecodeSequence() {
+  public List<java.lang.String> instructionSequence() {
     return Arrays.asList(this.literal);
   }
 

@@ -16,7 +16,7 @@ public class Integer extends Value {
     return this.representation;
   }
 
-  public List<java.lang.String> bytecodeSequence() {
+  public List<java.lang.String> instructionSequence() {
     return Arrays.asList(this.representation.toString());
   }
 

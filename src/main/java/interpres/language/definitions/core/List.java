@@ -2,7 +2,7 @@ package interpres.language.definitions.core;
 
 import java.util.ArrayList;
 
-import interpres.AsBytecode;
+import interpres.AsInstructionSequence;
 
 import interpres.ast.Symbol;
 import interpres.ast.AST;
@@ -15,10 +15,10 @@ public class List extends Definition {
 
   public List() {
     super("core.list", new Lambda((definitionTable, arguments) -> {
-      java.util.List<AsBytecode> listItems = new ArrayList<AsBytecode>();
+      java.util.List<AsInstructionSequence> listItems = new ArrayList<AsInstructionSequence>();
 
       for (AST argument : arguments) {
-        AsBytecode listItemValue = argument.evaluate(definitionTable);
+        AsInstructionSequence listItemValue = argument.evaluate(definitionTable);
         listItems.add(listItemValue);
       }
 
