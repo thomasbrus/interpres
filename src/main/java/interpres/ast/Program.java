@@ -1,7 +1,6 @@
 package interpres.ast;
 
 import java.util.Arrays;
-
 import interpres.language.DefinitionTable;
 
 public class Program extends AST {

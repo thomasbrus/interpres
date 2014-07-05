@@ -1,8 +1,7 @@
 package interpres.ast;
 
 import java.util.List;
-
-
+import java.util.Arrays;
 
 import interpres.language.DefinitionTable;
 import interpres.language.SymbolResolver;
@@ -20,6 +19,10 @@ public class Symbol extends AST {
 
   public String getName() {
     return this.name;
+  }
+
+  public List<String> instructionSequence() {
+    return Arrays.asList(this.name);
   }
 }
 

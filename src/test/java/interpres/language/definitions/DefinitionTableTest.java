@@ -7,22 +7,23 @@ import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import interpres.language.values.Integer;
-import interpres.language.values.Value;
+import interpres.ast.AST;
+import interpres.ast.IntegerValue;
+
 import interpres.language.DefinitionTable;
 
 @RunWith(JUnit4.class)
 public class DefinitionTableTest {
   private DefinitionTable definitionTable;
-  private Value firstValue;
-  private Value secondValue;
-  private Value thirdValue;
+  private AST firstValue;
+  private AST secondValue;
+  private AST thirdValue;
 
   @Before public void setUpEmptyDefinitionTable() {
     this.definitionTable = new DefinitionTable();
-    this.firstValue = new interpres.language.values.Integer(1);
-    this.secondValue = new interpres.language.values.Integer(2);
-    this.thirdValue = new interpres.language.values.Integer(3);
+    this.firstValue = new interpres.ast.IntegerValue(1);
+    this.secondValue = new interpres.ast.IntegerValue(2);
+    this.thirdValue = new interpres.ast.IntegerValue(3);
   }
 
   @Test public void defineAddsADefinition() {

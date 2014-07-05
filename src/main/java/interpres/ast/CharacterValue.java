@@ -1,8 +1,7 @@
 package interpres.ast;
 
 import java.util.List;
-import java.util.ArrayList;
-
+import java.util.Arrays;
 
 import interpres.language.DefinitionTable;
 
@@ -20,6 +19,10 @@ public class CharacterValue extends AST {
 
   public Character getRepresentation() {
     return this.representation;
+  }
+
+  public List<String> instructionSequence() {
+    return Arrays.asList(this.representation.toString());
   }
 }
 

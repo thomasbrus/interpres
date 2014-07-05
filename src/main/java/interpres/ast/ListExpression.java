@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 
 import interpres.SourceLocation;
 
-
 import interpres.language.DefinitionTable;
 import interpres.language.SymbolResolver;
 import interpres.language.RuntimeException;
@@ -63,11 +62,25 @@ public class ListExpression extends AST {
     return this.getFunction().getName();
   }
 
+  public List<String> instructionSequence() {
+    List<java.lang.String> instructionSequence = new ArrayList<String>();
+
+    for (AST item : this.items) {
+      instructionSequence.addAll(item.instructionSequence());
+    }
+
+    return instructionSequence;
+  }
+
   private Symbol getFunction() {
     return (Symbol) this.items.get(0);
   }
 
   private List<AST> getArguments() {
     return this.items.subList(1, this.items.size());
+  }
+
+  public String toString() {
+    return this.items.toString();
   }
 }

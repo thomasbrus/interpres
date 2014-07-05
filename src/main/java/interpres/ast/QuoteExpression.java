@@ -3,7 +3,6 @@ package interpres.ast;
 import java.util.Arrays;
 import java.util.List;
 
-
 import interpres.language.DefinitionTable;
 
 public class QuoteExpression extends AST {
@@ -19,6 +18,10 @@ public class QuoteExpression extends AST {
 
   public AST getExpression() {
     return this.expression;
+  }
+
+  public List<String> instructionSequence() {
+    return Arrays.asList(this.expression.toString());
   }
 }
 
