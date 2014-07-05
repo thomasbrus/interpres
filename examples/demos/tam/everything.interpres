@@ -25,6 +25,7 @@
 
 ; (assign @distance 3) ; => can't reassign constant
 
-(print-int distance)
+(print-int (NEG distance))
+(if (! (&& (> 0 (NEG -1)) true)) (print-str "OK") (print-str "Not OK")) 
 (print-int x)
 

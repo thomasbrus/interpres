@@ -1,0 +1,17 @@
+(core.define @NEG (core.lambda (a)
+    (core.list.concat a @("ineg"))))
+    
+(core.define @POS (core.lambda (a)
+    a))
+    
+(core.define @! (core.lambda (a)
+    (core.let (true-label (asm.next-label), done-label (asm.next-label))
+      (core.list
+        a
+        (core.string.concat @"ifeq " true-label)
+        false
+        (asm.jump done-label)
+        (asm.label true-label)
+        true
+        (asm.label done-label)))))
+

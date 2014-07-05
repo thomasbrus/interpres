@@ -1,0 +1,9 @@
+(core.define @NEG (core.lambda (a)
+    (core.list.concat a @("CALL neg"))))
+    
+(core.define @POS (core.lambda (a)
+    a))
+    
+(core.define @! (core.lambda (a)
+    (core.list.concat a @("CALL not"))))
+

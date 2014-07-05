@@ -5,10 +5,10 @@
       (core.list
         left right
         (core.string.concat @"if_icmplt " true-label)
-        @"iconst_0"
+        false
         (asm.jump done-label)
         (asm.label true-label)
-        @"iconst_1"
+        true
         (asm.label done-label)))))
 
 (core.define @> (core.lambda (left, right)
@@ -16,10 +16,10 @@
       (core.list
         left right
         (core.string.concat @"if_icmpgt " true-label)
-        @"iconst_0"
+        false
         (asm.jump done-label)
         (asm.label true-label)
-        @"iconst_1"
+        true
         (asm.label done-label)))))
 
 (core.define @<= (core.lambda (left, right)
@@ -27,10 +27,10 @@
       (core.list
         left right
         (core.string.concat @"if_icmple " true-label)
-        @"iconst_0"
+        false
         (asm.jump done-label)
         (asm.label true-label)
-        @"iconst_1"
+        true
         (asm.label done-label)))))
 
 (core.define @>= (core.lambda (left, right)
@@ -38,10 +38,10 @@
       (core.list
         left right
         (core.string.concat @"if_icmpge " true-label)
-        @"iconst_0"
+        false
         (asm.jump done-label)
         (asm.label true-label)
-        @"iconst_1"
+        true
         (asm.label done-label)))))
 
 (core.define @!= (core.lambda (left, right)
@@ -49,10 +49,10 @@
       (core.list
         left right
         (core.string.concat @"if_icmpne " true-label)
-        @"iconst_0"
+        false
         (asm.jump done-label)
         (asm.label true-label
-        @"iconst_1"
+        true
         (asm.label done-label))))))
 
 (core.define @== (core.lambda (left, right)
@@ -60,9 +60,9 @@
       (core.list
         left right
         (core.string.concat @"if_icmpeq " true-label)
-        @"iconst_0"
+        false
         (asm.jump done-label)
         (asm.label true-label)
-        @"iconst_1"
+        true
         (asm.label done-label)))))
 

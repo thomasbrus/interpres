@@ -12,6 +12,8 @@
 
 (var @continue 0)
 
+(if (! (&& (> 0 (NEG -1)) true)) (print-str "OK") (print-str "Not OK")) 
+
 (print-str "Continue? (Press 'y')")
 (read-char @continue)
 
