@@ -1,5 +1,7 @@
 package interpres.ast;
 
+import java.util.List;
+
 import interpres.AsInstructionSequence;
 
 import interpres.language.DefinitionTable;
@@ -19,6 +21,15 @@ public class Symbol extends AST {
 
   public String getName() {
     return this.name;
+  }
+
+  public Value getValue() {
+    try {
+      Integer integer = Integer.parseInt(this.name);
+      return new interpres.language.values.Integer(integer);
+    } catch (NumberFormatException e) {
+      return new interpres.language.values.Symbol(this.name);
+    }
   }
 }
 

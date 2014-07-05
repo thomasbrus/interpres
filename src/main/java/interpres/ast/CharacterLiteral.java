@@ -24,5 +24,9 @@ public class CharacterLiteral extends AST {
   public java.lang.Character getRepresentation() {
     return this.representation;
   }
+
+  public interpres.language.values.Character getValue() {
+    return new interpres.language.values.Character(this.representation);
+  }
 }
 

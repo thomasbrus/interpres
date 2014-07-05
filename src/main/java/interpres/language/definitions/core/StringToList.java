@@ -21,7 +21,7 @@ public class StringToList extends Definition {
   public StringToList() {
     super("core.string-to-list", new Lambda((definitionTable, arguments) -> {
       List<AsInstructionSequence> characters = new ArrayList<AsInstructionSequence>();
-      String stringValue = (String) arguments.get(0).evaluate(definitionTable);
+      String stringValue = (String) arguments.get(0).evaluate(definitionTable).getValue();
 
       for (char c : stringValue.getLiteral().toCharArray()) {
         characters.add(new Character(c));

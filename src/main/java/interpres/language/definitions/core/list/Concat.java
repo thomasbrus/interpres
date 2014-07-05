@@ -18,10 +18,11 @@ public class Concat extends Definition {
       java.util.List<AsInstructionSequence> concatenatedItems = new ArrayList<AsInstructionSequence>();
 
       for (AST argument : arguments) {
-        List listValue = (List) argument.evaluate(definitionTable);
+        List listValue = (List) argument.evaluate(definitionTable).getValue();
         concatenatedItems.addAll(listValue.getItems());
       }
 
+      // TODO: Fixme
       return new List(concatenatedItems);
     }));
   }

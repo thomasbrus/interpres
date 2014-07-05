@@ -12,9 +12,10 @@ public class Define extends Definition {
 
   public Define() {
     super("core.define", new Lambda((definitionTable, arguments) -> {
-      Symbol nameSymbol = (Symbol) arguments.get(0).evaluate(definitionTable);
+      Symbol nameSymbol = (Symbol) arguments.get(0).evaluate(definitionTable).getValue();
       AsInstructionSequence value = arguments.get(1).evaluate(definitionTable);
       definitionTable.define(nameSymbol.getIntern(), value);
+      // TODO: Fix me
       return List.buildEmpty();
     }));
   }

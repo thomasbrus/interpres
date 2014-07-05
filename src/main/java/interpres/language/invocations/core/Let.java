@@ -39,14 +39,14 @@ public class Let extends Invocation {
 
     while (localBindingsIterator.hasNext()) {
       String localBindingName = ((Symbol) localBindingsIterator.next()).getName();
-      AsInstructionSequence localBindingValue = localBindingsIterator.next().evaluate(this.getDefinitionTable());
+      AsInstructionSequence localBindingValue = localBindingsIterator.next().evaluate(this.getDefinitionTable()).getValue();
       this.getDefinitionTable().bind(localBindingName, localBindingValue);
     }
   }
 
   private List<AsInstructionSequence> evaluateExpressions() {
     return this.getExpressionsAST().stream().map(expression ->
-      expression.evaluate(this.getDefinitionTable())
+      expression.evaluate(this.getDefinitionTable()).getValue()
     ).collect(Collectors.toList());
   }
 

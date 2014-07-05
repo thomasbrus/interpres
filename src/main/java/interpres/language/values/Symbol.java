@@ -20,8 +20,5 @@ public class Symbol extends Value {
     return Arrays.asList(this.intern);
   }
 
-  public java.lang.String toString() {
-    return this.intern.toString();
-  }
 }
 

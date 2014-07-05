@@ -13,7 +13,7 @@ public class Reverse extends Definition {
 
   public Reverse() {
     super("core.list.reverse", new Lambda((definitionTable, arguments) -> {
-      List reversableValue = (List) arguments.get(0).evaluate(definitionTable);
+      List reversableValue = (List) arguments.get(0).evaluate(definitionTable).getValue();
       // FIXME: Shouldn't modify original list (?)
       Collections.reverse(reversableValue.getItems());
       return reversableValue;

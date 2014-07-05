@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.ArrayList;
 
 import interpres.ast.AST;
+import interpres.ast.StringLiteral;
+
 import interpres.language.definitions.Definition;
 
 import interpres.language.values.Value;
@@ -17,11 +19,11 @@ public class Concat extends Definition {
       List<java.lang.String> strings = new ArrayList<java.lang.String>();
 
       for (AST argument : arguments) {
-        String concatenable = (String) argument.evaluate(definitionTable);
+        String concatenable = (String) argument.evaluate(definitionTable).getValue();
         strings.add(concatenable.getLiteral());
       }
 
-      return new String(java.lang.String.join("", strings));
+      return new StringLiteral(java.lang.String.join("", strings));
     }));
   }
 

@@ -1,6 +1,6 @@
 package interpres.ast;
 
-import java.util.Arrays;
+import java.util.List;
 
 import interpres.AsInstructionSequence;
 import interpres.language.DefinitionTable;
@@ -20,6 +20,10 @@ public class UnquoteExpression extends AST {
       throw new UnsupportedOperationException("Unquoting is not supported for " + valueOrAST);
 
     return ((AST) valueOrAST).evaluate(definitionTable);
+  }
+
+  public Value getValue() {
+    return this.expression.getValue();
   }
 }
 

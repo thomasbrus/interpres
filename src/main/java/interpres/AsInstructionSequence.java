@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.ArrayList;
 import java.io.PrintStream;
 
+import interpres.language.values.Value;
+
 public interface AsInstructionSequence extends Iterable<java.lang.String> {
   public List<java.lang.String> instructionSequence();
 
@@ -17,4 +19,11 @@ public interface AsInstructionSequence extends Iterable<java.lang.String> {
       printStream.println(bytecode);
     }
   }
+
+  default public Value getValue() {
+    throw new UnsupportedOperationException(
+      "Unable to convert " + this + " to interpres.language.values.Value"
+    );
+  };
 }
+

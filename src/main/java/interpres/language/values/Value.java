@@ -13,5 +13,9 @@ public abstract class Value implements AsInstructionSequence {
   public List<java.lang.String> instructionSequence() {
     return new ArrayList<java.lang.String>();
   }
+
+  public Value getValue() {
+    return this;
+  }
 }
 

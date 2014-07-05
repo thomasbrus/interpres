@@ -38,12 +38,8 @@ public abstract class AST implements AsInstructionSequence {
     return this;
   }
 
-  public Value unquote(DefinitionTable definitionTable) {
-    throw new UnsupportedOperationException("Unquoting is not supported for " + this.getClass());
-  }
-
   public List<java.lang.String> instructionSequence() {
-    return new ArrayList<java.lang.String>();
+    return this.getValue().instructionSequence();
   }
 
   public boolean isQuotedSymbol() {

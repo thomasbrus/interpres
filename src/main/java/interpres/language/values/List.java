@@ -30,9 +30,5 @@ public class List extends Value {
 
     return instructionSequence;
   }
-
-  public java.lang.String toString() {
-    return this.items.toString();
-  }
 }
 
