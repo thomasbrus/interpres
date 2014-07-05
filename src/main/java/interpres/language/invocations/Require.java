@@ -45,12 +45,7 @@ public class Require extends Invocation {
       return this.evaluateFile(new File(this.resolvedFilename()));
     } catch (java.io.FileNotFoundException e) {
       throw new FileNotFoundException(e.getMessage());
-    } catch (IOException e) {
-    } catch (RecognitionException e) {
     }
-
-    // TODO: Rethrow interpres exception
-    return null;
   }
 
   public String getFileName() {
@@ -61,7 +56,7 @@ public class Require extends Invocation {
     return this.basePath.resolve(this.getFileName()).toString();
   }
 
-  private Value evaluateFile(File file) throws IOException, RecognitionException {
+  private Value evaluateFile(File file) throws java.io.FileNotFoundException {
     Value resultValue;
     FileInputStream fileInputStream = new FileInputStream(this.resolvedFilename());
 
