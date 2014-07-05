@@ -2,9 +2,9 @@ package interpres.language.invocations;
 
 import java.util.List;
 
+import interpres.AsBytecode;
 import interpres.ast.AST;
 import interpres.language.DefinitionTable;
-import interpres.language.values.Value;
 
 public abstract class Invocation {
   private DefinitionTable definitionTable;
@@ -23,6 +23,6 @@ public abstract class Invocation {
     return this.definitionTable;
   }
 
-  public abstract Value invoke();
+  public abstract AsBytecode invoke();
 }
 

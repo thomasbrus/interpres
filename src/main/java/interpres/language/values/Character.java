@@ -7,15 +7,9 @@ import interpres.ast.AST;
 
 public class Character extends Value {
   private java.lang.Character representation;
-  private AST characterAST;
 
   public Character(java.lang.Character representation) {
     this.representation = representation;
-  }
-
-  public Character(java.lang.Character representation, AST characterAST) {
-    this.representation = representation;
-    this.characterAST = characterAST;
   }
 
   public java.lang.Character getRepresentation() {

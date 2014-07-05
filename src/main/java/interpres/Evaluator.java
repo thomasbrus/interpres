@@ -12,7 +12,6 @@ import interpres.ast.AST;
 import interpres.ast.ListExpression;
 
 import interpres.language.DefinitionTable;
-import interpres.language.values.Value;
 import interpres.language.values.List;
 
 public class Evaluator {
@@ -24,15 +23,15 @@ public class Evaluator {
     this.sourceFileName = sourceFileName;
   }
 
-  public Value evaluate(InputStream inputStream) {
+  public AsBytecode evaluate(InputStream inputStream) {
     AST ast = this.transform(this.parse(inputStream));
     return ast.evaluate(this.definitionTable);
   }
 
-  public Value evaluateWithLayout(InputStream inputStream) {
-    Value body = this.evaluate(inputStream);
-    Value header = this.evaluateHeader();
-    Value footer = this.evaluateFooter();
+  public AsBytecode evaluateWithLayout(InputStream inputStream) {
+    AsBytecode body = this.evaluate(inputStream);
+    AsBytecode header = this.evaluateHeader();
+    AsBytecode footer = this.evaluateFooter();
     return new List(Arrays.asList(header, body, footer));
   }
 
@@ -70,11 +69,11 @@ public class Evaluator {
     }
   }
 
-  private Value evaluateHeader() {
+  private AsBytecode evaluateHeader() {
     return ListExpression.buildFunctionCall("asm.header").evaluate(this.definitionTable);
   }
 
-  private Value evaluateFooter() {
+  private AsBytecode evaluateFooter() {
     return ListExpression.buildFunctionCall("asm.footer").evaluate(this.definitionTable);
   }
 }

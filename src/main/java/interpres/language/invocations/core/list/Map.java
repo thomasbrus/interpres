@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.stream.Collectors;;
 
+import interpres.AsBytecode;
+
 import interpres.ast.AST;
 import interpres.ast.VirtualExpression;
 
@@ -26,7 +28,7 @@ public class Map extends Invocation {
     this.listValue = (List) this.getListAST().evaluate(definitionTable);
   }
 
-  public Value invoke() {
+  public List invoke() {
     return new List(this.listValue.getItems().stream().map(item ->
       this.lambdaValue.getFunction().apply(
         this.getDefinitionTable(), Arrays.asList(new VirtualExpression(item))
