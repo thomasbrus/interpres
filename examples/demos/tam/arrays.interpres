@@ -1,0 +1,7 @@
+(require "../../preludes/tam.interpres")
+
+(var-array @hoi (core.list.concat 1 2 3))
+
+(nth @hoi @0)
+
+(print-str "HOI")
