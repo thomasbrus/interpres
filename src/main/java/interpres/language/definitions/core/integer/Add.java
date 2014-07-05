@@ -15,7 +15,7 @@ public class Add extends Definition {
     super("core.integer.add", new Lambda((definitionTable, arguments) -> {
       Integer firstInteger = (Integer) arguments.get(0).evaluate(definitionTable).getValue();
       Integer secondInteger = (Integer) arguments.get(1).evaluate(definitionTable).getValue();
-      int delta = firstInteger.getRepresentation() - secondInteger.getRepresentation();
+      int delta = firstInteger.getRepresentation() + secondInteger.getRepresentation();
       return new Symbol(java.lang.Integer.toString(delta));
     }));
   }
