@@ -1,8 +1,7 @@
 package interpres.ast;
 
 import java.util.List;
-import java.util.ArrayList;
-
+import java.util.Arrays;
 
 import interpres.language.DefinitionTable;
 
@@ -20,6 +19,10 @@ public class IntegerValue extends AST {
 
   public Integer getValue() {
     return this.value;
+  }
+
+  public List<String> instructionSequence() {
+    return Arrays.asList(this.value.toString());
   }
 }
 

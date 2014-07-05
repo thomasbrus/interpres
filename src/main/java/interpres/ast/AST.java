@@ -33,12 +33,11 @@ public abstract class AST implements Iterable<java.lang.String> {
     return this.sourceLocation.getFileName();
   }
 
-  public List<java.lang.String> instructionSequence() {
-    // return this.getValue().instructionSequence();
-    return null;
+  public List<String> instructionSequence() {
+    return new ArrayList<String>();
   }
 
-  public Iterator<java.lang.String> iterator() {
+  public Iterator<String> iterator() {
     return this.instructionSequence().iterator();
   }
 

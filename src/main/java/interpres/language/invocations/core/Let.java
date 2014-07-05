@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Iterator;
 import java.util.stream.Collectors;
 
-
-
 import interpres.ast.AST;
 import interpres.ast.Symbol;
 import interpres.ast.ListExpression;

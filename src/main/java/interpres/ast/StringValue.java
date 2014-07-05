@@ -2,11 +2,10 @@ package interpres.ast;
 
 import java.util.List;
 import java.util.ArrayList;
-
+import java.util.Arrays;
 
 import interpres.language.DefinitionTable;
 
-// TODO: Rename to StringValue (idem dito voor Character and Integer)
 public class StringValue extends AST {
   private java.lang.String literal;
 
@@ -21,5 +20,13 @@ public class StringValue extends AST {
 
   public java.lang.String getLiteral() {
     return this.literal;
+  }
+
+  public List<String> instructionSequence() {
+    return Arrays.asList(this.literal);
+  }
+
+  public String toString() {
+    return "<'" + this.literal + "'>";
   }
 }

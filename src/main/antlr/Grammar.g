@@ -18,6 +18,7 @@ tokens {
   PROGRAM;
   LIST;
   STRING;
+  INTEGER;
   CHARACTER;
   SYMBOL;
   QUOTED;
@@ -51,16 +52,17 @@ list: LPAREN expression* RPAREN -> ^(LIST expression*);
 
 literal
   : string -> ^(STRING string)
-  | symbol -> ^(SYMBOL symbol)
   | character -> ^(CHARACTER character)
+  | integer -> ^(INTEGER integer)
+  | symbol -> ^(SYMBOL symbol)
   ;
 
 string: String;
-symbol: Symbol;
 character: Character;
+integer: Integer;
+symbol: Symbol;
 
 quoted_expression: AT expression -> ^(QUOTED expression);
-
 unquoted_expression: TILDE expression -> ^(UNQUOTED expression);
 
 // Lexer rules
@@ -68,7 +70,8 @@ unquoted_expression: TILDE expression -> ^(UNQUOTED expression);
 
 String: '"' (~'"' | '\\' '"')* '"';
 Character: '\'' ~'\'' '\'';
-Symbol: (Letter | Digit | Special)+;
+Integer: Digit+;
+Symbol:  (Letter | Special) (Letter | Special | Digit)*;
 
 Comment: ';' .* '\n' { $channel=HIDDEN; };
 Ws:(' ' | '\t' | '\f' | '\r' | '\n' | ',')+ { $channel=HIDDEN; };
@@ -77,7 +80,6 @@ Ws:(' ' | '\t' | '\f' | '\r' | '\n' | ',')+ { $channel=HIDDEN; };
 // =============================================================================
 
 fragment Digit: ('0'..'9');
-fragment Lower: ('a'..'z');
-fragment Upper: ('A'..'Z');
+fragment Letter: ('a'..'z') | ('A'..'Z');
 fragment Special: '+' | '-' | '*' | '/' | '%' | '&' | '|' | '=' | '>' | '<' | '$' | '!' | '?' | '_' | '.' | ':';
-fragment Letter: Lower | Upper;
+

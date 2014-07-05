@@ -2,8 +2,6 @@ package interpres.language.definitions.core;
 
 import java.util.Collections;
 
-
-
 import interpres.ast.AST;
 import interpres.ast.LambdaExpression;
 import interpres.ast.ListExpression;

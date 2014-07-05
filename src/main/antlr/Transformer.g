@@ -64,11 +64,14 @@ literal returns [AST ast]
     String literal = StringEscapeUtils.unescapeJava($string.text);
     $ast = new StringValue(literal.substring(1, literal.length() - 1));
   }
-  | ^(SYMBOL symbol=Symbol) {
-    $ast = new Symbol($symbol.text);
-  }
   | ^(CHARACTER character=Character) {
     $ast = new CharacterValue($character.text.charAt(1));
+  }
+  | ^(INTEGER integer=Integer) {
+    $ast = new IntegerValue(java.lang.Integer.parseInt($integer.text));
+  }
+  | ^(SYMBOL symbol=Symbol) {
+    $ast = new Symbol($symbol.text);
   }
   ;
 
@@ -79,3 +82,4 @@ quoted_expression returns [AST ast]
 unquoted_expression returns [AST ast]
   : ^(UNQUOTED expression) { $ast = new UnquoteExpression($expression.ast); }
   ;
+

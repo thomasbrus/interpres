@@ -4,9 +4,8 @@ import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.stream.Collectors;;
 
-
-
 import interpres.ast.AST;
+import interpres.ast.QuoteExpression;
 import interpres.ast.LambdaExpression;
 import interpres.ast.ListExpression;
 
@@ -26,11 +25,13 @@ public class Map extends Invocation {
   }
 
   public ListExpression invoke() {
-    return new ListExpression(this.list.getItems().stream().map(item ->
-      this.lambda.getFunction().apply(
-        this.getDefinitionTable(), Arrays.asList(item)
-      )
-    ).collect(Collectors.toList()));
+    System.out.println("Invoking lambda, with: " + this.list);
+    return new ListExpression(this.list.getItems().stream().map(item -> {
+      System.out.println("Current item: " + item);
+      return this.lambda.getFunction().apply(
+        this.getDefinitionTable(), Arrays.asList(new QuoteExpression(item))
+      );
+    }).collect(Collectors.toList()));
   }
 
   private AST getLambdaAST() {

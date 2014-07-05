@@ -2,6 +2,7 @@ package interpres.ast;
 
 import java.util.List;
 import java.util.Collections;
+import java.util.Arrays;
 import java.util.function.BiFunction;
 
 import interpres.language.DefinitionTable;
@@ -19,6 +20,10 @@ public class LambdaExpression extends AST {
 
   public BiFunction<DefinitionTable, List<AST>, AST> getFunction() {
     return this.function;
+  }
+
+  public List<String> instructionSequence() {
+    return Arrays.asList(this.function.toString());
   }
 }
 

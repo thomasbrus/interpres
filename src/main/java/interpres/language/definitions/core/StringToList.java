@@ -3,8 +3,6 @@ package interpres.language.definitions.core;
 import java.util.List;
 import java.util.ArrayList;
 
-
-
 import interpres.ast.AST;
 import interpres.ast.LambdaExpression;
 import interpres.ast.CharacterValue;

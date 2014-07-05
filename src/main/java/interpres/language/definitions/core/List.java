@@ -2,8 +2,6 @@ package interpres.language.definitions.core;
 
 import java.util.ArrayList;
 
-
-
 import interpres.ast.Symbol;
 import interpres.ast.AST;
 import interpres.ast.ListExpression;
