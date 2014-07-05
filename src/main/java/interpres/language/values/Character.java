@@ -19,9 +19,5 @@ public class Character extends Value {
   public List<java.lang.String> instructionSequence() {
     return Arrays.asList(this.representation.toString());
   }
-
-  public java.lang.String toString() {
-    return this.representation.toString();
-  }
 }
 

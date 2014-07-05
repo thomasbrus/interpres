@@ -1,5 +1,7 @@
 package interpres.ast;
 
+import java.util.List;
+
 import interpres.AsInstructionSequence;
 
 import interpres.language.DefinitionTable;
@@ -14,6 +16,10 @@ public class VirtualExpression extends AST {
 
   public AsInstructionSequence evaluate(DefinitionTable definitionTable) {
     return this.value;
+  }
+
+  public Value getValue() {
+    return this.value.getValue();
   }
 }
 

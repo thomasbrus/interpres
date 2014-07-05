@@ -17,11 +17,11 @@ public class Concat extends Definition {
       List<String> strings = new ArrayList<String>();
 
       for (AST argument : arguments) {
-        Symbol concatenable = (Symbol) argument.evaluate(definitionTable);
+        Symbol concatenable = (Symbol) argument.evaluate(definitionTable).getValue();
         strings.add(concatenable.getIntern());
       }
 
-      return new Symbol(String.join("", strings));
+      return new interpres.ast.Symbol(String.join("", strings));
     }));
   }
 

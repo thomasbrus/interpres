@@ -21,4 +21,8 @@ public class StringLiteral extends AST {
   public java.lang.String getLiteral() {
     return this.literal;
   }
+
+  public interpres.language.values.String getValue() {
+    return new interpres.language.values.String(this.literal);
+  }
 }

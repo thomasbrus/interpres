@@ -13,9 +13,10 @@ public class Subtract extends Definition {
 
   public Subtract() {
     super("core.integer.subtract", new Lambda((definitionTable, arguments) -> {
-      Integer firstInteger = (Integer) arguments.get(0).evaluate(definitionTable);
-      Integer secondInteger = (Integer) arguments.get(1).evaluate(definitionTable);
-      return new Integer(firstInteger.getRepresentation() - secondInteger.getRepresentation());
+      Integer firstInteger = (Integer) arguments.get(0).evaluate(definitionTable).getValue();
+      Integer secondInteger = (Integer) arguments.get(1).evaluate(definitionTable).getValue();
+      int delta = firstInteger.getRepresentation() - secondInteger.getRepresentation();
+      return new Symbol(java.lang.Integer.toString(delta));
     }));
   }
 

@@ -18,7 +18,7 @@ public class Repeat extends Definition {
 
   public Repeat() {
     super("core.repeat", new Lambda((definitionTable, arguments) -> {
-      Integer countValue = (Integer) arguments.get(0).evaluate(definitionTable);
+      Integer countValue = (Integer) arguments.get(0).evaluate(definitionTable).getValue();
 
       return ListExpression.buildFunctionCall(
         "core.list", Collections.nCopies(countValue.getRepresentation(), arguments.get(1))

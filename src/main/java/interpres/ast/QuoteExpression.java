@@ -15,15 +15,15 @@ public class QuoteExpression extends AST {
   }
 
   public AsInstructionSequence evaluate(DefinitionTable definitionTable) {
-    return this;
+    return this.getExpression();
   }
 
   public AST getExpression() {
     return this.expression;
   }
 
-  // public Value unquote(DefinitionTable definitionTable) {
-  //   return this.evaluate(definitionTable);
-  // }
+  public Value getValue() {
+    return this.expression.getValue();
+  }
 }
 

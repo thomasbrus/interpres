@@ -19,9 +19,5 @@ public class String extends Value {
   public List<java.lang.String> instructionSequence() {
     return Arrays.asList(this.literal);
   }
-
-  public java.lang.String toString() {
-    return this.literal.toString();
-  }
 }
 

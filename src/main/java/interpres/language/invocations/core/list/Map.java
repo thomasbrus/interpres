@@ -24,8 +24,8 @@ public class Map extends Invocation {
 
   public Map(DefinitionTable definitionTable, java.util.List<AST> arguments) {
     super(definitionTable, arguments);
-    this.lambdaValue = (Lambda) this.getLambdaAST().evaluate(definitionTable);
-    this.listValue = (List) this.getListAST().evaluate(definitionTable);
+    this.lambdaValue = (Lambda) this.getLambdaAST().evaluate(definitionTable).getValue();
+    this.listValue = (List) this.getListAST().evaluate(definitionTable).getValue();
   }
 
   public List invoke() {

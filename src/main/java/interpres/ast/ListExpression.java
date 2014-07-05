@@ -66,6 +66,12 @@ public class ListExpression extends AST {
     return this.getFunction().getName();
   }
 
+  public interpres.language.values.List getValue() {
+    return new interpres.language.values.List(
+      this.items.stream().collect(Collectors.toList())
+    );
+  }
+
   private Symbol getFunction() {
     return (Symbol) this.items.get(0);
   }
