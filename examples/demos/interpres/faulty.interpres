@@ -1,6 +1,13 @@
-; Lookup symbol that is not defined
-x
+; Require some non-existant file
+(require "some-file.interpres")
+; => FileNotFoundException: examples/demos/interpres/some-file.interpres (No such file or directory)
 
-; Invoke function that is also not defined
-(say-hello)
+; Lookup symbol that is not defined
+x ; => IrresolvableSymbolException: Could not resolve symbol: x
+
+; Invoke function that is not defined
+(say-hello @"Hi!")
+; => IrresolvableSymbolException: Could not resolve symbol: say-hello
+;       at main.say-hello(faulty.interpres:9)
+;       at main.core.list(Native Method)
 
