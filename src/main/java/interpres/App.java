@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.FileInputStream;
 import java.io.PrintStream;
+import java.io.File;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -24,16 +25,16 @@ public class App {
   private PrintStream outputStream;
   private Path basePath;
 
-  public App(String filename) throws IOException, RecognitionException{
-    this.basePath = Paths.get(filename).getParent();
-    this.inputStream = new FileInputStream(filename);
+  public App(String pathname) throws IOException, RecognitionException{
+    this.basePath = Paths.get(pathname).getParent();
+    this.inputStream = new FileInputStream(pathname);
     this.outputStream = new PrintStream(System.out);
     this.definitionTable = new DefinitionTable();
 
     definitionTable.define(new interpres.language.definitions.Require(basePath));
     setupDefinitionTable(this.definitionTable);
 
-    this.evaluator = new Evaluator(definitionTable);
+    this.evaluator = new Evaluator(definitionTable, (new File(pathname)).getName());
   }
 
   public void run() throws IOException, RecognitionException {

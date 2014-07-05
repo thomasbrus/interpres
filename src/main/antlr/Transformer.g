@@ -1,4 +1,4 @@
-tree grammar TreeWalker;
+tree grammar Transformer;
 
 options {
   tokenVocab = Grammar;
@@ -12,7 +12,16 @@ options {
   import org.apache.commons.lang3.StringEscapeUtils;
 }
 
-walk returns [AST ast]: program { $ast = $program.ast; };
+@members {
+  String sourceFileName;
+
+  public Transformer(CommonTreeNodeStream nodes, String sourceFileName) {
+    super(nodes);
+    this.sourceFileName = sourceFileName;
+  }
+}
+
+transform returns [AST ast]: program { $ast = $program.ast; };
 
 // Transformer rules
 // =============================================================================
@@ -37,13 +46,17 @@ expression returns [AST ast]
 
 list returns [AST ast]
   @init {
+    Integer lineNumber = -1;
     List<AST> items = new ArrayList<AST>();
   }
   @after {
-    $ast = new ListExpression(items);
+    $ast = new ListExpression(items, new SourceLocation(this.sourceFileName, lineNumber));
   }
   :
-  ^(LIST (expression { items.add($expression.ast); })*)
+  ^(LIST (expression {
+    items.add($expression.ast);
+    if (lineNumber == -1) lineNumber = $expression.tree.getLine();
+  })*)
   ;
 
 literal returns [AST ast]

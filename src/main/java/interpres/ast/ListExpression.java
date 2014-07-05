@@ -6,7 +6,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.stream.Collectors;
 
+import interpres.SourceLocation;
+
 import interpres.language.DefinitionTable;
+import interpres.language.SymbolResolver;
+import interpres.language.RuntimeException;
+
 import interpres.language.values.Value;
 import interpres.language.values.Lambda;
 
@@ -14,6 +19,11 @@ public class ListExpression extends AST {
   private List<AST> items;
 
   public ListExpression(List<AST> items) {
+    this(items, SourceLocation.NATIVE_METHOD);
+  }
+
+  public ListExpression(List<AST> items, SourceLocation sourceLocation) {
+    super(sourceLocation);
     this.items = items;
   }
 
@@ -33,8 +43,14 @@ public class ListExpression extends AST {
   }
 
   public Value evaluate(DefinitionTable definitionTable) {
-    Lambda lambdaValue = (Lambda) this.getFunction().evaluate(definitionTable);
-    return lambdaValue.getFunction().apply(definitionTable, this.getArguments());
+    try {
+      Lambda lambdaValue = (Lambda) this.getFunction().evaluate(definitionTable);
+      return lambdaValue.getFunction().apply(definitionTable, this.getArguments());
+    } catch (RuntimeException runtimeException) {
+      throw runtimeException.registerFunctionCall(
+        this.getFunctionName(), this.getSourceFileName(), this.getSourceLineNumber()
+      );
+    }
   }
 
   public interpres.language.values.List quote() {
@@ -50,6 +66,10 @@ public class ListExpression extends AST {
 
   public AST getItem(int index) {
     return this.items.get(index);
+  }
+
+  public String getFunctionName() {
+    return this.getFunction().getName();
   }
 
   private Symbol getFunction() {

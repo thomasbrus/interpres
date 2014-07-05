@@ -61,7 +61,7 @@ public class Require extends Invocation {
 
     this.getDefinitionTable().define(new interpres.language.definitions.Require(file.getParent()));
 
-    resultValue = new Evaluator(this.getDefinitionTable()).evaluate(fileInputStream);
+    resultValue = new Evaluator(this.getDefinitionTable(), file.getName()).evaluate(fileInputStream);
 
     this.getDefinitionTable().define(new interpres.language.definitions.Require(this.basePath));
 

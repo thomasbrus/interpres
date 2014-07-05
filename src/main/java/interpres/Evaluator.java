@@ -17,9 +17,11 @@ import interpres.language.values.List;
 
 public class Evaluator {
   private DefinitionTable definitionTable;
+  private String sourceFileName;
 
-  public Evaluator(DefinitionTable definitionTable) {
+  public Evaluator(DefinitionTable definitionTable, String sourceFileName) {
     this.definitionTable = definitionTable;
+    this.sourceFileName = sourceFileName;
   }
 
   public Value evaluate(InputStream inputStream) throws IOException, RecognitionException {
@@ -47,10 +49,10 @@ public class Evaluator {
   private AST transform(CommonTree tree) throws RecognitionException {
     // Transform the ANTLR tree into an Interpres AST
     CommonTreeNodeStream nodeStream = new CommonTreeNodeStream(tree);
-    TreeWalker walker = new TreeWalker(nodeStream);
-    TreeWalker.walk_return walkReturn = walker.walk();
+    Transformer transformer = new Transformer(nodeStream, this.sourceFileName);
+    Transformer.transform_return transformReturn = transformer.transform();
 
-    return walkReturn.ast;
+    return transformReturn.ast;
   }
 
   private Value evaluateHeader() {
