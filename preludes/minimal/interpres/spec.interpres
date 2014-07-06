@@ -1,0 +1,23 @@
+(core.define @describe (core.lambda (topic-description, @context-calls)
+    (do
+      (print-str "\033[37m")
+      (println-str topic-description)
+
+      (core.bind @context (core.lambda (context-description, quoted-bindings, @it-calls)
+        (core.let quoted-bindings
+          (do
+            (print-str "  \033[37;1m")
+            (println-str context-description)
+
+            (core.bind @it (core.lambda (assertion-description, @assertion)
+              (do
+                (if ~assertion
+                  (print-str "    \033[32;m")
+                  (print-str "    \033[31;m"))
+                (println-str assertion-description))))
+
+            ~it-calls))))
+
+      ~context-calls
+      (print-str "\033[0m"))))
+
