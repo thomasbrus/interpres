@@ -3,8 +3,8 @@
       (print-str "\033[37m")
       (println-str topic-description)
 
-      (core.bind @context (core.lambda (context-description, quoted-bindings, @it-calls)
-        (core.let quoted-bindings
+      (core.bind @context (core.lambda (context-description, @bindings, @it-calls)
+        (core.let bindings
           (do
             (print-str "  \033[37;1m")
             (println-str context-description)

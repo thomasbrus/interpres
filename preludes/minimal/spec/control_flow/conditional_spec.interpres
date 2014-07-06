@@ -1,10 +1,10 @@
 (describe "control_flow/conditional#if"
   (do (context "when evaluating a thruthy value"
-        @(if-expression (if true 1 2))
+        (if-expression (if true 1 2))
         (it "evaluates the first branch" (== 1 if-expression)))
 
       (context "when evaluating a falsy value"
-        @(if-expression (if false 1 2))
+        (if-expression (if false 1 2))
         (it "evaluates the second branch" (== 2 if-expression)))
 
       ; (context "when evaluating a thruthy value, and not providing an alternative"
