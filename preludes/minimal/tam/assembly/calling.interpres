@@ -1,0 +1,3 @@
+(core.define @asm.call (core.lambda (label)
+    (core.list (core.string.concat @"CALL(SB) " label @"[CB]"))))
+
