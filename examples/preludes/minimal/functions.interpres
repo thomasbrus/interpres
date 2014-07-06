@@ -1,4 +1,4 @@
-(require "../../preludes/tam.interpres")
+(require "../../../preludes/minimal/tam.interpres")
 
 (asm.push @1)
 
