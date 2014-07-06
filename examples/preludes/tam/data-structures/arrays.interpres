@@ -1,0 +1,6 @@
+(core.define @array core.list.concat)
+
+(core.define @array-size (core.lambda (identifier) (core.list (core.string.concat @"LOADL " ~(core.symbol.concat identifier @: @size)))))
+
+(core.define @nth (core.lambda (identifier index)
+    (core.list.concat (+ (asm.loada (core.string.concat ~(core.symbol.concat identifier @: @address))) index) (core.list asm.loadi))))

@@ -1,5 +1,6 @@
 (require "tam/assembly.interpres")
 (require "tam/control-flow.interpres")
+(require "tam/data-structures.interpres")
 (require "tam/io.interpres")
 (require "tam/literals.interpres")
 (require "tam/operators.interpres")

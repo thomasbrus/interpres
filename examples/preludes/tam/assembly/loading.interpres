@@ -5,6 +5,12 @@
     (core.list (core.string.concat
         @"LOADL " (core.integer-to-string quoted-integer)))))
 
+(core.define @asm.loada (core.lambda (address)
+    (core.list (core.string.concat
+        @"LOADA " address))))
+
+(core.define @asm.loadi @"LOADI(1)")       
+
 (core.define @asm.loadc (core.lambda (quoted-character)
     (asm.loadl (core.character.ord quoted-character))))
 

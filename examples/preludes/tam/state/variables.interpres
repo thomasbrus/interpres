@@ -8,12 +8,12 @@
         (assign identifier initial-value)))))
 
 
-(core.define @var-array (core.lambda (identifier array)
+(core.define @var-array (core.lambda (identifier input-array)
     (core.let (start-address (asm.address asm.stack.size @SB), index @0)
       (core.list.concat 
         (core.define identifier (asm.load start-address))
         (core.define (core.symbol.concat identifier @: @address) start-address)
-        (asm.push (core.list.size array))
+        (asm.push (core.list.size input-array))
         (core.list.map
           (core.lambda (entity) 
             (core.let (address (asm.address asm.stack.size @SB))
@@ -23,5 +23,7 @@
                 (core.redefine @index (core.integer.add index @1))
                 (asm.stack.increase)                
                 (asm.store address))))
-          array)))))        
+          input-array)
+        (core.define (core.symbol.concat identifier @: @size) (core.integer-to-string index))
+        ))))        
 
