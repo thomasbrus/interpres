@@ -34,7 +34,7 @@ public class DefinitionTable {
     this.definitions.addLast(new Definition(name, value, this.scopeLevel));
   }
 
-  public void set(String name, AST value) {
+  public void redefine(String name, AST value) {
     Iterator<Definition> it = this.definitions.descendingIterator();
     int i = this.definitions.size()-1;
 
