@@ -19,10 +19,9 @@
               (core.list.concat 
                 (asm.aload start-address)
                 (asm.loadl index)
-                entity
-                (core.define (core.symbol.concat identifier @: (core.string-to-symbol (core.integer-to-string index)) @: @address) start-address)
-                (core.redefine @index (core.integer.add index @1))                               
+                entity                
                 (core.list @"iastore")
+                (core.redefine @index (core.integer.add index @1))
                 ))
           input-array)
         (core.define (core.symbol.concat identifier @: @size) (core.integer-to-string index))
