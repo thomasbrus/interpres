@@ -18,7 +18,7 @@
           (core.lambda (entity) 
             (core.let (address (asm.address asm.stack.size @SB))
               (core.list.concat 
-                (core.list entity)
+                entity
                 (core.define (core.symbol.concat identifier @: (core.string-to-symbol (core.integer-to-string index)) @: @address) address)
                 (core.redefine @index (core.integer.add index @1))
                 (asm.stack.increase)                

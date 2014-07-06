@@ -9,7 +9,7 @@
         (core.list.map
           (core.lambda (entity) 
             (core.list.concat
-              (core.list entity)
+              entity
               (asm.store (core.string.concat ~(core.symbol.concat identifier @: (core.string-to-symbol (core.integer-to-string index)) @: @address)))
               (core.redefine @index (core.integer.add index @1)))) 
         input-array))))

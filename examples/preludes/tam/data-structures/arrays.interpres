@@ -1,4 +1,4 @@
-(core.define @array core.list.concat)
+(core.define @array core.list)
 
 (core.define @array-size (core.lambda (identifier) (core.list (core.string.concat @"LOADL " ~(core.symbol.concat identifier @: @size)))))
 

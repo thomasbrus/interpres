@@ -1,18 +1,20 @@
 (require "../../preludes/tam.interpres")
 
+(var-array @ints (array 1 (- 3 1) 3))
+(var-array @chars (array 'h' 'r' 'e' 'l' 'q' 'l' 'o' 'w' 'w' 'o' 'i' 'p' 'l' 'r' 'l' 'd'))
+(var-array @bools (array true false true true false true true false true true false false false true true true))
 
-
-(var-array @ints (array 1 2 3))
-(var-array @chars (array 'a' 'b' 'c' 'd'))
-(var-array @bools (array true false true true))
-
-(print-char (nth @chars 3))
-(assign-nth @chars 3 'X')
-(print-char (nth @chars 3))
-(assign-array @ints (core.list 4 5 6))
 (print-int (nth @ints 1))
+(print-char (nth @chars 1))
+
+(assign-nth @chars 1 'X')
+(assign-array @ints (core.list (- 6 2) 5 (+ 3 3)))
+
+(print-int (nth @ints 1))
+(print-char (nth @chars 1))
+
+(print-str "------")
 
 (var @i 0)
 (while (< i (array-size @ chars)) (do (if (nth @bools i) (print-char (nth @chars i))) (assign @i (+ i 1))))
-
 
