@@ -1,4 +1,4 @@
-(core.define @var (core.lambda (identifier initial-value)
+(core.define @var (core.lambda (identifier (initial-value 0))
     (core.let @(address (asm.address asm.stack.size @SB))
       (asm.stack.increase)
       (core.define identifier (asm.load address))
