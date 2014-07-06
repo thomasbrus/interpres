@@ -7,6 +7,7 @@ import java.util.Map;
 import interpres.ast.AST;
 import interpres.ast.LambdaExpression;
 import interpres.ast.ListExpression;
+import interpres.ast.QuoteExpression;
 
 import interpres.language.DefinitionTable;
 import interpres.language.FormalArgumentsList;
@@ -31,7 +32,7 @@ public class Lambda extends Invocation {
         localBindingASTs.add(binding.getValue());
       }
 
-      letArguments.add(new ListExpression(localBindingASTs));
+      letArguments.add(new QuoteExpression(new ListExpression(localBindingASTs)));
       letArguments.addAll(this.getExpressionASTs());
 
       return ListExpression.buildFunctionCall("core.let", letArguments).evaluate(this.getDefinitionTable());

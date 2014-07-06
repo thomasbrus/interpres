@@ -46,7 +46,7 @@ public class Let extends Invocation {
   }
 
   private ListExpression getLocalBindingsAST() {
-    return (ListExpression) this.getArguments().get(0);
+    return (ListExpression) this.getArguments().get(0).evaluate(this.getDefinitionTable());
   }
 
   private List<AST> getExpressionsAST() {
