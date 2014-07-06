@@ -1,12 +1,12 @@
-(require "../../preludes/tam.interpres")
-; (require "../../preludes/jvm.interpres")
+; (require "../../../preludes/minimal/jvm.interpres")
+(require "../../../preludes/minimal/tam.interpres")
 
 (if (< (+ 4 3) (- 10 2))
-  (print-str "Yes")
-  (print-str "No"))
+  (println-str "Yes")
+  (println-str "No"))
 
 (if (> (+ 6 5) 12)
-  (print-str "OK"))
+  (println-str "OK"))
 
 (const @x 2)
 (const @distance (+ 1 x))
@@ -28,8 +28,8 @@
 (print-int (minus distance))
 
 (if (! (&& (> 0 (minus -1)) true))
-  (print-str "Ok")
-  (print-str "Not so ok"))
+  (println-str "Ok")
+  (println-str "Not so ok"))
 
 (print-int x)
 
