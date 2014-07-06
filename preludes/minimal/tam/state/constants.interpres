@@ -1,5 +1,5 @@
 (core.define @const (core.lambda (identifier value)
-    (core.let (address (asm.address asm.stack.size @SB))
+    (core.let @(address (asm.address asm.stack.size @SB))
       (asm.stack.increase)
       (core.define identifier (asm.load address))
       value)))

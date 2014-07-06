@@ -3,7 +3,7 @@
 (core.define @plus (core.lambda (operand) operand))
 
 (core.define @! (core.lambda (operand)
-    (core.let (true-label (asm.next-label), done-label (asm.next-label))
+    (core.let @(true-label (asm.next-label), done-label (asm.next-label))
       (core.list
         operand
         (core.string.concat @"ifeq " true-label)

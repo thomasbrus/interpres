@@ -1,7 +1,7 @@
 ; TODO: Extract shared logic
 
 (core.define @< (core.lambda (left, right)
-    (core.let (true-label (asm.next-label), done-label (asm.next-label))
+    (core.let @(true-label (asm.next-label), done-label (asm.next-label))
       (core.list
         left right
         (core.string.concat @"if_icmplt " true-label)
@@ -12,7 +12,7 @@
         (asm.label done-label)))))
 
 (core.define @> (core.lambda (left, right)
-    (core.let (true-label (asm.next-label), done-label (asm.next-label))
+    (core.let @(true-label (asm.next-label), done-label (asm.next-label))
       (core.list
         left right
         (core.string.concat @"if_icmpgt " true-label)
@@ -23,7 +23,7 @@
         (asm.label done-label)))))
 
 (core.define @<= (core.lambda (left, right)
-    (core.let (true-label (asm.next-label), done-label (asm.next-label))
+    (core.let @(true-label (asm.next-label), done-label (asm.next-label))
       (core.list
         left right
         (core.string.concat @"if_icmple " true-label)
@@ -34,7 +34,7 @@
         (asm.label done-label)))))
 
 (core.define @>= (core.lambda (left, right)
-    (core.let (true-label (asm.next-label), done-label (asm.next-label))
+    (core.let @(true-label (asm.next-label), done-label (asm.next-label))
       (core.list
         left right
         (core.string.concat @"if_icmpge " true-label)
@@ -45,7 +45,7 @@
         (asm.label done-label)))))
 
 (core.define @!= (core.lambda (left, right)
-    (core.let (true-label (asm.next-label), done-label (asm.next-label))
+    (core.let @(true-label (asm.next-label), done-label (asm.next-label))
       (core.list
         left right
         (core.string.concat @"if_icmpne " true-label)
@@ -56,7 +56,7 @@
         (asm.label done-label))))))
 
 (core.define @== (core.lambda (left, right)
-    (core.let (true-label (asm.next-label), done-label (asm.next-label))
+    (core.let @(true-label (asm.next-label), done-label (asm.next-label))
       (core.list
         left right
         (core.string.concat @"if_icmpeq " true-label)
