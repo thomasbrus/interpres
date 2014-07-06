@@ -1,0 +1,28 @@
+(describe "control_flow/conditional#if"
+  (do (context "when evaluating a thruthy value"
+        @(if-expression (if true 1 2))
+        (it "evaluates the first branch" (== 1 if-expression)))
+
+      (context "when evaluating a falsy value"
+        @(if-expression (if false 1 2))
+        (it "evaluates the second branch" (== 2 if-expression)))
+
+      ; (context "when evaluating a thruthy value, and not providing an alternative"
+      ;   (if-expression (if true 1))
+      ;   (it "evaluates the first branch" (== 1 if-expression)))
+      ))
+
+; (describe "control_flow/conditional#unless"
+;   (do (context "when evaluating a thruthy value"
+;         @(unless-expression (unless true 1 2))
+;         (it "evaluates the second branch" (== 2 unless-expression)))
+
+;       (context "when evaluating a falsy value"
+;         @(unless-expression (unless false 1 2))
+;         (it "evaluates the first branch" (== 1 unless-expression)))
+
+;       ; (context "when evaluating a falsy value, and not providing an alternative"
+;       ;   (unless-expression (if false 1))
+;       ;   (it "evaluates the first branch" (== 1 if-expression)))
+;       ))
+

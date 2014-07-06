@@ -1,0 +1,2 @@
+(require "operators/binary_spec.interpres")
+
