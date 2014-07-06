@@ -1,11 +1,11 @@
 (core.define @read-int (core.lambda (varname)
     (core.list
       (core.string.concat @"LOADA " ~(core.symbol.concat varname @: @address))
-      "CALL getint")))
+      @"CALL getint")))
 
 (core.define @read-char (core.lambda (varname)
     (core.list
       (core.string.concat @"LOADA " ~(core.symbol.concat varname @: @address))
-      "CALL get"
-      "CALL geteol")))
+      @"CALL get"
+      @"CALL geteol")))
 
