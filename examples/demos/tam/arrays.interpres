@@ -1,14 +1,20 @@
 (require "../../preludes/tam.interpres")
 
-(var-array @ints (core.list.concat 1 2 3))
+(core.define @array core.list.concat)
+(array 'a' 'b' 'c')
+
+(var-array @ints (array 1 2 3))
 (var-array @chars (core.list.concat 'a' 'b' 'c' 'd'))
 
 (print-int (nth @ints @1))
 (print-char (nth @chars @3))
-(set-nth @chars @3 'X')
+(assign-nth @chars @3 'X')
 (print-char (nth @chars @3))
-(set-array @ints (core.list.concat 4 5 6))
+(assign-array @ints (core.list 4 5 6))
 (print-int (nth @ints @1))
 
-;(set-nth @chars @4 'e') => error
-;(set-array @ints (core.list.concat 4 5 6 7))  => error
+
+
+;(assign-nth @chars @4 'e') => error
+;(assign-array @ints (core.list 4 5 6 7))  => error
+;(assign-array @ints (core.list 4 5)) => allowed

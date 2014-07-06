@@ -1,17 +1,19 @@
 (core.define @assign (core.lambda (identifier value)
     (core.list.concat value (asm.store ~(core.symbol.concat identifier @: @address)))))
 
+
 (core.define @nth (core.lambda (identifier index)
     (asm.load (core.string.concat ~(core.symbol.concat identifier @: (core.string-to-symbol (core.integer-to-string index)) @: @address)))))
 
-(core.define @set-nth (core.lambda (identifier index value)
+(core.define @assign-nth (core.lambda (identifier index value)
     (core.list.concat value (asm.store (core.string.concat ~(core.symbol.concat identifier @: (core.string-to-symbol (core.integer-to-string index)) @: @address))))) )
 
-(core.define @set-array (core.lambda (identifier array)
+(core.define @assign-array (core.lambda (identifier array)
     (core.let (index @0)
         (core.list.map
           (core.lambda (entity) 
             (core.list.concat
               (core.list entity)
               (asm.store (core.string.concat ~(core.symbol.concat identifier @: (core.string-to-symbol (core.integer-to-string index)) @: @address)))
-              (core.bind @index (core.integer.add index @1)))) array))))
+              (core.redefine @index (core.integer.add index @1)))) 
+        array))))

@@ -20,12 +20,8 @@
               (core.list.concat 
                 (core.list entity)
                 (core.define (core.symbol.concat identifier @: (core.string-to-symbol (core.integer-to-string index)) @: @address) address)
-                (core.bind @index (core.integer.add index @1))
+                (core.redefine @index (core.integer.add index @1))
                 (asm.stack.increase)                
                 (asm.store address))))
-          array)))))
-
-
-
-        
+          array)))))        
 
