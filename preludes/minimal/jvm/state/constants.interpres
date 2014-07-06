@@ -1,4 +1,4 @@
-(core.define @const (core.lambda (identifier value)
+(core.define @const (core.lambda (@identifier value)
     (core.let @(address (core.integer-to-string asm.stack.size))
       (asm.stack.increase)
       (core.define identifier (asm.load address))

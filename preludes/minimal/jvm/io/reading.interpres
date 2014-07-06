@@ -1,20 +1,20 @@
-(core.define @read-int (core.lambda (variable-symbol)
-    (assign
-      variable-symbol
+(core.define @read-int (core.lambda (@variable-symbol)
+  (core.list
       @("getstatic Program/scanner Ljava/util/Scanner;"
-        "invokevirtual java/util/Scanner/nextInt()I"))))
+        "invokevirtual java/util/Scanner/nextInt()I")
+    (asm.store ~(core.symbol.concat variable-symbol @: @address)))))
 
-(core.define @read-string (core.lambda (variable-symbol)
-    (assign
-      variable-symbol
+(core.define @read-string (core.lambda (@variable-symbol)
+    (core.list
       @("getstatic Program/scanner Ljava/util/Scanner;"
-        "invokevirtual java/util/Scanner/next()Ljava/lang/String;"))))
+        "invokevirtual java/util/Scanner/next()Ljava/lang/String;")
+      (asm.store ~(core.symbol.concat variable-symbol @: @address)))))
 
-(core.define @read-char (core.lambda (variable-symbol)
-    (assign
-      variable-symbol
+(core.define @read-chr (core.lambda (@variable-symbol)
+  (core.list
       @("getstatic Program/scanner Ljava/util/Scanner;"
         "invokevirtual java/util/Scanner/next()Ljava/lang/String;"
         "iconst_0"
-        "invokevirtual java/lang/String/charAt(I)C"))))
+        "invokevirtual java/lang/String/charAt(I)C")
+    (asm.store ~(core.symbol.concat variable-symbol @: @address)))))
 
