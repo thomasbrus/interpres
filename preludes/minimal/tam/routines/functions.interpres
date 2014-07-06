@@ -1,26 +1,26 @@
-(core.define @fn (core.lambda (@name, @first-argument, @second-argument, @body)
-    ; define function address
-    (core.define (core.symbol.concat name @: @address) (asm.next-label))
+(core.define @fn (core.lambda (@function-name, @first-argument-name, @second-argument-name, @body)
+    ; Use unique label to refer to this function
+    (core.let @(function-label (asm.next-label))
 
-    (core.let (hello @hello)
-      ; define function call (add 1 2)
-      (core.define name (core.lambda-eager (first-argument second-argument)
-        (core.list @(first-argument second-argument) hello))))
-        ; @(+ b c)
-        ; (core.list
-        ;   first-argument
-        ;   second-argument
-        ;   hello
-        ;   @"CALL (SB) L1[CB]"))))
+      ; Define what happens when the function is invoked
+      (core.define function-name
+        ~(core.list
+          @core.lambda
+           (core.list first-argument-name second-argument-name)
+           (core.list
+             @core.list
+             first-argument-name
+             second-argument-name
+             (core.list @core.quote (asm.call function-label)))))
 
-    ; return function body
-    (core.list
-      (core.let ()
-        (core.bind first-argument @"LOAD (1) -2[LB]")
-        (core.bind second-argument @"LOAD (1) -1[LB]")
-        (core.let (evaluated-body ~body)
+      ; Place the function body on the stack
+      (core.list
+        (core.let
+          (core.list first-argument-name @@"LOAD(1) -2[LB]"
+                     second-argument-name @@"LOAD(1) -1[LB]"
+                     @evaluated-body body)
           (core.list
             (asm.jump (asm.address (core.integer.add @2 (core.list.size evaluated-body)) @CP))
-            @"L1: " evaluated-body)))
-      @"RETURN(1) 2")))
+            (asm.label function-label) evaluated-body))
+        @"RETURN(1) 2"))))
 

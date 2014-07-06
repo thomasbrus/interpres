@@ -1,9 +1,11 @@
 (require "../../../preludes/minimal/tam.interpres")
 
-(asm.push @1)
-
-(asm.stack.increase)
 (fn my-add left right (+ left right))
+(fn my-subtract left right (- left right))
 
-(my-add 1 2)
+(println-int (my-add 1 2))
+
+(println-int (my-add 3 4))
+
+(println-int (my-subtract 6 5))
 
