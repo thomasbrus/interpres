@@ -5,3 +5,26 @@
       (core.define (core.symbol.concat identifier @: @address) address)
       (assign identifier initial-value))))
 
+(core.define @var-array (core.lambda (identifier input-array)
+    (core.let (start-address (core.integer-to-string asm.stack.size), index @0)
+      (core.list.concat 
+        (core.define identifier (asm.load start-address))
+        (core.define (core.symbol.concat identifier @: @address) start-address)
+        (asm.loadl (core.list.size input-array))
+        (core.list @"newarray int")
+        (asm.astore start-address)
+        (asm.stack.increase) 
+        (core.list.map
+          (core.lambda (entity)             
+              (core.list.concat 
+                (asm.aload start-address)
+                (asm.loadl index)
+                entity
+                (core.define (core.symbol.concat identifier @: (core.string-to-symbol (core.integer-to-string index)) @: @address) start-address)
+                (core.redefine @index (core.integer.add index @1))                               
+                (core.list @"iastore")
+                ))
+          input-array)
+        (core.define (core.symbol.concat identifier @: @size) (core.integer-to-string index))
+        ))))        
+
