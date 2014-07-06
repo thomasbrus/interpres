@@ -1,3 +1,0 @@
-(core.define @true  (asm.loadl @1))
-(core.define @false (asm.loadl @0))
-

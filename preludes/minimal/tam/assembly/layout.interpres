@@ -1,3 +1,0 @@
-(core.define @asm.footer (core.lambda ()
-    (core.list (asm.pop asm.stack.size) @HALT)))
-

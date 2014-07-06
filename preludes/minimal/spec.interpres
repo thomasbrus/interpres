@@ -1,5 +1,0 @@
-(require "interpres/spec.interpres")
-
-(require "spec/control_flow_spec.interpres")
-(require "spec/operators_spec.interpres")
-

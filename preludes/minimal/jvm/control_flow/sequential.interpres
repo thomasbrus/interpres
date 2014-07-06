@@ -1,2 +1,0 @@
-(core.define @do core.list)
-

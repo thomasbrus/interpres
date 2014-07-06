@@ -1,8 +1,0 @@
-(core.define @minus (core.lambda (operand) (core.list operand @"CALL neg")))
-
-(core.define @plus (core.lambda (operand) operand))
-
-(core.define @! (core.lambda (operand) (core.list operand @"CALL not")))
-
-(core.define @not !)
-

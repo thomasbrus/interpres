@@ -1,3 +1,0 @@
-(core.define @asm.store (core.lambda (address)
-    (core.list (core.string.concat @"istore " address))))
-

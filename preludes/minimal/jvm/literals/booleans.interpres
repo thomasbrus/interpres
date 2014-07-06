@@ -1,3 +1,0 @@
-(core.define @true  @"iconst_1")
-(core.define @false @"iconst_0")
-

@@ -1,3 +1,0 @@
-(require "jvm.interpres")
-(require "spec.interpres")
-
