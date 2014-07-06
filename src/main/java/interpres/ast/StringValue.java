@@ -25,8 +25,5 @@ public class StringValue extends AST {
   public List<String> instructionSequence() {
     return Arrays.asList(this.literal);
   }
-
-  public String toString() {
-    return "<'" + this.literal + "'>";
-  }
 }
+

@@ -79,8 +79,5 @@ public class ListExpression extends AST {
   private List<AST> getArguments() {
     return this.items.subList(1, this.items.size());
   }
-
-  public String toString() {
-    return this.items.toString();
-  }
 }
+
