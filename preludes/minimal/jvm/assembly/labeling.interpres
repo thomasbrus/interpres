@@ -7,5 +7,5 @@
 
 (core.define @asm.next-label (core.lambda ()
   (core.define @asm.labels.counter (core.integer.add @1 asm.labels.counter))
-  (core.string.concat @"label-" (core.integer-to-string asm.labels.counter))))
+  (core.string.concat @"label" (core.integer-to-string asm.labels.counter))))
 

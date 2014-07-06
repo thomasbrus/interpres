@@ -1,4 +1,5 @@
 (require "assembly/addressing.interpres")
+(require "assembly/calling.interpres")
 (require "assembly/jumping.interpres")
 (require "assembly/labeling.interpres")
 (require "assembly/layout.interpres")
