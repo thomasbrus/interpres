@@ -6,9 +6,9 @@
 (while (== count-down 0)
   (do
     (println-str "Pick a number between 1 and 10")
-    (read-int @count-down)
+    (read-int count-down)
     (if (or (<= count-down 0) (> count-down 10))
-      (do (println-str "Input is out of range, please try again.") (assign @count-down 0)))))
+      (do (println-str "Input is out of range, please try again.") (assign count-down 0)))))
 
 (var @continue 0)
 
