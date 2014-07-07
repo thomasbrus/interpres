@@ -7,7 +7,7 @@ public class Let extends Definition {
 
   public Let() {
     super("interpres/let", new LambdaExpression((definitionTable, arguments) ->
-      new interpres.language.invocations.core.Let(definitionTable, arguments).invoke()
+      new interpres.language.invocations.interpres.Let(definitionTable, arguments).invoke()
     ));
   }
 

@@ -1,4 +1,4 @@
-package interpres.language.invocations.core.list;
+package interpres.language.invocations.interpres.list;
 
 import java.util.Arrays;
 import java.util.ArrayList;
