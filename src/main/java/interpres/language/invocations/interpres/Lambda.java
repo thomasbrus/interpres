@@ -15,10 +15,21 @@ import interpres.language.FormalArgumentsList;
 import interpres.language.invocations.Invocation;
 
 public class Lambda extends Invocation {
+  /**
+   * Constructs a new Lambda object.
+   *
+   * @param definitionTable the definition table to work with
+   * @param arguments the arguments corresponding with this lambda
+   */
   public Lambda(DefinitionTable definitionTable, List<AST> arguments) {
     super(definitionTable, arguments);
   }
 
+  /**
+   * Generates a new LambdaExpression based on the given arguments.
+   *
+   * @return LambdaExpression
+   */
   public AST invoke() {
     return new interpres.ast.LambdaExpression((lambdaDefinitionTable, actualArguments) -> {
       List<AST> letArguments = new ArrayList<AST>();

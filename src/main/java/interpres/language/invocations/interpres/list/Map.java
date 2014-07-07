@@ -18,12 +18,24 @@ public class Map extends Invocation {
   private LambdaExpression lambda;
   private ListExpression list;
 
+  /**
+   * Creates a new Map object.
+   *
+   * @param definitionTable the definition table to work with
+   * @param arguments the arguments corresponding with this Map
+   */
   public Map(DefinitionTable definitionTable, java.util.List<AST> arguments) {
     super(definitionTable, arguments);
     this.lambda = (LambdaExpression) this.getLambdaAST().evaluate(definitionTable);
     this.list = (ListExpression) this.getListAST().evaluate(definitionTable);
   }
 
+  /**
+   * Invokes the map expression and generates the corresponding
+   * AST.
+   *
+   * @return AST corresponding with the Map expression
+   */
   public ListExpression invoke() {
     return new ListExpression(this.list.getItems().stream().map(item -> {
       return this.lambda.getFunction().apply(

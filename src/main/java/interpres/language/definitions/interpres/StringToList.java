@@ -13,6 +13,10 @@ import interpres.language.definitions.Definition;
 
 public class StringToList extends Definition {
 
+  /**
+   * Constructs a new StringToList object.
+   * Converts a string to a ListExpression with characters.
+   */
   public StringToList() {
     super("interpres/string-to-list", new LambdaExpression((definitionTable, arguments) -> {
       List<AST> characters = new ArrayList<AST>();

@@ -11,6 +11,10 @@ import interpres.language.definitions.Definition;
 
 public class List extends Definition {
 
+  /**
+   * Constructs a new List object.
+   * Creates a ListExpression based on the given (AST) arguments.
+   */
   public List() {
     super("interpres/list", new LambdaExpression((definitionTable, arguments) -> {
       java.util.List<AST> listItems = new ArrayList<AST>();

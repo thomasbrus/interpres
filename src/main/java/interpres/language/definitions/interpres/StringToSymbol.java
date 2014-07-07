@@ -12,6 +12,10 @@ import interpres.language.definitions.Definition;
 
 public class StringToSymbol extends Definition {
 
+  /**
+   * Constructs a new StringToSymbol object.
+   * Creates a Symbol out of a StringValue.
+   */
   public StringToSymbol() {
     super("interpres/string-to-symbol", new LambdaExpression((definitionTable, arguments) -> {
       StringValue stringValue = (StringValue) arguments.get(0).evaluate(definitionTable);

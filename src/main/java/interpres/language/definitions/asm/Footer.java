@@ -8,6 +8,9 @@ import interpres.language.definitions.Definition;
 
 public class Footer extends Definition {
 
+  /**
+   * Constructs a new Footer.
+   */
   public Footer() {
     super("asm/footer", new LambdaExpression((definitionTable, arguments) -> {
       return new ListExpression(Collections.emptyList());

@@ -10,6 +10,10 @@ import interpres.language.definitions.Definition;
 
 public class Repeat extends Definition {
 
+  /**
+   * Constructs a new Repeat object.
+   * Repeats a given action a given number of times. 
+   */
   public Repeat() {
     super("interpres/repeat", new LambdaExpression((definitionTable, arguments) -> {
       IntegerValue countLiteral = (IntegerValue) arguments.get(0).evaluate(definitionTable);

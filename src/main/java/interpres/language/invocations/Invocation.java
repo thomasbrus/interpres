@@ -9,15 +9,29 @@ public abstract class Invocation {
   private DefinitionTable definitionTable;
   private List<AST> arguments;
 
+  /**
+   * Constructs a new Invocation object.
+   */
   public Invocation(DefinitionTable definitionTable, List<AST> arguments) {
     this.definitionTable = definitionTable;
     this.arguments = arguments;
   }
 
+  /**
+   * Returns the list of arguments of this Invocation.
+   * 
+   * @return list with arguments
+   */
   public List<AST> getArguments() {
     return this.arguments;
   }
 
+
+  /**
+   * Returns the defintion table of this Invocation.
+   * 
+   * @return definition table
+   */
   public DefinitionTable getDefinitionTable() {
     return this.definitionTable;
   }

@@ -8,6 +8,9 @@ import interpres.language.definitions.Definition;
 
 public class Header extends Definition {
 
+  /**
+   * Constructs a new Header object.
+   */
   public Header() {
     super("asm/header", new LambdaExpression((definitionTable, arguments) -> {
       return new ListExpression(Collections.emptyList());

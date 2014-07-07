@@ -11,6 +11,10 @@ import interpres.language.definitions.Definition;
 
 public class Concat extends Definition {
 
+  /**
+   * Constructs a new Concat object.
+   * Concatenates the StringValues given as arguments.
+   */
   public Concat() {
     super("interpres/string/concat", new LambdaExpression((definitionTable, arguments) -> {
       List<String> strings = new ArrayList<String>();
