@@ -21,7 +21,7 @@ public class QuoteExpression extends AST {
   }
 
   public List<String> instructionSequence() {
-    return Arrays.asList(this.expression.toString());
+    return this.expression.instructionSequence();
   }
 }
 
