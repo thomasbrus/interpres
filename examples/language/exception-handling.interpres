@@ -9,9 +9,9 @@ x ; => IrresolvableSymbolException: Could not resolve symbol: x
 (say-hello @"Hi!")
 ; => IrresolvableSymbolException: Could not resolve symbol: say-hello
 ;       at main.say-hello(faulty.interpres:9)
-;       at main.core.list(Native Method)
+;       at main.interpres.list(Native Method)
 
 ; Invoke a core function that expects a certain type
-(core.list.concat @"Not a list")
+(interpres/list/concat @"Not a list")
 ; => ClassCastException: interpres.ast.StringValue cannot be cast to interpres.ast.ListExpression
 
