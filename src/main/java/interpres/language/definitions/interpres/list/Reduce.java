@@ -9,11 +9,11 @@ import interpres.ast.LambdaExpression;
 import interpres.language.definitions.Definition;
 import interpres.language.DefinitionTable;
 
-public class Map extends Definition {
+public class Reduce extends Definition {
 
-  public Map() {
-    super("interpres/list/map", new LambdaExpression((definitionTable, arguments) ->
-      new interpres.language.invocations.interpres.list.Map(definitionTable, arguments).invoke()
+  public Reduce() {
+    super("interpres/list/reduce", new LambdaExpression((definitionTable, arguments) ->
+      new interpres.language.invocations.interpres.list.Reduce(definitionTable, arguments).invoke()
     ));
   }
 
