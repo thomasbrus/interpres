@@ -1,4 +1,4 @@
-package interpres.language.invocations.core;
+package interpres.language.invocations.interpres;
 
 import java.util.List;
 import java.util.Iterator;
