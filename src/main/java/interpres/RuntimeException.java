@@ -1,4 +1,4 @@
-package interpres.language;
+package interpres;
 
 import java.util.Stack;
 import interpres.ast.AST;

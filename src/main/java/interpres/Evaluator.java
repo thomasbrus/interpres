@@ -8,10 +8,10 @@ import java.io.InputStream;
 
 import java.util.Arrays;
 
+import interpres.language.DefinitionTable;
+
 import interpres.ast.AST;
 import interpres.ast.ListExpression;
-
-import interpres.language.DefinitionTable;
 
 public class Evaluator {
   private DefinitionTable definitionTable;
@@ -41,7 +41,7 @@ public class Evaluator {
     try {
       return (CommonTree) parser.parse().getTree();
     } catch (RecognitionException recognitionException) {
-      throw new RuntimeException(recognitionException);
+      throw new java.lang.RuntimeException(recognitionException);
     }
   }
 
@@ -51,7 +51,7 @@ public class Evaluator {
       GrammarLexer lexer = new GrammarLexer(new ANTLRInputStream(inputStream));
       return new CommonTokenStream(lexer);
     } catch (IOException ioException) {
-      throw new RuntimeException(ioException);
+      throw new java.lang.RuntimeException(ioException);
     }
   }
 
@@ -64,7 +64,7 @@ public class Evaluator {
       Transformer.transform_return transformReturn = transformer.transform();
       return transformReturn.ast;
     } catch (RecognitionException recognitionException) {
-      throw new RuntimeException(recognitionException);
+      throw new java.lang.RuntimeException(recognitionException);
     }
   }
 

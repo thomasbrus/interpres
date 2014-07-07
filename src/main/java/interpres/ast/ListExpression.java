@@ -7,10 +7,11 @@ import java.util.Collections;
 import java.util.stream.Collectors;
 
 import interpres.SourceLocation;
+import interpres.RuntimeException;
+import interpres.TypeMismatchException;
 
 import interpres.language.DefinitionTable;
 import interpres.language.SymbolResolver;
-import interpres.language.RuntimeException;
 
 public class ListExpression extends AST {
   private List<AST> items;
@@ -43,6 +44,8 @@ public class ListExpression extends AST {
     try {
       LambdaExpression lambda = (LambdaExpression) this.getFunction().evaluate(definitionTable);
       return lambda.getFunction().apply(definitionTable, this.getArguments());
+    } catch (ClassCastException classCastException) {
+      throw new TypeMismatchException(classCastException.getMessage());
     } catch (RuntimeException runtimeException) {
       throw runtimeException.registerFunctionCall(
         this.getFunctionName(), this.getSourceFileName(), this.getSourceLineNumber()

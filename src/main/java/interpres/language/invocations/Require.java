@@ -20,7 +20,7 @@ import interpres.ast.LambdaExpression;
 
 import interpres.language.definitions.Definition;
 import interpres.language.DefinitionTable;
-import interpres.language.RuntimeException;
+import interpres.RuntimeException;
 
 public class Require extends Invocation {
   private Path basePath;
