@@ -8,7 +8,7 @@
 (core.define @var-array (core.lambda (identifier input-array)
     (core.let (start-address (core.integer-to-string asm.stack.size), index @0)
       (core.list.concat 
-        (core.define identifier (asm.load start-address))
+        (core.define identifier (asm.aload start-address))        
         (core.define (core.symbol.concat identifier @: @address) start-address)
         (asm.loadl (core.list.size input-array))
         (core.list @"newarray int")
