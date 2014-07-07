@@ -67,8 +67,10 @@ public class App {
     definitionTable.define(new interpres.language.definitions.interpres.StringToSymbol());
     definitionTable.define(new interpres.language.definitions.interpres.list.Concat());
     definitionTable.define(new interpres.language.definitions.interpres.list.Size());
+    definitionTable.define(new interpres.language.definitions.interpres.list.At());
     definitionTable.define(new interpres.language.definitions.interpres.list.Reverse());
     definitionTable.define(new interpres.language.definitions.interpres.list.Map());
+    definitionTable.define(new interpres.language.definitions.interpres.list.Reduce());
     definitionTable.define(new interpres.language.definitions.interpres.string.Concat());
     definitionTable.define(new interpres.language.definitions.interpres.symbol.Concat());
     definitionTable.define(new interpres.language.definitions.interpres.character.Ord());

@@ -14,30 +14,38 @@ import interpres.language.DefinitionTable;
 
 import interpres.language.invocations.Invocation;
 
-public class Map extends Invocation {
+public class Reduce extends Invocation {
   private LambdaExpression lambda;
+  private AST initialValue;
   private ListExpression list;
 
-  public Map(DefinitionTable definitionTable, java.util.List<AST> arguments) {
+  public Reduce(DefinitionTable definitionTable, java.util.List<AST> arguments) {
     super(definitionTable, arguments);
     this.lambda = (LambdaExpression) this.getLambdaAST().evaluate(definitionTable);
+    this.initialValue = this.getInitialValueAST().evaluate(definitionTable);
     this.list = (ListExpression) this.getListAST().evaluate(definitionTable);
   }
 
-  public ListExpression invoke() {
-    return new ListExpression(this.list.getItems().stream().map(item -> {
-      return this.lambda.getFunction().apply(
-        this.getDefinitionTable(), Arrays.asList(new QuoteExpression(item))
-      );
-    }).collect(Collectors.toList()));
+  public AST invoke() {
+    return this.list.getItems().stream().reduce(
+      this.initialValue,
+      (memo, item) -> this.lambda.getFunction().apply(
+        this.getDefinitionTable(),
+        Arrays.asList(new QuoteExpression(memo), new QuoteExpression(item))
+      )
+    );
   }
 
   private AST getLambdaAST() {
     return this.getArguments().get(0);
   }
 
-  private AST getListAST() {
+  private AST getInitialValueAST() {
     return this.getArguments().get(1);
+  }
+
+  private AST getListAST() {
+    return this.getArguments().get(2);
   }
 }
 
