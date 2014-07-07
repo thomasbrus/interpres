@@ -13,14 +13,14 @@ public class Concat extends Definition {
 
   public Concat() {
     super("interpres/string/concat", new LambdaExpression((definitionTable, arguments) -> {
-      List<java.lang.String> strings = new ArrayList<java.lang.String>();
+      List<String> strings = new ArrayList<String>();
 
       for (AST argument : arguments) {
         StringValue concatenable = (StringValue) argument.evaluate(definitionTable);
         strings.add(concatenable.getLiteral());
       }
 
-      return new StringValue(java.lang.String.join("", strings));
+      return new StringValue(String.join("", strings));
     }));
   }
 
