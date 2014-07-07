@@ -16,15 +16,30 @@ import interpres.language.SymbolResolver;
 public class ListExpression extends AST {
   private List<AST> items;
 
+  /**
+   * Constructs a new ListExpression.
+   *
+   * @param items 
+   */
   public ListExpression(List<AST> items) {
     this(items, SourceLocation.NATIVE_METHOD);
   }
 
+  /**
+   * Constructs a new ListExpression.
+   *
+   * @param items 
+   * @param sourceLocation the SourceLocation of this expression
+   */
   public ListExpression(List<AST> items, SourceLocation sourceLocation) {
     super(sourceLocation);
     this.items = items;
   }
 
+  /**
+   *
+   *
+   */
   public static ListExpression buildFunctionCall(String name, List<AST> arguments) {
     List<AST> items = new ArrayList<AST>();
     items.add(new Symbol(name));
@@ -32,14 +47,26 @@ public class ListExpression extends AST {
     return new ListExpression(items);
   }
 
+  /**
+   *
+   *
+   */
   public static ListExpression buildFunctionCall(String name, AST argument) {
     return buildFunctionCall(name, Arrays.asList(argument));
   }
 
+  /**
+   *
+   *
+   */
   public static ListExpression buildFunctionCall(String name) {
     return buildFunctionCall(name, Collections.emptyList());
   }
 
+  /**
+   *
+   *
+   */
   public AST evaluate(DefinitionTable definitionTable) {
     try {
       LambdaExpression lambda = (LambdaExpression) this.getFunction().evaluate(definitionTable);
@@ -53,18 +80,34 @@ public class ListExpression extends AST {
     }
   }
 
+  /**
+   *
+   *
+   */
   public List<AST> getItems() {
     return this.items;
   }
 
+  /**
+   *
+   *
+   */
   public AST getItem(int index) {
     return this.items.get(index);
   }
 
+  /**
+   *
+   *
+   */
   public String getFunctionName() {
     return this.getFunction().getName();
   }
 
+  /**
+   *
+   *
+   */
   public List<String> instructionSequence() {
     List<java.lang.String> instructionSequence = new ArrayList<String>();
 
@@ -75,10 +118,18 @@ public class ListExpression extends AST {
     return instructionSequence;
   }
 
+  /**
+   *
+   *
+   */
   private Symbol getFunction() {
     return (Symbol) this.items.get(0);
   }
 
+  /**
+   *
+   *
+   */
   private List<AST> getArguments() {
     return this.items.subList(1, this.items.size());
   }

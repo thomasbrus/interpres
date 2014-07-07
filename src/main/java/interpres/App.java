@@ -24,6 +24,11 @@ public class App {
   private PrintStream outputStream;
   private Path basePath;
 
+  /**
+   * Constructs a new App object.
+   *
+   * @param pathname the path towards the interpres script to run
+   */
   public App(String pathname) throws IOException, RecognitionException{
     this.basePath = Paths.get(pathname).getParent();
     this.inputStream = new FileInputStream(pathname);
@@ -36,6 +41,9 @@ public class App {
     this.evaluator = new Evaluator(definitionTable, (new File(pathname)).getName());
   }
 
+  /**
+   * Runs this App object, which will generate instructions.
+   */
   public void run() throws IOException, RecognitionException {
     evaluator.evaluateWithLayout(this.inputStream).printInstructionSequence(this.outputStream);
   }
