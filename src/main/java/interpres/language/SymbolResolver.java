@@ -1,5 +1,7 @@
 package interpres.language;
 
+import interpres.RuntimeException;
+
 import interpres.ast.AST;
 import interpres.ast.Symbol;
 import interpres.ast.ListExpression;
