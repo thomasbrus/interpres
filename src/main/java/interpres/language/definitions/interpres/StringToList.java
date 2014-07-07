@@ -1,4 +1,4 @@
-package interpres.language.definitions.core;
+package interpres.language.definitions.interpres;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ import interpres.language.definitions.Definition;
 public class StringToList extends Definition {
 
   public StringToList() {
-    super("core.string-to-list", new LambdaExpression((definitionTable, arguments) -> {
+    super("interpres/string-to-list", new LambdaExpression((definitionTable, arguments) -> {
       List<AST> characters = new ArrayList<AST>();
       StringValue string = (StringValue) arguments.get(0).evaluate(definitionTable);
 

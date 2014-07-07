@@ -69,11 +69,11 @@ public class Evaluator {
   }
 
   private AST evaluateHeader() {
-    return ListExpression.buildFunctionCall("asm.header").evaluate(this.definitionTable);
+    return ListExpression.buildFunctionCall("asm/header").evaluate(this.definitionTable);
   }
 
   private AST evaluateFooter() {
-    return ListExpression.buildFunctionCall("asm.footer").evaluate(this.definitionTable);
+    return ListExpression.buildFunctionCall("asm/footer").evaluate(this.definitionTable);
   }
 }
 

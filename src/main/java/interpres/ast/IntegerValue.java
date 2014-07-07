@@ -13,7 +13,7 @@ public class IntegerValue extends AST {
   }
 
   public AST evaluate(DefinitionTable definitionTable) {
-    return ListExpression.buildFunctionCall("asm.loadl", new QuoteExpression(this))
+    return ListExpression.buildFunctionCall("asm/loadl", new QuoteExpression(this))
       .evaluate(definitionTable);
   }
 

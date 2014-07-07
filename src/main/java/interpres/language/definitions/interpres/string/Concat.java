@@ -1,4 +1,4 @@
-package interpres.language.definitions.core.string;
+package interpres.language.definitions.interpres.string;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ import interpres.language.definitions.Definition;
 public class Concat extends Definition {
 
   public Concat() {
-    super("core.string.concat", new LambdaExpression((definitionTable, arguments) -> {
+    super("interpres/string/concat", new LambdaExpression((definitionTable, arguments) -> {
       List<java.lang.String> strings = new ArrayList<java.lang.String>();
 
       for (AST argument : arguments) {

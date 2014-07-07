@@ -14,7 +14,7 @@ public class StringValue extends AST {
   }
 
   public AST evaluate(DefinitionTable definitionTable) {
-    return ListExpression.buildFunctionCall("asm.loads", new QuoteExpression(this))
+    return ListExpression.buildFunctionCall("asm/loads", new QuoteExpression(this))
       .evaluate(definitionTable);
   }
 

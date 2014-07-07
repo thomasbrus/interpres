@@ -1,4 +1,4 @@
-package interpres.language.definitions.core.list;
+package interpres.language.definitions.interpres.list;
 
 import java.util.Arrays;
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ import interpres.language.DefinitionTable;
 public class Map extends Definition {
 
   public Map() {
-    super("core.list.map", new LambdaExpression((definitionTable, arguments) ->
+    super("interpres/list/map", new LambdaExpression((definitionTable, arguments) ->
       new interpres.language.invocations.core.list.Map(definitionTable, arguments).invoke()
     ));
   }

@@ -1,4 +1,4 @@
-package interpres.language.definitions.core;
+package interpres.language.definitions.interpres;
 
 import java.util.Arrays;
 
@@ -11,7 +11,7 @@ import interpres.language.definitions.Definition;
 public class Quote extends Definition {
 
   public Quote() {
-    super("core.quote", new LambdaExpression((definitionTable, arguments) -> {
+    super("interpres/quote", new LambdaExpression((definitionTable, arguments) -> {
       return new QuoteExpression(arguments.get(0)).evaluate(definitionTable);
     }));
   }

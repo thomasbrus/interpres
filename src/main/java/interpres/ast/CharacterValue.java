@@ -13,7 +13,7 @@ public class CharacterValue extends AST {
   }
 
   public AST evaluate(DefinitionTable definitionTable) {
-    return ListExpression.buildFunctionCall("asm.loadc", new QuoteExpression(this))
+    return ListExpression.buildFunctionCall("asm/loadc", new QuoteExpression(this))
       .evaluate(definitionTable);
   }
 

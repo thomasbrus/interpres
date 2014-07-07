@@ -1,4 +1,4 @@
-package interpres.language.definitions.core;
+package interpres.language.definitions.interpres;
 
 import java.util.Collections;
 
@@ -12,7 +12,7 @@ import interpres.language.definitions.Definition;
 public class Define extends Definition {
 
   public Define() {
-    super("core.define", new LambdaExpression((definitionTable, arguments) -> {
+    super("interpres/define", new LambdaExpression((definitionTable, arguments) -> {
       Symbol symbol = (Symbol) arguments.get(0).evaluate(definitionTable);
       AST value = arguments.get(1).evaluate(definitionTable);
       definitionTable.define(symbol.getName(), value);

@@ -11,7 +11,7 @@ public class Program extends AST {
   }
 
   public ListExpression evaluate(DefinitionTable definitionTable) {
-    return (ListExpression) ListExpression.buildFunctionCall("core.list", this.expressions)
+    return (ListExpression) ListExpression.buildFunctionCall("interpres/list", this.expressions)
       .evaluate(definitionTable);
   }
 }

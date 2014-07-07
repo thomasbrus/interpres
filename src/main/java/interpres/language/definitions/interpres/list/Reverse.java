@@ -1,4 +1,4 @@
-package interpres.language.definitions.core.list;
+package interpres.language.definitions.interpres.list;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ import interpres.language.definitions.Definition;
 public class Reverse extends Definition {
 
   public Reverse() {
-    super("core.list.reverse", new LambdaExpression((definitionTable, arguments) -> {
+    super("interpres/list/reverse", new LambdaExpression((definitionTable, arguments) -> {
       List<AST> reversedList = new ArrayList<AST>();
       ListExpression originalList = (ListExpression) arguments.get(0).evaluate(definitionTable);
 

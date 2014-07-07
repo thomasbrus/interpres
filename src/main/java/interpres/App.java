@@ -45,27 +45,27 @@ public class App {
   }
 
   private void setupDefinitionTable(DefinitionTable definitionTable) {
-    definitionTable.define(new interpres.language.definitions.core.Define());
-    definitionTable.define(new interpres.language.definitions.core.Bind());
-    definitionTable.define(new interpres.language.definitions.core.Let());
-    definitionTable.define(new interpres.language.definitions.core.Lambda());
-    definitionTable.define(new interpres.language.definitions.core.Quote());
-    definitionTable.define(new interpres.language.definitions.core.Unquote());
-    definitionTable.define(new interpres.language.definitions.core.Repeat());
-    definitionTable.define(new interpres.language.definitions.core.List());
-    definitionTable.define(new interpres.language.definitions.core.StringToList());
-    definitionTable.define(new interpres.language.definitions.core.IntegerToString());
-    definitionTable.define(new interpres.language.definitions.core.SymbolToString());
-    definitionTable.define(new interpres.language.definitions.core.StringToSymbol());
-    definitionTable.define(new interpres.language.definitions.core.list.Concat());
-    definitionTable.define(new interpres.language.definitions.core.list.Size());
-    definitionTable.define(new interpres.language.definitions.core.list.Reverse());
-    definitionTable.define(new interpres.language.definitions.core.list.Map());
-    definitionTable.define(new interpres.language.definitions.core.string.Concat());
-    definitionTable.define(new interpres.language.definitions.core.symbol.Concat());
-    definitionTable.define(new interpres.language.definitions.core.character.Ord());
-    definitionTable.define(new interpres.language.definitions.core.integer.Add());
-    definitionTable.define(new interpres.language.definitions.core.integer.Subtract());
+    definitionTable.define(new interpres.language.definitions.interpres.Define());
+    definitionTable.define(new interpres.language.definitions.interpres.Bind());
+    definitionTable.define(new interpres.language.definitions.interpres.Let());
+    definitionTable.define(new interpres.language.definitions.interpres.Lambda());
+    definitionTable.define(new interpres.language.definitions.interpres.Quote());
+    definitionTable.define(new interpres.language.definitions.interpres.Unquote());
+    definitionTable.define(new interpres.language.definitions.interpres.Repeat());
+    definitionTable.define(new interpres.language.definitions.interpres.List());
+    definitionTable.define(new interpres.language.definitions.interpres.StringToList());
+    definitionTable.define(new interpres.language.definitions.interpres.IntegerToString());
+    definitionTable.define(new interpres.language.definitions.interpres.SymbolToString());
+    definitionTable.define(new interpres.language.definitions.interpres.StringToSymbol());
+    definitionTable.define(new interpres.language.definitions.interpres.list.Concat());
+    definitionTable.define(new interpres.language.definitions.interpres.list.Size());
+    definitionTable.define(new interpres.language.definitions.interpres.list.Reverse());
+    definitionTable.define(new interpres.language.definitions.interpres.list.Map());
+    definitionTable.define(new interpres.language.definitions.interpres.string.Concat());
+    definitionTable.define(new interpres.language.definitions.interpres.symbol.Concat());
+    definitionTable.define(new interpres.language.definitions.interpres.character.Ord());
+    definitionTable.define(new interpres.language.definitions.interpres.integer.Add());
+    definitionTable.define(new interpres.language.definitions.interpres.integer.Subtract());
 
     definitionTable.define(new interpres.language.definitions.asm.Header());
     definitionTable.define(new interpres.language.definitions.asm.Footer());

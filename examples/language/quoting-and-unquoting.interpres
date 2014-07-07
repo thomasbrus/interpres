@@ -1,23 +1,23 @@
 ; -----------------------------------------------------------------------------
 ; These are equivalent, thanks to quoting of @my-var
-(core.define @identity (core.lambda (my-var) my-var))
+(interpres/define @identity (interpres/lambda (my-var) my-var))
 (identity @hello) ; => hello (Symbol)
 
-(core.define @identity-2 (core.lambda (@my-var) my-var))
+(interpres/define @identity-2 (interpres/lambda (@my-var) my-var))
 (identity-2 hello) ; => hello (Symbol)
 
 
 ; -----------------------------------------------------------------------------
 ; Data can be turned into code
-(core.define @list-data (core.list @core.list.reverse @@(1 2 3)))
+(interpres/define @list-data (interpres/list @interpres/list/reverse @@(1 2 3)))
 
-list-data ; => (core.list.reverse 1 2 3)
+list-data ; => (interpres/list/reverse 1 2 3)
 ~list-data ; => (3 2 1)
 
 
 ; -----------------------------------------------------------------------------
 ; Quoting and unquoting even eachother out
-(core.define @say-hello (core.lambda (message) message))
+(interpres/define @say-hello (interpres/lambda (message) message))
 
 (say-hello @"Hi!") ; => "Hi!"
 ~@~@~@(say-hello @"Hi!") ; => "Hi!"

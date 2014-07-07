@@ -1,4 +1,4 @@
-package interpres.language.definitions.core;
+package interpres.language.definitions.interpres;
 
 import interpres.ast.LambdaExpression;
 import interpres.language.definitions.Definition;
@@ -6,7 +6,7 @@ import interpres.language.definitions.Definition;
 public class Let extends Definition {
 
   public Let() {
-    super("core.let", new LambdaExpression((definitionTable, arguments) ->
+    super("interpres/let", new LambdaExpression((definitionTable, arguments) ->
       new interpres.language.invocations.core.Let(definitionTable, arguments).invoke()
     ));
   }

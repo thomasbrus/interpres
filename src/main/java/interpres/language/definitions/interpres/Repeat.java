@@ -1,4 +1,4 @@
-package interpres.language.definitions.core;
+package interpres.language.definitions.interpres;
 
 import java.util.Collections;
 
@@ -11,11 +11,11 @@ import interpres.language.definitions.Definition;
 public class Repeat extends Definition {
 
   public Repeat() {
-    super("core.repeat", new LambdaExpression((definitionTable, arguments) -> {
+    super("interpres/repeat", new LambdaExpression((definitionTable, arguments) -> {
       IntegerValue countLiteral = (IntegerValue) arguments.get(0).evaluate(definitionTable);
 
       return ListExpression.buildFunctionCall(
-        "core.list", Collections.nCopies(countLiteral.getValue(), arguments.get(1))
+        "interpres/list", Collections.nCopies(countLiteral.getValue(), arguments.get(1))
       ).evaluate(definitionTable);
     }));
   }

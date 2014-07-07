@@ -1,4 +1,4 @@
-package interpres.language.definitions.core.symbol;
+package interpres.language.definitions.interpres.symbol;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ import interpres.language.definitions.Definition;
 public class Concat extends Definition {
 
   public Concat() {
-    super("core.symbol.concat", new LambdaExpression((definitionTable, arguments) -> {
+    super("interpres/symbol/concat", new LambdaExpression((definitionTable, arguments) -> {
       List<String> symbolNames = new ArrayList<String>();
 
       for (AST argument : arguments) {

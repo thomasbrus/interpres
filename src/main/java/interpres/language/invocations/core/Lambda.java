@@ -35,7 +35,7 @@ public class Lambda extends Invocation {
       letArguments.add(new QuoteExpression(new ListExpression(localBindingASTs)));
       letArguments.addAll(this.getExpressionASTs());
 
-      return ListExpression.buildFunctionCall("core.let", letArguments).evaluate(this.getDefinitionTable());
+      return ListExpression.buildFunctionCall("interpres/let", letArguments).evaluate(this.getDefinitionTable());
     });
   }
 

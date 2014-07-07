@@ -1,4 +1,4 @@
-package interpres.language.definitions.core;
+package interpres.language.definitions.interpres;
 
 import java.util.ArrayList;
 
@@ -12,7 +12,7 @@ import interpres.language.definitions.Definition;
 public class List extends Definition {
 
   public List() {
-    super("core.list", new LambdaExpression((definitionTable, arguments) -> {
+    super("interpres/list", new LambdaExpression((definitionTable, arguments) -> {
       java.util.List<AST> listItems = new ArrayList<AST>();
 
       for (AST argument : arguments) {
