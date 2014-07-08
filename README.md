@@ -3,7 +3,7 @@ Interpres is a LISP that allows programmers to create their own language DSL, ta
 
 To make this possible, Interpres programs output a sequence of assembly instructions. Consider the following example for an imaginary assembly language:
 
-```clojure
+```scheme
 ; The language DSL. Defines + and print-int
 (interpres/define @print-int (interpres/lambda (int)
   (interpres/list int (asm/call @"PUTINT") (asm/call @"PUTEOL"))))
