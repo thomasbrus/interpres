@@ -33,7 +33,7 @@ Please head over to [interpres-imperative](https://github.com/thomasbrus/interpr
 ## Usage instructions
 Download the latest release from [thomasbrus/interpres/releases](https://github.com/thomasbrus/interpres/releases). Place the JAR in your classpath and execute the following command:
 
-`java interpres.App my-dsl.interpres`
+    java interpres.App my-dsl.interpres
 
 See [examples/language](examples/language) for a few examples. See [thomasbrus/interpres-imperative/examples](https://github.com/thomasbrus/interpres-imperative/tree/master/examples) for some more interesting examples.
 
