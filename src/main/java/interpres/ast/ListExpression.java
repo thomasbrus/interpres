@@ -19,7 +19,7 @@ public class ListExpression extends AST {
   /**
    * Constructs a new ListExpression.
    *
-   * @param items 
+   * @param items the items of this ListExpression
    */
   public ListExpression(List<AST> items) {
     this(items, SourceLocation.NATIVE_METHOD);
@@ -28,7 +28,7 @@ public class ListExpression extends AST {
   /**
    * Constructs a new ListExpression.
    *
-   * @param items 
+   * @param items the items of this ListExpression
    * @param sourceLocation the SourceLocation of this expression
    */
   public ListExpression(List<AST> items, SourceLocation sourceLocation) {
@@ -37,8 +37,11 @@ public class ListExpression extends AST {
   }
 
   /**
-   *
-   *
+   * Builds a new ListExpression based on a lists of arguments.
+   * 
+   * @param name the name of the function call
+   * @param arguments the corresponding arguments
+   * @return a new ListExpression containing the function call
    */
   public static ListExpression buildFunctionCall(String name, List<AST> arguments) {
     List<AST> items = new ArrayList<AST>();
@@ -48,24 +51,31 @@ public class ListExpression extends AST {
   }
 
   /**
-   *
-   *
+   * Builds a new ListExpression based on a single argument.
+   * 
+   * @param name the name of the function call
+   * @param argument the corresponding argument
+   * @return a new ListExpression containing the function call
    */
   public static ListExpression buildFunctionCall(String name, AST argument) {
     return buildFunctionCall(name, Arrays.asList(argument));
   }
 
   /**
+   * Builds a new ListExpression with a given name.
    *
-   *
+   * @param name the name of the function call
+   * @return a new ListExpression containing the function call
    */
   public static ListExpression buildFunctionCall(String name) {
     return buildFunctionCall(name, Collections.emptyList());
   }
 
   /**
+   * Evaluates the current ListExpression. 
    *
-   *
+   * @param definitionTable the definition table used while evaluating the object
+   * @return the generated AST
    */
   public AST evaluate(DefinitionTable definitionTable) {
     try {
@@ -81,32 +91,37 @@ public class ListExpression extends AST {
   }
 
   /**
+   * Returns the items of this ListExpression.
    *
-   *
+   * @return items of this object
    */
   public List<AST> getItems() {
     return this.items;
   }
 
   /**
+   * Returns a specific item of this ListExpression.
    *
-   *
+   * @param index the index of the item
+   * @return the AST of the item
    */
   public AST getItem(int index) {
     return this.items.get(index);
   }
 
   /**
+   * Returns the function name of the current ListExpression.
    *
-   *
+   * @return the name of this function
    */
   public String getFunctionName() {
     return this.getFunction().getName();
   }
 
   /**
+   * Returns the instructions corresponding with this object.
    *
-   *
+   * @return List of Strings containing the instructions belonging to this object
    */
   public List<String> instructionSequence() {
     List<java.lang.String> instructionSequence = new ArrayList<String>();
@@ -118,18 +133,10 @@ public class ListExpression extends AST {
     return instructionSequence;
   }
 
-  /**
-   *
-   *
-   */
   private Symbol getFunction() {
     return (Symbol) this.items.get(0);
   }
 
-  /**
-   *
-   *
-   */
   private List<AST> getArguments() {
     return this.items.subList(1, this.items.size());
   }

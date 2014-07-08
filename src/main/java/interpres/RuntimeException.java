@@ -9,6 +9,8 @@ public class RuntimeException extends java.lang.RuntimeException {
 
   /**
    * Constructs a new RuntimeException.
+   *
+   * @param message the message of this RuntimeException
    */
   public RuntimeException(String message) {
     super(message);

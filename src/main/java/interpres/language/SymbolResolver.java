@@ -31,7 +31,7 @@ public class SymbolResolver {
   /**
    * Resolves a symbol into an AST.
    *
-   * @param definitionTable the DefinitionTable to work with
+   * @param symbol the Symbol to resolve
    * @return the corresponding AST
    * @throws IrresolvableSymbolException if !definitionTable.contains(symbol)
    */

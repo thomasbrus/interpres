@@ -11,6 +11,9 @@ public abstract class Invocation {
 
   /**
    * Constructs a new Invocation object.
+   * 
+   * @param definitionTable the definition table to work with
+   * @param arguments the arguments of this invokation
    */
   public Invocation(DefinitionTable definitionTable, List<AST> arguments) {
     this.definitionTable = definitionTable;
@@ -36,6 +39,7 @@ public abstract class Invocation {
     return this.definitionTable;
   }
 
+  
   public abstract AST invoke();
 }
 

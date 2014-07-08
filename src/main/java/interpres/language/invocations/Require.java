@@ -29,7 +29,7 @@ public class Require extends Invocation {
   /**
    * Constructs a new FileNotFoundException.
    *
-   * @param message Message to 
+   * @param message the exception message to display
    */
     public FileNotFoundException(String message) {
       super(message);
@@ -40,8 +40,8 @@ public class Require extends Invocation {
    * Constructs a new Require object.
    *
    * @param definitionTable the definition table to work with
-   * @param arguments 
-   * @param basePath 
+   * @param arguments the arguments for this require
+   * @param basePath path from which the requir
    */
   public Require(DefinitionTable definitionTable, List<AST> arguments, Path basePath) {
     super(definitionTable, arguments);

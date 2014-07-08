@@ -44,7 +44,7 @@ public class Evaluator {
    * including header and footer.
    *
    * @param inputStream the InputStream to use
-   * @result AST of the parsed contents of the input
+   * @return AST of the parsed contents of the input
    */
   public AST evaluateWithLayout(InputStream inputStream) {
     AST body = (AST) this.evaluate(inputStream);

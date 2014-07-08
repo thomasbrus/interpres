@@ -28,6 +28,8 @@ public class App {
    * Constructs a new App object.
    *
    * @param pathname the path towards the interpres script to run
+   * @throws IOException if file not found
+   * @throws RecognitionException on invalid syntax
    */
   public App(String pathname) throws IOException, RecognitionException{
     this.basePath = Paths.get(pathname).getParent();
@@ -43,6 +45,8 @@ public class App {
 
   /**
    * Runs this App object, which will generate instructions.
+   * @throws IOException if file not found
+   * @throws RecognitionException on invalid syntax 
    */
   public void run() throws IOException, RecognitionException {
     evaluator.evaluateWithLayout(this.inputStream).printInstructionSequence(this.outputStream);

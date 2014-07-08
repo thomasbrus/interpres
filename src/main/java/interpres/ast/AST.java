@@ -31,6 +31,7 @@ public abstract class AST implements Iterable<java.lang.String> {
    * Evaluates the current AST.  
    *
    * @param definitionTable the definition table used while evaluating the object
+   * @return the generated AST
    */
   public abstract AST evaluate(DefinitionTable definitionTable);
 
