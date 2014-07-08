@@ -21,9 +21,9 @@ To make this possible, Interpres programs output a sequence of assembly instruct
 Please head over to [interpres-imperative](https://github.com/thomasbrus/interpres-imperative) to get a more complete specific idea of what is possible.
 
 ## Features
-* Defining functions and values using `define`
-* Lambda functions with default arguments
+* Adding definitions using `define`
 * Lexical scope with `bind`
+* Lambda functions with default arguments
 * Let-in expressions
 * Backtrace with line numbers and filename
 * Quoting and unquoting (*code as data*)
@@ -35,7 +35,7 @@ Download the latest release from [thomasbrus/interpres/releases](https://github.
 
 `java interpres.App my-dsl.interpres`
 
-Seee [examples/language](examples/language) for a few examples. Some more interesting examples are available at [thomasbrus/interpres-imperative](https://github.com/thomasbrus/interpres/commits/master?page=3)
+See [examples/language](examples/language) for a few examples. See [thomasbrus/interpres-imperative/examples](https://github.com/thomasbrus/interpres-imperative/tree/master/examples) for some more interesting examples.
 
 ## Development
 ### Prerequisites
