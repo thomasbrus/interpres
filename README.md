@@ -6,10 +6,10 @@ To make this possible, Interpres programs output a sequence of assembly instruct
 ```clojure
 ; The language DSL. Defines + and print-int
 (interpres/define @print-int (interpres/lambda (int)
-  (interpres/list int (asm.call @"putint") (asm.call @"puteol"))))
+  (interpres/list int (asm/call @putint) (asm/call @puteol))))
 
 (interpres/define @+ (lambda (first-integer second-integer)
-  (interpres/list (asm.loadl first-integer) (asm.loadl second-integer) (asm.call @"add"))))
+  (interpres/list (asm/loadl first-integer) (asm/loadl second-integer) (asm/call @"add"))))
 
 (define @asm/loadl (lambda (literal) (interpres/string/conat @"LOADL " literal)))
 (define @asm/call (lambda (address) (interpres/string/concat @"CALL " address)))
