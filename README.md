@@ -8,11 +8,14 @@ To make this possible, Interpres programs output a sequence of assembly instruct
 (interpres/define @print-int (interpres/lambda (int)
   (interpres/list int (asm/call @putint) (asm/call @puteol))))
 
-(interpres/define @+ (lambda (first-integer second-integer)
+(interpres/define @+ (interpres/lambda (first-integer second-integer)
   (interpres/list (asm/loadl first-integer) (asm/loadl second-integer) (asm/call @"add"))))
 
-(define @asm/loadl (lambda (literal) (interpres/string/conat @"LOADL " literal)))
-(define @asm/call (lambda (address) (interpres/string/concat @"CALL " address)))
+(interpres/define @asm/loadl (interpres/lambda (literal)
+  (interpres/string/conat @"LOADL " literal)))
+
+(interpres/define @asm/call (interpres/lambda (address)
+  (interpres/string/concat @"CALL " address)))
 
 ; An actual program, using the above definitions
 (print-int (+ 1 2)) ; => ["LOADL 1", "LOADL 2", "CALL add", "CALL putint", "CALL puteol"]
