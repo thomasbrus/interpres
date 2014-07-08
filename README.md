@@ -21,7 +21,7 @@ To make this possible, Interpres programs output a sequence of assembly instruct
 (print-int (+ 1 2)) ; => ["LOADL 1", "LOADL 2", "CALL ADD", "CALL PUTINT", "CALL PUTEOL"]
 ```
 
-Please head over to [interpres-imperative](https://github.com/thomasbrus/interpres-imperative) to get a more complete specific idea of what is possible.
+Please head over to [interpres-imperative](https://github.com/thomasbrus/interpres-imperative) to get a more specific idea of what is possible.
 
 ## Features
 * Adding definitions using `define`
