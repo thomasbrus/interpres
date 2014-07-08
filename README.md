@@ -1,59 +1,43 @@
 # Interpres
-Interpres is a LISP dialect that helps programmers write programs that **emit assembly
-instructions for any platform**. This is accomplished by implementing every language feature in terms of a list
-of assembly instructions. After an Interpres program is evaluated, its output can be run by the
-interpreter of the target platform (JVM, LLVM, ...).
+Interpres is a LISP that allows programmers to create their own language DSL, targeted at any platform. A programmer may for example decide to implemented an `if` and `while`function, that compile to the JVM.
 
-In order to not leave a programmer empty handed when getting started, a number of prelude
-libraries targeted at different platforms are provided. These libraries implement a minimal set
-of imperative programming constructs, such as `var`, `if`, `println`, as well as arithmetic
-operations, and defining and invoking procedures.
-
-## Example
-The following example showcases a simple program in which two numbers are added together and
-its resulted is printed to the screen. Even though this is an elementary example, much is
-going on.
+To make this possible, Interpres programs output a sequence of assembly instructions. Consider the following example for an imaginary assembly language:
 
 ```clojure
-; Standard library functions, for example defined in Prelude.TAM
-(define asm.loadl (lambda [literal] ["LOADL " literal]))
-(define asm.call (lambda [address] ["CALL " address]))
+; The language DSL. Defines + and print-int
+(interpres/define @print-int (interpres/lambda (int)
+  (interpres/list int (asm.call @"putint") (asm.call @"puteol"))))
 
-(define print-int (lambda [int] [int (asm.call "putint") (asm.call "puteol")]))
-(define + (lambda [a b] [(asm.loadl a) (asm.loadl b) (asm.call "add")])) ;
+(interpres/define @+ (lambda (first-integer second-integer)
+  (interpres/list (asm.loadl first-integer) (asm.loadl second-integer) (asm.call @"add"))))
 
-; The actual program, which makes use of the Prelude targeted at TAM
-(import Prelude.TAM)
+(define @asm/loadl (lambda (literal) (interpres/string/conat @"LOADL " literal)))
+(define @asm/call (lambda (address) (interpres/string/concat @"CALL " address)))
+
+; An actual program, using the above definitions
 (print-int (+ 1 2)) ; => ["LOADL 1", "LOADL 2", "CALL add", "CALL putint", "CALL puteol"]
 ```
 
-First the meta-function `print-int` is defined. In order for this function to output the correct
-set of assembly instructions, it will need to evaluate its first argument (`int`, which in turn
-produces assembly instructions), and subsequently output the instructions which print an integer to
-the screen. To accomplish this a helper function called `asm.call` is defined.
+Please head over to [interpres-imperative](https://github.com/thomasbrus/interpres-imperative) to get a more complete specific idea of what is possible.
 
-Next, another meta-function is defined, namely `+`. For the sake of the example, it is assumed
-that both arguments are integer literals. Hence `asm.loadl x` is called. In Interpres, these
-integers would have been replaced already at compile-time by their respective assembly instructions.
+## Features
+* Defining functions and values using `define`
+* Lambda functions with default arguments
+* Lexical scope with `bind`
+* Let-in expressions
+* Backtrace with line numbers and filename
+* Quoting and unquoting (*code as data*)
+* [Builtin functions](https://github.com/thomasbrus/interpres/tree/master/src/main/java/interpres/language/definitions/interpres) to work with lists, symbols, strings, characters and integers
+* Requiring of files relative to current file
 
-Finally, when the program is evaluated, the `print-int` instruction will produce a list of valid
-assembly instructions. In this case, instructions for the
-[Triangle virtual machine (TAM)](http://www.dcs.gla.ac.uk/~daw/books/PLPJ/software.html).
-This specific program can be executed by using the TAM Interpreter.
+## Usage instructions
+Download the latest release from [thomasbrus/interpres/releases](https://github.com/thomasbrus/interpres/releases). Place the JAR in your classpath and execute the following command:
 
-## Advantages
+`java interpres.App my-dsl.interpres`
 
-- Freedom
-  - Programs can be targeted at *any* platform without messing with the Interpres infrastructure.
-  - Inherent extensibility of the language at meta level due to the LISP syntax.
-- Power
-  - Having a number of prelude libraries available allows the programmer to get started right away.
-    By writing macros the language can be further extended and made even more powerful.
-- Speed
-  - Every language feature can be implemented in terms of low level assembly instructions.
-  - Compiled programs take full advantage of the speed of its target platform.
+Seee [examples/language](examples/language) for a few examples. Some more interesting examples are available at [thomasbrus/interpres-imperative](https://github.com/thomasbrus/interpres/commits/master?page=3)
 
-## Building & Running
+## Development
 ### Prerequisites
 This project requires the following software to be installed:
 
@@ -72,12 +56,13 @@ Using Maven, the project is compiled by issuing the `mvn compile` command. The p
 then be run by providing a programming written in Interpres and passing it to the main app:
 
     $ mvn compile
-    $ mvn exec:java -Dexec.mainClass="interpres.App" < my-program.interpres
+    $ mvn exec:java -Dexec.mainClass="interpres.App" my-program.interpres
 
-This command will produce a bunch of output, probably more than you'd hoped for. This can be
-circumvented by first compiling the project into a JAR, and then running it using the regular `java`
-command:
+An alternative way is using `mvn package`. This will not produce as much debugging output and it does not hang for a few seconds each time.
 
     $ mvn package
-    $ java -classpath target/interpres-0.0.1.jar interpres.App < my-program.interpres
+    $ java -classpath target/interpres-<version>.jar interpres.App my-program.interpres
 
+## License
+
+See [LICENSE.txt](LICENSE.txt).
