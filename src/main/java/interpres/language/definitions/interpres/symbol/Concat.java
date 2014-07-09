@@ -11,10 +11,6 @@ import interpres.language.definitions.Definition;
 
 public class Concat extends Definition {
 
-  /**
-   * Constructs a new Concat object.
-   * Concatenates the Symbols given as arguments.
-   */
   public Concat() {
     super("interpres/symbol/concat", new LambdaExpression((definitionTable, arguments) -> {
       List<String> symbolNames = new ArrayList<String>();

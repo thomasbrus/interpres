@@ -11,10 +11,6 @@ import interpres.language.definitions.Definition;
 
 public class Size extends Definition {
 
-  /**
-   * Constructs a new Size object.
-   * Returns an IntegerValue with the size of a given ListExpression.
-   */
   public Size() {
     super("interpres/list/size", new LambdaExpression((definitionTable, arguments) -> {
       ListExpression list = (ListExpression) arguments.get(0).evaluate(definitionTable);

@@ -11,10 +11,6 @@ import interpres.language.definitions.Definition;
 
 public class Reverse extends Definition {
 
-  /**
-   * Constructs a new Reverse object.
-   * Returns a ListExpression with given arguments in a reversed order.
-   */
   public Reverse() {
     super("interpres/list/reverse", new LambdaExpression((definitionTable, arguments) -> {
       List<AST> reversedList = new ArrayList<AST>();

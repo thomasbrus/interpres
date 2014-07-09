@@ -17,20 +17,11 @@ public class FormalArgumentsList {
   private ListExpression listExpression;
   private Map<AST, AST> bindings;
 
-  /**
-   * Constructs a new FormalArgumentsList.
-   *
-   * @param listExpression the listExpression to work with
-   */
   public FormalArgumentsList(ListExpression listExpression) {
     this.listExpression = listExpression;
     this.bindings = new HashMap<AST, AST>();
   }
 
-  /**
-   * 
-   * 
-   */
   public void bindActualArguments(List<AST> actualArguments) {
     for (int i = 0; i < this.getFormalArgumentASTs().size(); i++) {
       AST actualArgument, formalArgument = this.getFormalArgumentASTs().get(i);
@@ -49,19 +40,10 @@ public class FormalArgumentsList {
     }
   }
 
-  /**
-   * 
-   * 
-   */
   public Map<AST, AST> getBindings() {
     return this.bindings;
   }
 
-
-  /**
-   * 
-   * 
-   */
   public List<AST> getFormalArgumentASTs() {
     return this.mapArgumentASTs(itemAST -> {
       if (itemAST instanceof ListExpression)
@@ -71,10 +53,6 @@ public class FormalArgumentsList {
     });
   }
 
-  /**
-   * 
-   * 
-   */
   public List<AST> getDefaultArgumentASTs() {
     return this.mapArgumentASTs(itemAST -> {
       if (itemAST instanceof ListExpression)

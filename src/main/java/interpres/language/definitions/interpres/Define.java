@@ -11,10 +11,6 @@ import interpres.language.definitions.Definition;
 
 public class Define extends Definition {
 
-  /**
-   * Constructs a new Define object.
-   * Adds a new definition to the definition table.
-   */
   public Define() {
     super("interpres/define", new LambdaExpression((definitionTable, arguments) -> {
       Symbol symbol = (Symbol) arguments.get(0).evaluate(definitionTable);

@@ -17,35 +17,16 @@ public class Evaluator {
   private DefinitionTable definitionTable;
   private String sourceFileName;
 
-  /**
-   * Constructs a new Evaluator object.
-   *
-   * @param definitionTable the definition table to work with
-   * @param sourceFileName file name of the script to evaluate
-   */
   public Evaluator(DefinitionTable definitionTable, String sourceFileName) {
     this.definitionTable = definitionTable;
     this.sourceFileName = sourceFileName;
   }
 
-  /**
-   * Evaluates the code by parsing the contents of an inputStream.
-   * 
-   * @param inputStream the InputStream to use   
-   * @return AST of the parsed contents of the input
-   */
   public AST evaluate(InputStream inputStream) {
     AST ast = this.transform(this.parse(inputStream));
     return (AST) ast.evaluate(this.definitionTable);
   }
 
-  /**
-   * Evaluates the code by parsing the contents of an inputStream
-   * including header and footer.
-   *
-   * @param inputStream the InputStream to use
-   * @return AST of the parsed contents of the input
-   */
   public AST evaluateWithLayout(InputStream inputStream) {
     AST body = (AST) this.evaluate(inputStream);
     AST header = this.evaluateHeader();

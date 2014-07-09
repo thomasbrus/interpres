@@ -11,10 +11,6 @@ import interpres.language.definitions.Definition;
 
 public class Bind extends Definition {
 
-  /**
-   * Constructs a new Bind object.
-   * Binds an AST to a given Symbol.
-   */
   public Bind() {
     super("interpres/bind", new LambdaExpression((definitionTable, arguments) -> {
       Symbol symbol = (Symbol) arguments.get(0).evaluate(definitionTable);

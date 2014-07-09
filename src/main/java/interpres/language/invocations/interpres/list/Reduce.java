@@ -19,12 +19,6 @@ public class Reduce extends Invocation {
   private AST initialValue;
   private ListExpression list;
 
-  /**
-   * Creates a new Reduce object.
-   *
-   * @param definitionTable the definition table to work with
-   * @param arguments the arguments corresponding with this Reduce
-   */
   public Reduce(DefinitionTable definitionTable, java.util.List<AST> arguments) {
     super(definitionTable, arguments);
     this.lambda = (LambdaExpression) this.getLambdaAST().evaluate(definitionTable);
@@ -32,12 +26,6 @@ public class Reduce extends Invocation {
     this.list = (ListExpression) this.getListAST().evaluate(definitionTable);
   }
 
-  /**
-   * Invokes the reduce expression and generates the corresponding
-   * AST.
-   *
-   * @return AST corresponding with the Reduce expression
-   */
   public AST invoke() {
     return this.list.getItems().stream().reduce(
       this.initialValue,

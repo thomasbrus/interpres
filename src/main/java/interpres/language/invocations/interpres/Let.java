@@ -14,22 +14,10 @@ import interpres.language.DefinitionTable;
 import interpres.language.invocations.Invocation;
 
 public class Let extends Invocation {
-  /**
-   * Creates a new Let object.
-   *
-   * @param definitionTable the definition table to work with
-   * @param arguments the arguments corresponding with this Let
-   */
   public Let(DefinitionTable definitionTable, List<AST> arguments) {
     super(definitionTable, arguments);
   }
 
-  /**
-   * Adds the declarations to the definition table and evaluates the 
-   * last argument. 
-   *
-   * @return AST corresponding with the Let expression
-   */
   public AST invoke() {
     this.getDefinitionTable().enterScope();
 
