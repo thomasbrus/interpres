@@ -11,7 +11,7 @@
 ; Data and code are the same
 (interpres/define @list-data (interpres/list @interpres/list/reverse @@(1 2 3)))
 
-list-data ; => (interpres/list/reverse 1 2 3)
+list-data ; => (interpres/list/reverse @(1 2 3))
 ~list-data ; => (3 2 1)
 
 
