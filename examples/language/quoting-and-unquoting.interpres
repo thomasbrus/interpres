@@ -1,14 +1,14 @@
 ; -----------------------------------------------------------------------------
 ; These are equivalent, thanks to quoting of @my-var
 (interpres/define @identity (interpres/lambda (my-var) my-var))
-(identity @hello) ; => hello (Symbol)
-
 (interpres/define @identity-2 (interpres/lambda (@my-var) my-var))
-(identity-2 hello) ; => hello (Symbol)
+
+(identity @hello) ; => hello
+(identity-2 hello) ; => hello
 
 
 ; -----------------------------------------------------------------------------
-; Data can be turned into code
+; Data and code are the same
 (interpres/define @list-data (interpres/list @interpres/list/reverse @@(1 2 3)))
 
 list-data ; => (interpres/list/reverse 1 2 3)
