@@ -66,6 +66,11 @@ An alternative way is using `mvn package`. This will not produce as much debuggi
     $ mvn package
     $ java -classpath target/interpres-<version>.jar interpres.App my-program.interpres
 
+
+## Motivation
+
+This project was part of the Compiler Design course at the Unversity of Twente. [Download final report (Dutch)](http://cl.ly/0K0i180v1i0Q)
+
 ## License
 
 See [LICENSE.txt](LICENSE.txt).
